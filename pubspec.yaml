@@ -26,11 +26,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  bloc_test: ^8.1.0
   build_runner: ^2.1.0
   ficcanaso: ^2.0.7
   freezed: ^0.14.2
+  golden_toolkit: ^0.9.0
   injectable_generator: ^1.4.1
   json_serializable: ^4.1.4
+  mocktail: ^0.1.4
 
 flutter:
   uses-material-design: true
