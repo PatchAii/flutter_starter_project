@@ -26,3 +26,4 @@ jobs:
       with:
         coverage-files: coverage/lcov.info
         artifact-name: code-coverage-report
+        github-token: ${{ secrets.GITHUB_TOKEN }}
