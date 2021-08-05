@@ -38,4 +38,19 @@ void main() {
       'predictability': 77
     });
   });
+
+  test('Test City model', () {
+    final c = City.fromJson({
+      'title': 'London',
+      'location_type': 'City',
+      'woeid': 44418,
+      'latt_long': '51.506321,-0.12714'
+    });
+    expect(c.toJson(), {
+      'title': 'London',
+      'location_type': 'City',
+      'woeid': 44418,
+      'latt_long': '51.506321,-0.12714'
+    });
+  });
 }
