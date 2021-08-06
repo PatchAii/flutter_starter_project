@@ -5,9 +5,10 @@ on:
   workflow_dispatch:
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
-    - run: brew install lcov
+    - run: sudo apt-get update
+    - run: sudo apt-get install -y lcov
     - uses: actions/checkout@v2
     - uses: actions/setup-java@v1
       with:
@@ -18,7 +19,7 @@ jobs:
         echo ENDPOINT='https://www.metaweather.com/' >> .env
     - uses: subosito/flutter-action@v1
     - run: flutter pub get
-    - run: flutter test --coverage
+    - run: flutter test test/unit --coverage
     - run: lcov --remove coverage/lcov.info 'lib/*/*.freezed.dart' 'lib/*/*.g.dart' 'lib/*/*.part.dart' 'lib/generated/*.dart' -o coverage/lcov.info
     - name: Report code coverage
       uses: zgosalvez/github-actions-report-lcov@v1
