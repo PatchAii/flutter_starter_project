@@ -42,7 +42,7 @@ class _AppScaffoldState extends State<AppScaffold> {
   @override
   Widget build(BuildContext context) {
     final isLogged =
-        context.watch<AppState>().loggedInState == LoggedInState.loggedIn;
+        context.watch<AppState>().loggedInState == LoggedState.loggedIn;
     if (isLogged) {
       return Scaffold(
         key: _scaffoldKey,

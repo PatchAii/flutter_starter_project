@@ -1,24 +1,42 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_starter_project/core/core.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-enum LoggedInState {
+enum LoggedState {
   loggedOut,
   loggedIn,
 }
 
 @singleton
 class AppState extends ChangeNotifier {
-  LoggedInState _loggedInState = LoggedInState.loggedOut;
+  String _currentPath = '/';
+  LoggedState _loggedInState = LoggedState.loggedOut;
 
-  LoggedInState get loggedInState => _loggedInState;
+  LoggedState get loggedInState {
+    final isLoggedIn =
+        getIt<SharedPreferences>().getBool('isLoggedIn') ?? false;
+    _loggedInState = isLoggedIn ? LoggedState.loggedIn : LoggedState.loggedOut;
+
+    return _loggedInState;
+  }
+
+  String get currentPath => _currentPath;
+  set currentPath(String path) {
+    _currentPath = path;
+    notifyListeners();
+  }
 
   void logIn() {
-    _loggedInState = LoggedInState.loggedIn;
+    _loggedInState = LoggedState.loggedIn;
+    getIt<SharedPreferences>().setBool('isLoggedIn', true);
     notifyListeners();
   }
 
   Future<void> logOut() async {
-    _loggedInState = LoggedInState.loggedOut;
+    _loggedInState = LoggedState.loggedOut;
+    await getIt<SharedPreferences>().setBool('isLoggedIn', false);
+
     notifyListeners();
   }
 }

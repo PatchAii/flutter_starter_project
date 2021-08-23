@@ -77,23 +77,27 @@ class __ThemeConsumerAppState extends State<_ThemeConsumerApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routeInformationParser: const RoutemasterParser(),
+      themeMode: ThemeMode.light,
+      theme: ThemeData(
+        primaryColor: Colors.green,
+        accentColor: Colors.greenAccent,
+        colorScheme: const ColorScheme.light(
+          primary: Colors.green,
+        ),
+      ),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       routerDelegate: routemaster,
       builder: (context, child) {
-        return MaterialApp(
-          themeMode: ThemeMode.light,
-          theme: ThemeData(
-            primaryColor: Colors.green,
-            accentColor: Colors.greenAccent,
-            colorScheme: const ColorScheme.light(
-              primary: Colors.green,
+        return Overlay(
+          initialEntries: [
+            OverlayEntry(
+              builder: (context) => AppScaffold(
+                child: child,
+              ),
             ),
-          ),
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          home: AppScaffold(
-            child: child,
-          ),
+          ],
         );
       },
     );
