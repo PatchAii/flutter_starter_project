@@ -10,7 +10,6 @@ enum LoggedState {
 
 @singleton
 class AppState extends ChangeNotifier {
-  String _currentPath = '/';
   LoggedState _loggedInState = LoggedState.loggedOut;
 
   LoggedState get loggedInState {
@@ -21,15 +20,10 @@ class AppState extends ChangeNotifier {
     return _loggedInState;
   }
 
-  String get currentPath => _currentPath;
-  set currentPath(String path) {
-    _currentPath = path;
-    notifyListeners();
-  }
-
   void logIn() {
     _loggedInState = LoggedState.loggedIn;
     getIt<SharedPreferences>().setBool('isLoggedIn', true);
+
     notifyListeners();
   }
 

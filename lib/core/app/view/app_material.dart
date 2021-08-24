@@ -6,11 +6,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_starter_project/core/app/changenotifier/app_state.dart';
-import 'package:flutter_starter_project/core/app/view/app_scaffold.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/lang/lang.dart';
 import 'package:provider/provider.dart';
-import 'package:routemaster/routemaster.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -40,13 +38,13 @@ class App extends StatelessWidget {
       useOnlyLangCode: true,
       path: 'translations',
       assetLoader: const CodegenLoader(),
-      child: const _ThemeApp(),
+      child: const AppProvider(),
     );
   }
 }
 
-class _ThemeApp extends StatelessWidget {
-  const _ThemeApp({
+class AppProvider extends StatelessWidget {
+  const AppProvider({
     Key? key,
   }) : super(key: key);
 
@@ -58,25 +56,25 @@ class _ThemeApp extends StatelessWidget {
           create: (context) => getIt<AppState>(),
         ),
       ],
-      child: const _ThemeConsumerApp(),
+      child: const ConsumerApp(),
     );
   }
 }
 
-class _ThemeConsumerApp extends StatefulWidget {
-  const _ThemeConsumerApp({
+class ConsumerApp extends StatefulWidget {
+  const ConsumerApp({
     Key? key,
   }) : super(key: key);
 
   @override
-  __ThemeConsumerAppState createState() => __ThemeConsumerAppState();
+  _ConsumerAppState createState() => _ConsumerAppState();
 }
 
-class __ThemeConsumerAppState extends State<_ThemeConsumerApp> {
+class _ConsumerAppState extends State<ConsumerApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routeInformationParser: const RoutemasterParser(),
+      routeInformationParser: RouteApp.routeInformationParser,
       themeMode: ThemeMode.light,
       theme: ThemeData(
         primaryColor: Colors.green,
@@ -88,18 +86,7 @@ class __ThemeConsumerAppState extends State<_ThemeConsumerApp> {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      routerDelegate: routemaster,
-      builder: (context, child) {
-        return Overlay(
-          initialEntries: [
-            OverlayEntry(
-              builder: (context) => AppScaffold(
-                child: child,
-              ),
-            ),
-          ],
-        );
-      },
+      routerDelegate: RouteApp.routemaster,
     );
   }
 }

@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:routemaster/routemaster.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,8 +23,7 @@ Future _initApp() async {
     EasyLocalization.ensureInitialized(),
     dotenv.load(),
   ];
-  Routemaster.setPathUrlStrategy();
-
+  RouteApp.initRoutes();
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };

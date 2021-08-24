@@ -1,84 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/app/changenotifier/app_state.dart';
 import 'package:flutter_starter_project/core/core.dart';
+import 'package:flutter_starter_project/core/route/route.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
+import 'package:routemaster/routemaster.dart';
 
 class AppScaffold extends StatefulWidget {
   const AppScaffold({
     Key? key,
-    required this.child,
+    required this.children,
   }) : super(key: key);
 
-  final Widget? child;
+  final List<Widget> children;
 
   @override
   _AppScaffoldState createState() => _AppScaffoldState();
 }
 
 class _AppScaffoldState extends State<AppScaffold> {
-  int index = 0;
-  late final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   Future<void> onIndexSelect(newIndex) async {
     switch (newIndex) {
       case 0:
-        routemaster.push('/weather');
-        setState(() {
-          index = newIndex;
-        });
+        RouteApp.routemaster.push('/weather');
         break;
       case 1:
-        routemaster.push('/profile');
-        setState(() {
-          index = newIndex;
-        });
+        RouteApp.routemaster.push('/profile');
         break;
       default:
-        routemaster.push('/');
+        RouteApp.routemaster.push('/');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final isLogged =
-        context.watch<AppState>().loggedInState == LoggedState.loggedIn;
-    if (isLogged) {
-      return Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-          title: GestureDetector(
-            onTap: () {
-              routemaster.push('/');
-              setState(() {
-                index = 0;
-              });
-            },
-            child: SizedBox(
-              width: 100,
-              child: SvgPicture.asset(
-                'assets/logo/patchai.svg',
-              ),
+    final pageIndex = TabPage.of(context).controller.index;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: GestureDetector(
+          onTap: () {
+            RouteApp.routemaster.push('/');
+          },
+          child: SizedBox(
+            width: 100,
+            child: SvgPicture.asset(
+              'assets/logo/patchai.svg',
             ),
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: () {
-                getIt<AppState>().logOut();
-              },
-            )
-          ],
         ),
-        body: widget.child!,
-        bottomNavigationBar: NavigationBottomBar(
-          selectedIndex: index,
-          onIndexSelect: onIndexSelect,
-        ),
-      );
-    } else {
-      return widget.child!;
-    }
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              getIt<AppState>().logOut();
+            },
+          )
+        ],
+      ),
+      body: widget.children[pageIndex],
+      bottomNavigationBar: NavigationBottomBar(
+        selectedIndex: pageIndex,
+        onIndexSelect: onIndexSelect,
+      ),
+    );
   }
 }
 

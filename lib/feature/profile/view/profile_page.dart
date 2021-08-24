@@ -7,13 +7,15 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GestureDetector(
-        onTap: () {
-          routemaster.push('/settings');
-        },
-        child: SvgPicture.asset(
-          'assets/logo/patchai.svg',
+    return Material(
+      child: Center(
+        child: GestureDetector(
+          onTap: () {
+            RouteApp.routemaster.push('/settings');
+          },
+          child: SvgPicture.asset(
+            'assets/logo/patchai.svg',
+          ),
         ),
       ),
     );
