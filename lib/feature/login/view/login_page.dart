@@ -4,10 +4,7 @@ import 'package:flutter_starter_project/core/core.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({
     Key? key,
-    required this.title,
   }) : super(key: key);
-
-  final String title;
 
   @override
   _LoginPageState createState() => _LoginPageState();
