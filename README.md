@@ -4,7 +4,7 @@
 
 ## Introduction
 
-> a template with best practices for starting a new app or familiarizing yourself with our projects architecture
+> a template with best practices for starting a new app or becoming familiar with the architecture of our projects
 
 ---
 
