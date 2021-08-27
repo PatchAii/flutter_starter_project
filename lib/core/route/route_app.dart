@@ -18,7 +18,14 @@ class RouteApp {
       );
     },
     routes: {
-      '/': (_) => TabPage(
+      '/': (_) {
+        if (onBoardingRequired()) {
+          return const MaterialPage(
+            name: 'OnBoarding',
+            child: OnboardingPage(),
+          );
+        } else {
+          return TabPage(
             pageBuilder: (child) => NoAnimationPage(child: child),
             child: const AppScaffold(
               children: [
@@ -31,16 +38,13 @@ class RouteApp {
               ],
             ),
             paths: ['/weather', '/profile'],
+          );
+        }
+      },
+      '/weather': (_) => const MaterialPage(
+            name: 'Weather',
+            child: WeatherPage(),
           ),
-      '/weather': (_) => canUserAccessPage()
-          ? const MaterialPage(
-              name: 'Weather',
-              child: WeatherPage(),
-            )
-          : const MaterialPage(
-              name: 'Weather',
-              child: WeatherPage(),
-            ),
       '/profile': (_) => const MaterialPage(
             name: 'Profile',
             child: ProfilePage(),
@@ -58,9 +62,6 @@ class RouteApp {
             ),
     },
   );
-
-  static bool canUserAccessPage() =>
-      getIt<AppState>().loggedInState == LoggedState.loggedIn;
 
   static final loggedOutRoutes = RouteMap(
     onUnknownRoute: (_) => const Redirect('/'),
@@ -89,6 +90,11 @@ class RouteApp {
       }
     },
   );
+
+  static bool canUserAccessPage() =>
+      getIt<AppState>().loggedInState == LoggedState.loggedIn;
+
+  static bool onBoardingRequired() => getIt<AppState>().onBoardRequired();
 
   static void initRoutes() {
     Routemaster.setPathUrlStrategy();
