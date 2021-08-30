@@ -29,7 +29,10 @@ void main() {
       },
       build: () => _getBloc(repo),
       act: (bloc) => bloc.add(const WeatherEvent.fetch()),
-      expect: () => [const WeatherState.loaded(city: 'London', weathers: [])],
+      expect: () => [
+        const WeatherState.loading(),
+        const WeatherState.loaded(city: 'London', weathers: [])
+      ],
     );
 
     blocTest<WeatherBloc, WeatherState>(
@@ -41,7 +44,7 @@ void main() {
       },
       build: () => _getBloc(repo),
       act: (bloc) => bloc.add(const WeatherEvent.fetch()),
-      expect: () => [const WeatherState.error()],
+      expect: () => [const WeatherState.loading(), const WeatherState.error()],
     );
   });
 }

@@ -4,14 +4,12 @@ import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/route/route.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:layout/layout.dart';
 
 class AppScaffold extends StatefulWidget {
   const AppScaffold({
     Key? key,
-    required this.children,
   }) : super(key: key);
-
-  final List<Widget> children;
 
   @override
   _AppScaffoldState createState() => _AppScaffoldState();
@@ -57,11 +55,30 @@ class _AppScaffoldState extends State<AppScaffold> {
           )
         ],
       ),
-      body: widget.children[pageIndex],
-      bottomNavigationBar: NavigationBottomBar(
-        selectedIndex: pageIndex,
-        onIndexSelect: onIndexSelect,
+      body: Row(
+        children: [
+          if (context.layout.breakpoint > LayoutBreakpoint.sm) ...[
+            NavigationSideBar(
+              selectedIndex: pageIndex,
+              onIndexSelect: onIndexSelect,
+              extended: true,
+            ),
+            const VerticalDivider(thickness: 1, width: 1),
+          ],
+          Expanded(
+            child: PageStackNavigator(
+              key: ValueKey(pageIndex),
+              stack: TabPage.of(context).stacks[pageIndex],
+            ),
+          ),
+        ],
       ),
+      bottomNavigationBar: context.layout.breakpoint < LayoutBreakpoint.md
+          ? NavigationBottomBar(
+              selectedIndex: pageIndex,
+              onIndexSelect: onIndexSelect,
+            )
+          : null,
     );
   }
 }
@@ -89,6 +106,39 @@ class NavigationBottomBar extends StatelessWidget {
         BottomNavigationBarItem(
           icon: const Icon(Icons.person),
           label: LocaleKeys.profile.tr(),
+        ),
+      ],
+    );
+  }
+}
+
+class NavigationSideBar extends StatelessWidget {
+  const NavigationSideBar({
+    Key? key,
+    required this.selectedIndex,
+    required this.onIndexSelect,
+    required this.extended,
+  }) : super(key: key);
+
+  final Function(int) onIndexSelect;
+  final bool extended;
+  final int selectedIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return NavigationRail(
+      selectedIndex: selectedIndex,
+      onDestinationSelected: onIndexSelect,
+      labelType: NavigationRailLabelType.none,
+      extended: extended,
+      destinations: [
+        NavigationRailDestination(
+          icon: const Icon(Icons.wb_sunny),
+          label: Text(LocaleKeys.weather.tr()),
+        ),
+        NavigationRailDestination(
+          icon: const Icon(Icons.person),
+          label: Text(LocaleKeys.profile.tr()),
         ),
       ],
     );
