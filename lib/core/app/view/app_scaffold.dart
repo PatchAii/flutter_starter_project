@@ -8,10 +8,7 @@ import 'package:routemaster/routemaster.dart';
 class AppScaffold extends StatefulWidget {
   const AppScaffold({
     Key? key,
-    required this.children,
   }) : super(key: key);
-
-  final List<Widget> children;
 
   @override
   _AppScaffoldState createState() => _AppScaffoldState();
@@ -57,7 +54,10 @@ class _AppScaffoldState extends State<AppScaffold> {
           )
         ],
       ),
-      body: widget.children[pageIndex],
+      body: PageStackNavigator(
+        key: ValueKey(pageIndex),
+        stack: TabPage.of(context).stacks[pageIndex],
+      ),
       bottomNavigationBar: NavigationBottomBar(
         selectedIndex: pageIndex,
         onIndexSelect: onIndexSelect,

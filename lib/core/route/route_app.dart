@@ -27,16 +27,7 @@ class RouteApp {
         } else {
           return TabPage(
             pageBuilder: (child) => NoAnimationPage(child: child),
-            child: const AppScaffold(
-              children: [
-                WeatherPage(
-                  key: ValueKey('WeatherPage'),
-                ),
-                ProfilePage(
-                  key: ValueKey('ProfilePage'),
-                ),
-              ],
-            ),
+            child: const AppScaffold(),
             paths: ['/weather', '/profile'],
           );
         }
@@ -48,6 +39,12 @@ class RouteApp {
       '/profile': (_) => const MaterialPage(
             name: 'Profile',
             child: ProfilePage(),
+          ),
+      '/profile/sub': (_) => const MaterialPage(
+            name: 'Profile/Sub',
+            child: SettingsPage(
+              subPage: true,
+            ),
           ),
       '/settings': (_) => canUserAccessPage()
           ? const MaterialPage(
