@@ -29,6 +29,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
   Stream<WeatherState> _fetch(_Fetch event) async* {
     try {
+      yield const WeatherState.loading();
       final weathers = await repo.fetchWeather();
       yield WeatherState.loaded(
         city: 'London',

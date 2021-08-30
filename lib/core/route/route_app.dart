@@ -40,8 +40,7 @@ class RouteApp {
             name: 'Profile',
             child: ProfilePage(),
           ),
-      '/profile/sub': (_) => const MaterialPage(
-            name: 'Profile/Sub',
+      '/profile/sub': (_) => const AnimationDisablePage(
             child: SettingsPage(
               subPage: true,
             ),
@@ -137,4 +136,44 @@ class NoAnimationPage<T> extends TransitionPage<T> {
           pushTransition: PageTransition.none,
           popTransition: PageTransition.none,
         );
+}
+
+class AnimationPage extends Page {
+  final Widget child;
+
+  const AnimationPage({required this.child});
+
+  @override
+  Route createRoute(BuildContext context) {
+    return PageRouteBuilder(
+      settings: this,
+      pageBuilder: (context, animation, animation2) {
+        final tween = Tween(begin: 0.0, end: 1.0);
+        final curveTween = CurveTween(curve: Curves.easeInOut);
+
+        return FadeTransition(
+          opacity: animation.drive(curveTween).drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+}
+
+class AnimationDisablePage extends Page {
+  final Widget child;
+
+  const AnimationDisablePage({required this.child});
+
+  @override
+  Route createRoute(BuildContext context) {
+    return PageRouteBuilder(
+      settings: this,
+      barrierDismissible: true,
+      transitionDuration: const Duration(),
+      pageBuilder: (_, __, ___) {
+        return child;
+      },
+    );
+  }
 }

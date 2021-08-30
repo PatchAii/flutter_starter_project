@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -8,19 +6,31 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_starter_project/core/app/changenotifier/app_state.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/lang/lang.dart';
+import 'package:layout/layout.dart';
 import 'package:provider/provider.dart';
+import 'package:logger/logger.dart';
+
+var logger = Logger(
+  printer: PrettyPrinter(
+    printEmojis: false,
+    methodCount: 0,
+  ),
+  filter: DevelopmentFilter(),
+);
 
 class AppBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
-    log('onChange(${bloc.runtimeType}, $change)');
+    logger.d(
+      ' *️⃣ ${bloc.runtimeType}\n ⏸ CurrentState: ${change.currentState}\n ⏯ NextState: ${change.nextState}',
+    );
   }
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    log('onError(${bloc.runtimeType}, $error, $stackTrace)');
     super.onError(bloc, error, stackTrace);
+    logger.e('${bloc.runtimeType}\n$error\n$stackTrace');
   }
 }
 
@@ -73,20 +83,23 @@ class ConsumerApp extends StatefulWidget {
 class _ConsumerAppState extends State<ConsumerApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routeInformationParser: RouteApp.routeInformationParser,
-      themeMode: ThemeMode.light,
-      theme: ThemeData(
-        primaryColor: Colors.green,
-        accentColor: Colors.greenAccent,
-        colorScheme: const ColorScheme.light(
-          primary: Colors.green,
+    return Layout(
+      format: MaterialLayoutFormat(),
+      child: MaterialApp.router(
+        routeInformationParser: RouteApp.routeInformationParser,
+        themeMode: ThemeMode.light,
+        theme: ThemeData(
+          primaryColor: Colors.green,
+          accentColor: Colors.greenAccent,
+          colorScheme: const ColorScheme.light(
+            primary: Colors.green,
+          ),
         ),
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        routerDelegate: RouteApp.routemaster,
       ),
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      routerDelegate: RouteApp.routemaster,
     );
   }
 }

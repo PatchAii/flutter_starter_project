@@ -6,25 +6,23 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                RouteApp.routemaster.push('/settings');
-              },
-              child: const Text('/settings'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                RouteApp.routemaster.push('/profile/sub');
-              },
-              child: const Text('/profile/sub'),
-            ),
-          ],
-        ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              RouteApp.routemaster.push('/settings');
+            },
+            child: const Text('/settings'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              RouteApp.routemaster.push('/profile/sub');
+            },
+            child: const Text('/profile/sub'),
+          ),
+        ],
       ),
     );
   }

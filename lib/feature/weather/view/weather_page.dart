@@ -136,8 +136,21 @@ class WeatherError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        LocaleKeys.error.tr(),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            LocaleKeys.error.tr(),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              context.read<WeatherBloc>().add(
+                    const WeatherEvent.fetch(),
+                  );
+            },
+            child: const Text('Retry'),
+          )
+        ],
       ),
     );
   }

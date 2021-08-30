@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_starter_project/core/core.dart';
@@ -24,6 +25,8 @@ Future _initApp() async {
     dotenv.load(),
   ];
   RouteApp.initRoutes();
+  Bloc.observer = AppBlocObserver();
+
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
