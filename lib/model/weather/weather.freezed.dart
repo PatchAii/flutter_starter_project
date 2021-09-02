@@ -75,7 +75,10 @@ const $Weather = _$WeatherTearOff();
 
 /// @nodoc
 mixin _$Weather {
-  num get id => throw _privateConstructorUsedError;
+  num get id =>
+      throw _privateConstructorUsedError; //JsonKey permette di definire il nome della proprieta' usato in from/to json
+//In questo modo la proprieta' all'interno della classe puo' assumere anche nome diverso
+//Ex. in json abbiamo weather_state_name ma la proprieta' assume nome weatherStateName
   @JsonKey(name: 'weather_state_name')
   String get weatherStateName => throw _privateConstructorUsedError;
   @JsonKey(name: 'weather_state_abbr')
@@ -369,7 +372,9 @@ class _$_Weather implements _Weather {
 
   @override
   final num id;
-  @override
+  @override //JsonKey permette di definire il nome della proprieta' usato in from/to json
+//In questo modo la proprieta' all'interno della classe puo' assumere anche nome diverso
+//Ex. in json abbiamo weather_state_name ma la proprieta' assume nome weatherStateName
   @JsonKey(name: 'weather_state_name')
   final String weatherStateName;
   @override
@@ -525,7 +530,9 @@ abstract class _Weather implements Weather {
 
   @override
   num get id => throw _privateConstructorUsedError;
-  @override
+  @override //JsonKey permette di definire il nome della proprieta' usato in from/to json
+//In questo modo la proprieta' all'interno della classe puo' assumere anche nome diverso
+//Ex. in json abbiamo weather_state_name ma la proprieta' assume nome weatherStateName
   @JsonKey(name: 'weather_state_name')
   String get weatherStateName => throw _privateConstructorUsedError;
   @override

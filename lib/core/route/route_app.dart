@@ -45,6 +45,8 @@ class RouteApp {
               subPage: true,
             ),
           ),
+      //Se la route /settings appartiene a loggedInRoutes, per quale motivo e' necessario ricontrollare
+      //che l'utente sia loggato? Suppongo sia in previsione di altri requisiti oltre allo stesso login.
       '/settings': (_) => canUserAccessPage()
           ? const MaterialPage(
               name: 'Settings',

@@ -4,3 +4,6 @@ help:
 localisation:	## code generation for localization files and keys
 	flutter pub run easy_localization:generate -S assets/translations -O lib/core/lang -o app_localization.dart
 	flutter pub run easy_localization:generate -S assets/translations -O lib/core/lang -f keys -o locale_keys.g.dart $(c)
+
+build_runner:	## code generation for models
+	flutter pub run build_runner build --delete-conflicting-outputs

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_starter_project/core/core.dart';
+import 'package:flutter_starter_project/feature/common/widget/app_loading.dart';
 import 'package:flutter_starter_project/feature/weather/bloc/weather_bloc.dart';
 import 'package:flutter_starter_project/model/model.dart';
 import 'package:intl/intl.dart';
@@ -21,7 +22,7 @@ class WeatherPage extends StatelessWidget {
         body: BlocBuilder<WeatherBloc, WeatherState>(
           builder: (context, state) {
             return state.map(
-              loading: (state) => const WeatherLoading(),
+              loading: (state) => const AppLoading(),
               loaded: (state) => WeatherList(
                 city: state.city,
                 weathers: state.weathers,
@@ -31,19 +32,6 @@ class WeatherPage extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-}
-
-class WeatherLoading extends StatelessWidget {
-  const WeatherLoading({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: CircularProgressIndicator(),
     );
   }
 }

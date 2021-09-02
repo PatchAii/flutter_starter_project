@@ -7,6 +7,9 @@ part 'weather.g.dart';
 class Weather with _$Weather {
   const factory Weather({
     required num id,
+    //JsonKey permette di definire il nome della proprieta' usato in from/to json
+    //In questo modo la proprieta' all'interno della classe puo' assumere anche nome diverso
+    //Ex. in json abbiamo weather_state_name ma la proprieta' assume nome weatherStateName
     @JsonKey(name: 'weather_state_name') required String weatherStateName,
     @JsonKey(name: 'weather_state_abbr') required String weatherStateAbbr,
     @JsonKey(name: 'wind_direction_compass')
