@@ -18,15 +18,13 @@ class CodegenLoader extends AssetLoader{
   "weather": "Weather",
   "profile": "Profile",
   "login": "Login",
-  "error": "Error",
-  "blabla": "blablaeng"
+  "error": "Error"
 };
 static const Map<String,dynamic> it = {
   "weather": "Tempo",
   "profile": "Profilo",
   "login": "Login",
-  "error": "Errore",
-  "blabla": "blablait"
+  "error": "Errore"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "it": it};
 }

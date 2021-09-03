@@ -101,7 +101,7 @@ class NavigationBottomBar extends StatelessWidget {
       items: [
         BottomNavigationBarItem(
           icon: const Icon(Icons.wb_sunny),
-          label: LocaleKeys.blabla.tr(),
+          label: LocaleKeys.weather.tr(),
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.person),

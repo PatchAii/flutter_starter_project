@@ -5,6 +5,5 @@ abstract class  LocaleKeys {
   static const profile = 'profile';
   static const login = 'login';
   static const error = 'error';
-  static const blabla = 'blabla';
 
 }
