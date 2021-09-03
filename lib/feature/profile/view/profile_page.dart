@@ -39,9 +39,9 @@ class ProfileContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(user.name!),
+          ProfileData(user: user),
           ElevatedButton(
             onPressed: () {
               RouteApp.routemaster.push('/settings');
@@ -83,6 +83,39 @@ class ProfileError extends StatelessWidget {
             child: const Text('Retry'),
           )
         ],
+      ),
+    );
+  }
+}
+
+class ProfileData extends StatelessWidget {
+  const ProfileData({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
+
+  final User user;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Id: ${user.id}'),
+                Text('Name: ${user.name}'),
+                Text('Username: ${user.username}'),
+                Text('Email: ${user.email}'),
+                Text('Phone: ${user.phone}'),
+                Text('Website: ${user.website}'),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
