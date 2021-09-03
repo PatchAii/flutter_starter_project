@@ -48,7 +48,7 @@ class AppState extends ChangeNotifier {
     getIt<SharedPreferences>().setBool('isLoggedIn', true);
     getIt<SharedPreferences>().setString(
       'user',
-      jsonEncode(const User(id: '1').toJson()),
+      jsonEncode(const User(id: 1).toJson()),
     );
 
     notifyListeners();
@@ -56,7 +56,7 @@ class AppState extends ChangeNotifier {
 
   void setUserProperties() {
     _user = const User(
-      id: '1',
+      id: 1,
       name: 'Kimi',
       email: 'Raikkonen',
     );

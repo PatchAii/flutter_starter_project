@@ -1,4 +1,4 @@
-import 'package:flutter_starter_project/model/weather/weather.dart';
+import 'package:flutter_starter_project/model/model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -52,5 +52,61 @@ void main() {
       'woeid': 44418,
       'latt_long': '51.506321,-0.12714'
     });
+  });
+
+  test('Test User model', () {
+    final u = User.fromJson({
+      'id': 1,
+      'name': 'Leanne Graham',
+      'username': 'Bret',
+      'email': 'Sincere@april.biz',
+      'phone': '1-770-736-8031 x56442',
+      'website': 'hildegard.org'
+    });
+    expect(u.toJson(), {
+      'id': 1,
+      'name': 'Leanne Graham',
+      'username': 'Bret',
+      'email': 'Sincere@april.biz',
+      'address': null,
+      'phone': '1-770-736-8031 x56442',
+      'website': 'hildegard.org',
+      'company': null
+    });
+  });
+
+  test('Test Company model', () {
+    final c = Company.fromJson({
+      'name': 'Romaguera-Crona',
+      'catchPhrase': 'Multi-layered client-server neural-net',
+      'bs': 'harness real-time e-markets'
+    });
+    expect(c.toJson(), {
+      'name': 'Romaguera-Crona',
+      'catchPhrase': 'Multi-layered client-server neural-net',
+      'bs': 'harness real-time e-markets'
+    });
+  });
+
+  test('Test Address model', () {
+    final a = Address.fromJson({
+      'street': 'Kulas Light',
+      'suite': 'Apt. 556',
+      'city': 'Gwenborough',
+      'zipcode': '92998-3874',
+      'geo': null
+    });
+    expect(a.toJson(), {
+      'street': 'Kulas Light',
+      'suite': 'Apt. 556',
+      'city': 'Gwenborough',
+      'zipcode': '92998-3874',
+      'geo': null
+    });
+  });
+
+  test('Test Geo model', () {
+    final g = Geo.fromJson({'lat': '-37.3159', 'lng': '81.1496'});
+    expect(g.toJson(), {'lat': '-37.3159', 'lng': '81.1496'});
   });
 }

@@ -20,13 +20,13 @@ class WeatherRepo {
 
     final res =
         await RestClient.get(api: '/api/location/${cities.first.woeid}');
-    final wheaters = List<Weather>.from(
+    final weathers = List<Weather>.from(
       jsonDecode(res.body)['consolidated_weather'].map(
         (json) {
           return Weather.fromJson(json);
         },
       ),
     );
-    return wheaters;
+    return weathers;
   }
 }
