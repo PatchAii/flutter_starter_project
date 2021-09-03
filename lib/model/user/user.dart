@@ -1,13 +1,7 @@
-import 'dart:convert';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
-
-User userFromJson(String str) => User.fromJson(jsonDecode(str));
-
-String userToJson(User data) => jsonEncode(data.toJson());
 
 @freezed
 class User with _$User {

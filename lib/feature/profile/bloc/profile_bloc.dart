@@ -8,8 +8,6 @@ import 'package:injectable/injectable.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
-//Ho creato il Bloc per il profilo tramite il plugin di bloc
-//Come e' arrivato a capire che usiamo freezed??
 part 'profile_bloc.freezed.dart';
 
 @injectable
@@ -24,7 +22,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Stream<ProfileState> mapEventToState(
     ProfileEvent event,
   ) async* {
-    //Non mi e' chiaro a cosa serva l'asterisco
     yield* event.map(
       fetch: _fetch,
     );

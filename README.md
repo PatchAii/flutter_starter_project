@@ -42,6 +42,10 @@ flutter doctor -v
 ## Test
 
 ```sh
+brew install lcov
+```
+
+```sh
 flutter test
 ```
 

@@ -11,7 +11,6 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //Non mi e' ancora chiaro come abbia fatto Get_it a passarmi ProfileBloc
     return BlocProvider(
       create: (context) => getIt<ProfileBloc>()
         ..add(
