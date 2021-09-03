@@ -95,12 +95,6 @@ class RouteApp {
   static void initRoutes() {
     Routemaster.setPathUrlStrategy();
   }
-
-  static bool showRouteWidget(BuildContext context) {
-    final isLogged =
-        context.watch<AppState>().loggedInState == LoggedState.loggedIn;
-    return isLogged;
-  }
 }
 
 class RouteAppObsever extends RoutemasterObserver {
@@ -139,9 +133,9 @@ class NoAnimationPage<T> extends TransitionPage<T> {
 }
 
 class AnimationPage extends Page {
-  final Widget child;
-
   const AnimationPage({required this.child});
+
+  final Widget child;
 
   @override
   Route createRoute(BuildContext context) {
@@ -161,9 +155,9 @@ class AnimationPage extends Page {
 }
 
 class AnimationDisablePage extends Page {
-  final Widget child;
-
   const AnimationDisablePage({required this.child});
+
+  final Widget child;
 
   @override
   Route createRoute(BuildContext context) {
