@@ -16,7 +16,7 @@ class AppScaffold extends StatefulWidget {
 }
 
 class _AppScaffoldState extends State<AppScaffold> {
-  Future<void> onIndexSelect(newIndex) async {
+  Future<void> _onIndexSelect(newIndex) async {
     switch (newIndex) {
       case 0:
         RouteApp.routemaster.push('/weather');
@@ -60,7 +60,7 @@ class _AppScaffoldState extends State<AppScaffold> {
           if (context.layout.breakpoint > LayoutBreakpoint.sm) ...[
             NavigationSideBar(
               selectedIndex: pageIndex,
-              onIndexSelect: onIndexSelect,
+              onIndexSelect: _onIndexSelect,
               extended: true,
             ),
             const VerticalDivider(thickness: 1, width: 1),
@@ -76,7 +76,7 @@ class _AppScaffoldState extends State<AppScaffold> {
       bottomNavigationBar: context.layout.breakpoint < LayoutBreakpoint.md
           ? NavigationBottomBar(
               selectedIndex: pageIndex,
-              onIndexSelect: onIndexSelect,
+              onIndexSelect: _onIndexSelect,
             )
           : null,
     );
