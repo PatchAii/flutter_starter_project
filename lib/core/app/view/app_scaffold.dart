@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/app/changenotifier/app_state.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/route/route.dart';
+import 'package:flutter_starter_project/gen/assets.gen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:layout/layout.dart';
@@ -42,7 +43,7 @@ class _AppScaffoldState extends State<AppScaffold> {
           child: SizedBox(
             width: 100,
             child: SvgPicture.asset(
-              'assets/logo/patchai.svg',
+              Assets.logo.patchai,
             ),
           ),
         ),
