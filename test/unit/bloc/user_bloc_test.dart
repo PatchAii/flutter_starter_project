@@ -5,6 +5,8 @@ import 'package:flutter_starter_project/model/model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../utils/fixture_reader.dart';
+
 class MockProfileRepo extends Mock implements ProfileRepo {}
 
 void main() {
@@ -24,29 +26,14 @@ void main() {
       'emits ProfileState.loaded when ProfileEvent.fetch is added',
       setUp: () {
         when(() => repo.fetchUser()).thenAnswer(
-          (_) => Future.value(User.fromJson({
-            'id': 1,
-            'name': 'Leanne Graham',
-            'username': 'Bret',
-            'email': 'Sincere@april.biz',
-            'phone': '1-770-736-8031 x56442',
-            'website': 'hildegard.org'
-          })),
+          (_) => Future.value(User.fromJson(fixture('user.json'))),
         );
       },
       build: () => _getBloc(repo),
       act: (bloc) => bloc.add(const ProfileEvent.fetch()),
       expect: () => [
         const ProfileState.loading(),
-        ProfileState.loaded(
-            user: User.fromJson({
-          'id': 1,
-          'name': 'Leanne Graham',
-          'username': 'Bret',
-          'email': 'Sincere@april.biz',
-          'phone': '1-770-736-8031 x56442',
-          'website': 'hildegard.org'
-        }))
+        ProfileState.loaded(user: User.fromJson(fixture('user.json')))
       ],
     );
 
