@@ -12,15 +12,16 @@ class RestClient {
   static Future<http.Response> post({
     required String api,
     Map<String, dynamic>? body,
+    String? endpoint,
   }) async {
-    _initClient();
+    final e = _initClient(endpoint);
 
     final headers = <String, String>{
       'Content-Type': 'application/json',
     };
 
     return httpClient!.post(
-      Uri.parse('${dotenv.env['ENDPOINT']}$api'),
+      Uri.parse('$e$api'),
       headers: headers,
       body: jsonEncode(body),
     );
@@ -28,15 +29,16 @@ class RestClient {
 
   static Future<http.Response> get({
     required String api,
+    String? endpoint,
   }) async {
-    _initClient();
+    final e = _initClient(endpoint);
 
     final headers = <String, String>{
       'Content-Type': 'application/json',
     };
 
     return httpClient!.get(
-      Uri.parse('${dotenv.env['ENDPOINT']}$api'),
+      Uri.parse('$e$api'),
       headers: headers,
     );
   }
@@ -44,21 +46,23 @@ class RestClient {
   static Future<http.Response> put({
     required String api,
     required Map<String, dynamic>? body,
+    String? endpoint,
   }) async {
-    _initClient();
+    final e = _initClient(endpoint);
 
     final headers = <String, String>{
       'Content-Type': 'application/json',
     };
 
     return httpClient!.put(
-      Uri.parse('${dotenv.env['ENDPOINT']}$api'),
+      Uri.parse('$e$api'),
       headers: headers,
       body: jsonEncode(body),
     );
   }
 
-  static void _initClient() {
+  static String? _initClient(String? endpoint) {
     httpClient ??= http.Client();
+    return endpoint ?? dotenv.env['ENDPOINT'];
   }
 }
