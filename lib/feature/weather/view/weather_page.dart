@@ -43,47 +43,75 @@ class WeatherList extends StatelessWidget {
     required this.city,
   }) : super(key: key);
 
-  final List<Weather> weathers;
   final String city;
+  final List<Weather> weathers;
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              city,
-            ),
-          ),
-        ),
         if (weathers.isNotEmpty)
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
+              child: Row(
                 children: [
-                  Text(
-                    weathers.first.weatherStateName,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          DateFormat('d LLLL yyyy').format(
+                            weathers.first.applicableDate,
+                          ),
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        Text(
+                          city,
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                        Text(
+                          weathers.first.weatherStateName,
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                        Text(
+                          'maxTemp ${weathers.first.maxTemp}',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Text(
+                          'theTemp ${weathers.first.theTemp}',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Text(
+                          'mnumemp ${weathers.first.mnumemp}',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Text(
+                          'airPressure ${weathers.first.airPressure}',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Text(
+                          'windSpeed ${weathers.first.windSpeed}',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        Text(
+                          'windDirectionCompass ${weathers.first.windDirectionCompass}',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      ],
+                    ),
                   ),
-                  Text(
-                    'maxTemp ${weathers.first.maxTemp}',
-                  ),
-                  Text(
-                    'theTemp ${weathers.first.theTemp}',
-                  ),
-                  Text(
-                    'mnumemp ${weathers.first.mnumemp}',
-                  ),
-                  Text(
-                    'airPressure ${weathers.first.airPressure}',
-                  ),
-                  Text(
-                    'windSpeed ${weathers.first.windSpeed}',
-                  ),
-                  Text(
-                    'windDirectionCompass ${weathers.first.windDirectionCompass}',
+                  Expanded(
+                    child: SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: Image.network(
+                        'https://www.metaweather.com/static/img/weather/png/${weathers.first.weatherStateAbbr.toString().split('.').last}.png',
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -92,17 +120,32 @@ class WeatherList extends StatelessWidget {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
-              return Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    leading: const Icon(Icons.wb_sunny_rounded),
-                    title: Text(
-                      weathers[index].weatherStateName,
-                    ),
-                    subtitle: Text(
-                      DateFormat('yyyy-MM-dd')
-                          .format(weathers[index].applicableDate),
+              if (index == 0) return const SizedBox();
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 8.0,
+                ),
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      leading: SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Image.network(
+                          'https://www.metaweather.com/static/img/weather/png/64/${weathers[index].weatherStateAbbr.toString().split('.').last}.png',
+                        ),
+                      ),
+                      title: Text(
+                        weathers[index].weatherStateName,
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      subtitle: Text(
+                        DateFormat('d LLLL yyyy')
+                            .format(weathers[index].applicableDate),
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
                     ),
                   ),
                 ),

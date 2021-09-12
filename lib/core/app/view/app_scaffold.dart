@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter_project/core/app/changenotifier/app_state.dart';
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:flutter_starter_project/core/route/route.dart';
-import 'package:flutter_starter_project/gen/assets.gen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:routemaster/routemaster.dart';
 import 'package:layout/layout.dart';
+import 'package:routemaster/routemaster.dart';
 
 class AppScaffold extends StatefulWidget {
   const AppScaffold({
@@ -17,6 +14,8 @@ class AppScaffold extends StatefulWidget {
 }
 
 class _AppScaffoldState extends State<AppScaffold> {
+  bool extended = true;
+
   Future<void> _onIndexSelect(newIndex) async {
     switch (newIndex) {
       case 0:
@@ -36,6 +35,14 @@ class _AppScaffoldState extends State<AppScaffold> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: context.layout.breakpoint > LayoutBreakpoint.sm
+            ? IconButton(
+                icon: const Icon(
+                  Icons.menu,
+                ),
+                onPressed: onExtendedSelect,
+              )
+            : null,
         title: GestureDetector(
           onTap: () {
             RouteApp.routemaster.push('/');
@@ -44,6 +51,7 @@ class _AppScaffoldState extends State<AppScaffold> {
             width: 100,
             child: SvgPicture.asset(
               Assets.logo.patchai,
+              color: Colors.white,
             ),
           ),
         ),
@@ -62,7 +70,7 @@ class _AppScaffoldState extends State<AppScaffold> {
             NavigationSideBar(
               selectedIndex: pageIndex,
               onIndexSelect: _onIndexSelect,
-              extended: true,
+              extended: extended,
             ),
             const VerticalDivider(thickness: 1, width: 1),
           ],
@@ -81,6 +89,12 @@ class _AppScaffoldState extends State<AppScaffold> {
             )
           : null,
     );
+  }
+
+  void onExtendedSelect() {
+    setState(() {
+      extended = !extended;
+    });
   }
 }
 

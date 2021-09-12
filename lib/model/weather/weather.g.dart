@@ -10,7 +10,8 @@ _$_Weather _$_$_WeatherFromJson(Map<String, dynamic> json) {
   return _$_Weather(
     id: json['id'] as num,
     weatherStateName: json['weather_state_name'] as String,
-    weatherStateAbbr: json['weather_state_abbr'] as String,
+    weatherStateAbbr:
+        _$enumDecode(_$WeatherStateAbbrEnumMap, json['weather_state_abbr']),
     windDirectionCompass: json['wind_direction_compass'] as String,
     created: DateTime.parse(json['created'] as String),
     applicableDate: DateTime.parse(json['applicable_date'] as String),
@@ -30,7 +31,8 @@ Map<String, dynamic> _$_$_WeatherToJson(_$_Weather instance) =>
     <String, dynamic>{
       'id': instance.id,
       'weather_state_name': instance.weatherStateName,
-      'weather_state_abbr': instance.weatherStateAbbr,
+      'weather_state_abbr':
+          _$WeatherStateAbbrEnumMap[instance.weatherStateAbbr],
       'wind_direction_compass': instance.windDirectionCompass,
       'created': instance.created.toIso8601String(),
       'applicable_date': instance.applicableDate.toIso8601String(),
@@ -44,6 +46,45 @@ Map<String, dynamic> _$_$_WeatherToJson(_$_Weather instance) =>
       'visibility': instance.visibility,
       'predictability': instance.predictability,
     };
+
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
+}) {
+  if (source == null) {
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
+  }
+
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
+}
+
+const _$WeatherStateAbbrEnumMap = {
+  WeatherStateAbbr.sn: 'sn',
+  WeatherStateAbbr.sl: 'sl',
+  WeatherStateAbbr.h: 'h',
+  WeatherStateAbbr.t: 't',
+  WeatherStateAbbr.hr: 'hr',
+  WeatherStateAbbr.lr: 'lr',
+  WeatherStateAbbr.s: 's',
+  WeatherStateAbbr.hc: 'hc',
+  WeatherStateAbbr.lc: 'lc',
+  WeatherStateAbbr.c: 'c',
+};
 
 _$_City _$_$_CityFromJson(Map<String, dynamic> json) {
   return _$_City(

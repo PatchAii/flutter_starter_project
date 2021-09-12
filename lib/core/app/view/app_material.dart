@@ -1,14 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_starter_project/core/app/changenotifier/app_state.dart';
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:flutter_starter_project/core/lang/lang.dart';
+import 'package:flutter_starter_project/utils/utils.dart';
 import 'package:layout/layout.dart';
-import 'package:provider/provider.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
 var logger = Logger(
   printer: PrettyPrinter(
@@ -86,13 +82,19 @@ class _ConsumerAppState extends State<ConsumerApp> {
     return Layout(
       format: MaterialLayoutFormat(),
       child: MaterialApp.router(
+        scaffoldMessengerKey: rootScaffoldMessengerKey,
         routeInformationParser: RouteApp.routeInformationParser,
         themeMode: ThemeMode.light,
         theme: ThemeData(
-          primaryColor: Colors.green,
-          accentColor: Colors.greenAccent,
+          primaryColor: const Color(0xFF6EC818),
           colorScheme: const ColorScheme.light(
-            primary: Colors.green,
+            primary: Color(0xFF6EC818),
+          ),
+          pageTransitionsTheme: const PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: ZoomPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            },
           ),
         ),
         localizationsDelegates: context.localizationDelegates,

@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_starter_project/core/app/view/app_scaffold.dart';
 import 'package:flutter_starter_project/core/core.dart';
+import 'package:flutter_starter_project/core/route/route_pages.dart';
 import 'package:flutter_starter_project/feature/feature.dart';
 import 'package:flutter_starter_project/feature/profile/view/profile_page.dart';
-import 'package:routemaster/routemaster.dart';
 import 'package:provider/provider.dart';
+import 'package:routemaster/routemaster.dart';
 
 class RouteApp {
   static final loggedInRoutes = RouteMap(
     onUnknownRoute: (route) {
-      return MaterialPage(
+      return SwipableBackPage(
         name: 'Not Found',
         child: NotFoundPage(
           route: route,
@@ -20,13 +21,15 @@ class RouteApp {
     routes: {
       '/': (_) {
         if (onBoardingRequired()) {
-          return const MaterialPage(
-            name: 'OnBoarding',
+          return const SwipableBackPage(
+            name: 'Onboarding',
             child: OnboardingPage(),
           );
         } else {
           return TabPage(
-            pageBuilder: (child) => NoAnimationPage(child: child),
+            pageBuilder: (child) => MaterialPage(
+              child: child,
+            ),
             child: const AppScaffold(),
             paths: ['/weather', '/profile'],
           );
@@ -40,13 +43,14 @@ class RouteApp {
             name: 'Profile',
             child: ProfilePage(),
           ),
-      '/profile/sub': (_) => const AnimationDisablePage(
+      '/profile/sub': (_) => const SwipableBackPage(
+            name: 'Settings Sub Page',
             child: SettingsPage(
               subPage: true,
             ),
           ),
       '/settings': (_) => canUserAccessPage()
-          ? const MaterialPage(
+          ? const SwipableBackPage(
               name: 'Settings',
               child: SettingsPage(),
             )
@@ -56,6 +60,27 @@ class RouteApp {
                 route: 'AccessDenied',
               ),
             ),
+      '/settings/bottomsheet': (_) => BottomSheetPage(
+            child: Container(
+              color: Colors.greenAccent,
+              child: const Center(
+                child: Text(
+                  'settigs BottomSheet',
+                ),
+              ),
+            ),
+          ),
+      '/profile/bottomsheet': (_) => BottomSheetPage(
+            heightPerc: .5,
+            child: Container(
+              color: Colors.orange,
+              child: const Center(
+                child: Text(
+                  'profile BottomSheet',
+                ),
+              ),
+            ),
+          )
     },
   );
 
@@ -120,54 +145,5 @@ class RouteAppTitleObserver extends RoutemasterObserver {
         ),
       );
     }
-  }
-}
-
-class NoAnimationPage<T> extends TransitionPage<T> {
-  NoAnimationPage({required Widget child})
-      : super(
-          child: child,
-          pushTransition: PageTransition.none,
-          popTransition: PageTransition.none,
-        );
-}
-
-class AnimationPage extends Page {
-  const AnimationPage({required this.child});
-
-  final Widget child;
-
-  @override
-  Route createRoute(BuildContext context) {
-    return PageRouteBuilder(
-      settings: this,
-      pageBuilder: (context, animation, animation2) {
-        final tween = Tween(begin: 0.0, end: 1.0);
-        final curveTween = CurveTween(curve: Curves.easeInOut);
-
-        return FadeTransition(
-          opacity: animation.drive(curveTween).drive(tween),
-          child: child,
-        );
-      },
-    );
-  }
-}
-
-class AnimationDisablePage extends Page {
-  const AnimationDisablePage({required this.child});
-
-  final Widget child;
-
-  @override
-  Route createRoute(BuildContext context) {
-    return PageRouteBuilder(
-      settings: this,
-      barrierDismissible: true,
-      transitionDuration: const Duration(),
-      pageBuilder: (_, __, ___) {
-        return child;
-      },
-    );
   }
 }
