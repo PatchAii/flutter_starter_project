@@ -109,7 +109,7 @@ class WeatherList extends StatelessWidget {
                       height: 200,
                       width: 200,
                       child: Image.network(
-                        'https://www.metaweather.com/static/img/weather/png/${weathers.first.weatherStateAbbr.toString().split('.').last}.png',
+                        'https://cors-anywhere.herokuapp.com/https://meta-weather.vercel.app/static/img/weather/png/${weathers.first.weatherStateAbbr.toString().split('.').last}.png',
                       ),
                     ),
                   ),
@@ -134,7 +134,7 @@ class WeatherList extends StatelessWidget {
                         height: 50,
                         width: 50,
                         child: Image.network(
-                          'https://www.metaweather.com/static/img/weather/png/64/${weathers[index].weatherStateAbbr.toString().split('.').last}.png',
+                          'https://cors-anywhere.herokuapp.com/https://meta-weather.vercel.app/static/img/weather/png/64/${weathers[index].weatherStateAbbr.toString().split('.').last}.png',
                         ),
                       ),
                       title: Text(
