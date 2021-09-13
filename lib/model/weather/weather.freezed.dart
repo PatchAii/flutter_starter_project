@@ -25,7 +25,7 @@ class _$WeatherTearOff {
       @JsonKey(name: 'weather_state_name')
           required String weatherStateName,
       @JsonKey(name: 'weather_state_abbr')
-          required String weatherStateAbbr,
+          required WeatherStateAbbr weatherStateAbbr,
       @JsonKey(name: 'wind_direction_compass')
           required String windDirectionCompass,
       required DateTime created,
@@ -79,7 +79,7 @@ mixin _$Weather {
   @JsonKey(name: 'weather_state_name')
   String get weatherStateName => throw _privateConstructorUsedError;
   @JsonKey(name: 'weather_state_abbr')
-  String get weatherStateAbbr => throw _privateConstructorUsedError;
+  WeatherStateAbbr get weatherStateAbbr => throw _privateConstructorUsedError;
   @JsonKey(name: 'wind_direction_compass')
   String get windDirectionCompass => throw _privateConstructorUsedError;
   DateTime get created => throw _privateConstructorUsedError;
@@ -113,7 +113,7 @@ abstract class $WeatherCopyWith<$Res> {
   $Res call(
       {num id,
       @JsonKey(name: 'weather_state_name') String weatherStateName,
-      @JsonKey(name: 'weather_state_abbr') String weatherStateAbbr,
+      @JsonKey(name: 'weather_state_abbr') WeatherStateAbbr weatherStateAbbr,
       @JsonKey(name: 'wind_direction_compass') String windDirectionCompass,
       DateTime created,
       @JsonKey(name: 'applicable_date') DateTime applicableDate,
@@ -166,7 +166,7 @@ class _$WeatherCopyWithImpl<$Res> implements $WeatherCopyWith<$Res> {
       weatherStateAbbr: weatherStateAbbr == freezed
           ? _value.weatherStateAbbr
           : weatherStateAbbr // ignore: cast_nullable_to_non_nullable
-              as String,
+              as WeatherStateAbbr,
       windDirectionCompass: windDirectionCompass == freezed
           ? _value.windDirectionCompass
           : windDirectionCompass // ignore: cast_nullable_to_non_nullable
@@ -227,7 +227,7 @@ abstract class _$WeatherCopyWith<$Res> implements $WeatherCopyWith<$Res> {
   $Res call(
       {num id,
       @JsonKey(name: 'weather_state_name') String weatherStateName,
-      @JsonKey(name: 'weather_state_abbr') String weatherStateAbbr,
+      @JsonKey(name: 'weather_state_abbr') WeatherStateAbbr weatherStateAbbr,
       @JsonKey(name: 'wind_direction_compass') String windDirectionCompass,
       DateTime created,
       @JsonKey(name: 'applicable_date') DateTime applicableDate,
@@ -281,7 +281,7 @@ class __$WeatherCopyWithImpl<$Res> extends _$WeatherCopyWithImpl<$Res>
       weatherStateAbbr: weatherStateAbbr == freezed
           ? _value.weatherStateAbbr
           : weatherStateAbbr // ignore: cast_nullable_to_non_nullable
-              as String,
+              as WeatherStateAbbr,
       windDirectionCompass: windDirectionCompass == freezed
           ? _value.windDirectionCompass
           : windDirectionCompass // ignore: cast_nullable_to_non_nullable
@@ -374,7 +374,7 @@ class _$_Weather implements _Weather {
   final String weatherStateName;
   @override
   @JsonKey(name: 'weather_state_abbr')
-  final String weatherStateAbbr;
+  final WeatherStateAbbr weatherStateAbbr;
   @override
   @JsonKey(name: 'wind_direction_compass')
   final String windDirectionCompass;
@@ -499,7 +499,7 @@ abstract class _Weather implements Weather {
       @JsonKey(name: 'weather_state_name')
           required String weatherStateName,
       @JsonKey(name: 'weather_state_abbr')
-          required String weatherStateAbbr,
+          required WeatherStateAbbr weatherStateAbbr,
       @JsonKey(name: 'wind_direction_compass')
           required String windDirectionCompass,
       required DateTime created,
@@ -530,7 +530,7 @@ abstract class _Weather implements Weather {
   String get weatherStateName => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'weather_state_abbr')
-  String get weatherStateAbbr => throw _privateConstructorUsedError;
+  WeatherStateAbbr get weatherStateAbbr => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'wind_direction_compass')
   String get windDirectionCompass => throw _privateConstructorUsedError;

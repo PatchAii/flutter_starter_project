@@ -3,12 +3,13 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_starter_project/feature/weather/repo/weather_repo.dart';
 import 'package:flutter_starter_project/model/model.dart';
+import 'package:flutter_starter_project/utils/utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
+part 'weather_bloc.freezed.dart';
 part 'weather_event.dart';
 part 'weather_state.dart';
-part 'weather_bloc.freezed.dart';
 
 @injectable
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
@@ -36,6 +37,10 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         weathers: weathers,
       );
     } catch (e) {
+      SnackBarController.showSnackbar(
+        'SnackBar from fetchWeather',
+        duration: const Duration(seconds: 10),
+      );
       yield const WeatherState.error();
     }
   }
