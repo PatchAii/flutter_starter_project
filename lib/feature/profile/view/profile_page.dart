@@ -37,50 +37,57 @@ class ProfileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          ProfileData(user: user),
-          ElevatedButton(
-            onPressed: () {
-              RouteApp.routemaster.push('/settings');
-            },
-            child: const Text('/settings'),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ProfileData(
+          user: user,
+        ),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  RouteApp.routemaster.push('/settings');
+                },
+                child: const Text('/settings'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  RouteApp.routemaster.push('/profile/sub');
+                },
+                child: const Text('/profile/sub'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  RouteApp.routemaster.push('/profile/bottomsheet');
+                },
+                child: const Text('/bottomsheet'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  RouteApp.routemaster.push('/posts?userId=1');
+                },
+                child: const Text('/posts/userId:1'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  RouteApp.routemaster.push('/posts?userId=2');
+                },
+                child: const Text('/posts/userId:2'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  RouteApp.routemaster.push(
+                      '/notification?title=Kimi&subtitle=Raikkonen&description=AlfaRomeo Raicing ORLEN');
+                },
+                child: const Text('/notification'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              RouteApp.routemaster.push('/profile/sub');
-            },
-            child: const Text('/profile/sub'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              RouteApp.routemaster.push('/posts?userId=1');
-            },
-            child: const Text('/posts/userId:1'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              RouteApp.routemaster.push('/posts?userId=2');
-            },
-            child: const Text('/posts/userId:2'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              RouteApp.routemaster.push(
-                  '/notification?title=Kimi&subtitle=Raikkonen&description=AlfaRomeo Raicing ORLEN');
-            },
-            child: const Text('/notification'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              RouteApp.routemaster.push('/bottom');
-            },
-            child: const Text('/bottom'),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -123,23 +130,59 @@ class ProfileData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
+      color: Theme.of(context).primaryColor.withOpacity(.7),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Id: ${user.id}'),
-                Text('Name: ${user.name}'),
-                Text('Username: ${user.username}'),
-                Text('Email: ${user.email}'),
-                Text('Phone: ${user.phone}'),
-                Text('Website: ${user.website}'),
-              ],
-            ),
-          ],
+        padding: const EdgeInsets.all(16.0),
+        child: Card(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: CircleAvatar(
+                  radius: 75.0,
+                  backgroundImage:
+                      Image.network('https://placekitten.com/500/500').image,
+                  backgroundColor: Colors.transparent,
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Id: ${user.id}',
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      Text(
+                        'Name: ${user.name}',
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                      Text(
+                        'Username: ${user.username}',
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                      Text(
+                        'Email: ${user.email}',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      Text(
+                        'Phone: ${user.phone}',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      Text(
+                        'Website: ${user.website}',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

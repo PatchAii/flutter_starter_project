@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_starter_project/feature/weather/bloc/weather_bloc.dart';
 import 'package:flutter_starter_project/feature/weather/repo/weather_repo.dart';
 import 'package:flutter_starter_project/model/model.dart';
+import 'package:flutter_starter_project/utils/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -11,7 +12,7 @@ class MockWeatherRepo extends Mock implements WeatherRepo {}
 
 void main() {
   late WeatherRepo repo;
-
+  SnackBarController.testing = true;
   group('WeatherBloc', () {
     setUp(() {
       repo = MockWeatherRepo();

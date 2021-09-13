@@ -8,7 +8,8 @@ class Weather with _$Weather {
   const factory Weather({
     required num id,
     @JsonKey(name: 'weather_state_name') required String weatherStateName,
-    @JsonKey(name: 'weather_state_abbr') required String weatherStateAbbr,
+    @JsonKey(name: 'weather_state_abbr')
+        required WeatherStateAbbr weatherStateAbbr,
     @JsonKey(name: 'wind_direction_compass')
         required String windDirectionCompass,
     required DateTime created,
@@ -38,4 +39,17 @@ class City with _$City {
   }) = _City;
 
   factory City.fromJson(Map<String, dynamic> json) => _$CityFromJson(json);
+}
+
+enum WeatherStateAbbr {
+  sn,
+  sl,
+  h,
+  t,
+  hr,
+  lr,
+  s,
+  hc,
+  lc,
+  c,
 }
