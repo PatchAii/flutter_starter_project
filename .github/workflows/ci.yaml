@@ -15,8 +15,8 @@ jobs:
         java-version: '12.x'
     - name: Create env file
       run: |
-        touch .env
-        echo ENDPOINT='https://www.metaweather.com/' >> .env
+        touch dotenv
+        echo ENDPOINT='https://www.metaweather.com/' >> dotenv
     - uses: subosito/flutter-action@v1
     - run: flutter pub get
     - run: flutter test --coverage test/unit
