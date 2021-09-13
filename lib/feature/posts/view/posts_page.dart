@@ -50,13 +50,17 @@ class PostsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(
+        SliverAppBar(
           expandedHeight: 150.0,
           floating: true,
           snap: true,
           flexibleSpace: FlexibleSpaceBar(
             title: Text(
               'Posts',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(color: Colors.white),
             ),
           ),
         ),
