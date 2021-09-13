@@ -63,60 +63,74 @@ class PostsList extends StatelessWidget {
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
             final post = posts[index];
-            return InkWell(
-              onTap: () {
-                RouteApp.routemaster.push(
-                    '/notification?title=${post.title}&subtitle=${post.id}&description=${post.body}');
-              },
-              child: Card(
-                clipBehavior: Clip.antiAlias,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.green,
-                        child: Text(
-                          post.userId.toString(),
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      title: Text(post.title),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        post.body,
-                        style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                      ),
-                    ),
-                    const Divider(),
-                    ButtonBar(
-                      alignment: MainAxisAlignment.end,
-                      children: [
-                        IconButton(
-                          onPressed: () => {},
-                          icon: const Icon(
-                            Icons.share,
-                            color: Colors.blue,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () => {},
-                          icon: const Icon(
-                            Icons.star,
-                            color: Colors.amberAccent,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return PostCard(post: post);
           }, childCount: posts.length),
         )
       ],
+    );
+  }
+}
+
+class PostCard extends StatelessWidget {
+  const PostCard({
+    Key? key,
+    required this.post,
+  }) : super(key: key);
+
+  final Post post;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        RouteApp.routemaster.push(
+            '/notification?title=${post.title}&subtitle=${post.id}&description=${post.body}');
+      },
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.green,
+                child: Text(
+                  post.userId.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+              title: Text(post.title),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                post.body,
+                style: TextStyle(color: Colors.black.withOpacity(0.6)),
+              ),
+            ),
+            const Divider(),
+            ButtonBar(
+              alignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () => {},
+                  icon: const Icon(
+                    Icons.share,
+                    color: Colors.blue,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => {},
+                  icon: const Icon(
+                    Icons.star,
+                    color: Colors.amberAccent,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
