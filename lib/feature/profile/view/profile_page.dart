@@ -54,6 +54,31 @@ class ProfileContent extends StatelessWidget {
             },
             child: const Text('/profile/sub'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              RouteApp.routemaster.push('/posts?userId=1');
+            },
+            child: const Text('/posts/userId:1'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              RouteApp.routemaster.push('/posts?userId=2');
+            },
+            child: const Text('/posts/userId:2'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              RouteApp.routemaster.push(
+                  '/notification?title=Kimi&subtitle=Raikkonen&description=AlfaRomeo Raicing ORLEN');
+            },
+            child: const Text('/notification'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              RouteApp.routemaster.push('/bottom');
+            },
+            child: const Text('/bottom'),
+          ),
         ],
       ),
     );

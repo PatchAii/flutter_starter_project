@@ -7,8 +7,8 @@ import 'package:flutter_starter_project/core/app/changenotifier/app_state.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/lang/lang.dart';
 import 'package:layout/layout.dart';
-import 'package:provider/provider.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
 var logger = Logger(
   printer: PrettyPrinter(
@@ -90,10 +90,9 @@ class _ConsumerAppState extends State<ConsumerApp> {
         themeMode: ThemeMode.light,
         theme: ThemeData(
           primaryColor: Colors.green,
-          accentColor: Colors.greenAccent,
           colorScheme: const ColorScheme.light(
             primary: Colors.green,
-          ),
+          ).copyWith(secondary: Colors.greenAccent),
         ),
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,

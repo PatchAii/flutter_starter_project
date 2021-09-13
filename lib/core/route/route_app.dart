@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_starter_project/core/app/view/app_scaffold.dart';
+import 'package:flutter_starter_project/core/common/notification_dialog.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/feature/feature.dart';
+import 'package:flutter_starter_project/feature/posts/view/posts_page.dart';
 import 'package:flutter_starter_project/feature/profile/view/profile_page.dart';
-import 'package:routemaster/routemaster.dart';
 import 'package:provider/provider.dart';
+import 'package:routemaster/routemaster.dart';
 
 class RouteApp {
   static final loggedInRoutes = RouteMap(
@@ -28,7 +30,7 @@ class RouteApp {
           return TabPage(
             pageBuilder: (child) => NoAnimationPage(child: child),
             child: const AppScaffold(),
-            paths: ['/weather', '/profile'],
+            paths: ['/weather', '/profile', '/posts'],
           );
         }
       },
@@ -56,6 +58,18 @@ class RouteApp {
                 route: 'AccessDenied',
               ),
             ),
+      '/posts': (route) => MaterialPage(
+            child: PostsPage(userId: route.queryParameters['userId']),
+          ),
+      '/notification': (route) => DialogPage(
+            child: NotificationDialog(
+                title: route.queryParameters['title'] ?? '',
+                subtitle: route.queryParameters['subtitle'],
+                description: route.queryParameters['description']),
+          ),
+      '/bottom': (route) => const BottomSheetPage(
+            child: Text(''),
+          ),
     },
   );
 
@@ -155,7 +169,9 @@ class AnimationPage extends Page {
 }
 
 class AnimationDisablePage extends Page {
-  const AnimationDisablePage({required this.child});
+  const AnimationDisablePage({
+    required this.child,
+  });
 
   final Widget child;
 
@@ -169,5 +185,41 @@ class AnimationDisablePage extends Page {
         return child;
       },
     );
+  }
+}
+
+class DialogPage extends Page<void> {
+  final Widget child;
+
+  const DialogPage({
+    required this.child,
+  });
+
+  @override
+  Route<void> createRoute(BuildContext context) {
+    return DialogRoute(
+      context: context,
+      builder: (context) => child,
+      settings: this,
+    );
+  }
+}
+
+class BottomSheetPage extends Page<void> {
+  final Widget child;
+
+  const BottomSheetPage({required this.child});
+
+  @override
+  Route<void> createRoute(BuildContext context) {
+    return MaterialPageRoute(
+        builder: (context) {
+          return Container(
+            height: 300.0,
+            color: Colors.red,
+          );
+        },
+        settings: this,
+        fullscreenDialog: true);
   }
 }

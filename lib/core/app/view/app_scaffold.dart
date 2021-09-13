@@ -4,8 +4,8 @@ import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/route/route.dart';
 import 'package:flutter_starter_project/gen/assets.gen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:routemaster/routemaster.dart';
 import 'package:layout/layout.dart';
+import 'package:routemaster/routemaster.dart';
 
 class AppScaffold extends StatefulWidget {
   const AppScaffold({
@@ -24,6 +24,9 @@ class _AppScaffoldState extends State<AppScaffold> {
         break;
       case 1:
         RouteApp.routemaster.push('/profile');
+        break;
+      case 2:
+        RouteApp.routemaster.push('/posts');
         break;
       default:
         RouteApp.routemaster.push('/');
@@ -108,6 +111,10 @@ class NavigationBottomBar extends StatelessWidget {
           icon: const Icon(Icons.person),
           label: LocaleKeys.profile.tr(),
         ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.list),
+          label: LocaleKeys.posts.tr(),
+        ),
       ],
     );
   }
@@ -140,6 +147,10 @@ class NavigationSideBar extends StatelessWidget {
         NavigationRailDestination(
           icon: const Icon(Icons.person),
           label: Text(LocaleKeys.profile.tr()),
+        ),
+        NavigationRailDestination(
+          icon: const Icon(Icons.list),
+          label: Text(LocaleKeys.posts.tr()),
         ),
       ],
     );
