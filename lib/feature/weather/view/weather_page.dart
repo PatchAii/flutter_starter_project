@@ -5,6 +5,7 @@ import 'package:flutter_starter_project/feature/common/widget/app_loading.dart';
 import 'package:flutter_starter_project/feature/weather/bloc/weather_bloc.dart';
 import 'package:flutter_starter_project/model/model.dart';
 import 'package:intl/intl.dart';
+import 'package:layout/layout.dart';
 
 class WeatherPage extends StatelessWidget {
   const WeatherPage({
@@ -57,64 +58,7 @@ class WeatherList extends StatelessWidget {
                 horizontal: 16.0,
                 vertical: 8.0,
               ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          DateFormat('d LLLL yyyy').format(
-                            weathers.first.applicableDate,
-                          ),
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                        Text(
-                          city,
-                          style: Theme.of(context).textTheme.headline2,
-                        ),
-                        Text(
-                          weathers.first.weatherStateName,
-                          style: Theme.of(context).textTheme.headline5,
-                        ),
-                        Text(
-                          'maxTemp ${weathers.first.maxTemp}',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        Text(
-                          'theTemp ${weathers.first.theTemp}',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        Text(
-                          'mnumemp ${weathers.first.mnumemp}',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        Text(
-                          'airPressure ${weathers.first.airPressure}',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        Text(
-                          'windSpeed ${weathers.first.windSpeed}',
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                        Text(
-                          'windDirectionCompass ${weathers.first.windDirectionCompass}',
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: Image.network(
-                        'https://cors-anywhere.herokuapp.com/https://meta-weather.vercel.app/static/img/weather/png/${weathers.first.weatherStateAbbr.toString().split('.').last}.png',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              child: WeatherHeader(weathers: weathers, city: city),
             ),
           ),
         SliverList(
@@ -156,6 +100,140 @@ class WeatherList extends StatelessWidget {
         )
       ],
     );
+  }
+}
+
+class WeatherHeader extends StatelessWidget {
+  const WeatherHeader({
+    Key? key,
+    required this.weathers,
+    required this.city,
+  }) : super(key: key);
+
+  final List<Weather> weathers;
+  final String city;
+
+  @override
+  Widget build(BuildContext context) {
+    if (context.layout.breakpoint > LayoutBreakpoint.xs) {
+      return Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  DateFormat('d LLLL yyyy').format(
+                    weathers.first.applicableDate,
+                  ),
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                Text(
+                  city,
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                Text(
+                  weathers.first.weatherStateName,
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                Text(
+                  'maxTemp ${weathers.first.maxTemp}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Text(
+                  'theTemp ${weathers.first.theTemp}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Text(
+                  'mnumemp ${weathers.first.mnumemp}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Text(
+                  'airPressure ${weathers.first.airPressure}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Text(
+                  'windSpeed ${weathers.first.windSpeed}',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                Text(
+                  'windDirectionCompass ${weathers.first.windDirectionCompass}',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: SizedBox(
+              height: 200,
+              width: 200,
+              child: Image.network(
+                'https://cors-anywhere.herokuapp.com/https://meta-weather.vercel.app/static/img/weather/png/${weathers.first.weatherStateAbbr.toString().split('.').last}.png',
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  DateFormat('d LLLL yyyy').format(
+                    weathers.first.applicableDate,
+                  ),
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                Text(
+                  city,
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                Text(
+                  weathers.first.weatherStateName,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                Text(
+                  'maxTemp ${weathers.first.maxTemp}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Text(
+                  'theTemp ${weathers.first.theTemp}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Text(
+                  'mnumemp ${weathers.first.mnumemp}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Text(
+                  'airPressure ${weathers.first.airPressure}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Text(
+                  'windSpeed ${weathers.first.windSpeed}',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                Text(
+                  'windDirectionCompass ${weathers.first.windDirectionCompass}',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: SizedBox(
+              height: 150,
+              width: 150,
+              child: Image.network(
+                'https://cors-anywhere.herokuapp.com/https://meta-weather.vercel.app/static/img/weather/png/${weathers.first.weatherStateAbbr.toString().split('.').last}.png',
+              ),
+            ),
+          ),
+        ],
+      );
+    }
   }
 }
 
