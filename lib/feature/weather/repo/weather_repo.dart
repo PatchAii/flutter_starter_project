@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_starter_project/model/weather/weather.dart';
 import 'package:flutter_starter_project/utils/utils.dart';
 import 'package:injectable/injectable.dart';
@@ -10,7 +9,6 @@ class WeatherRepo {
   Future<List<Weather>> fetchWeather() async {
     final woeids = await RestClient.get(
       api: '/api/location/search/?query=london',
-      endpoint: dotenv.env['WEATHER_ENDPOINT'],
     );
 
     final cities = List<City>.from(
@@ -23,7 +21,6 @@ class WeatherRepo {
 
     final res = await RestClient.get(
       api: '/api/location/${cities.first.woeid}',
-      endpoint: dotenv.env['WEATHER_ENDPOINT'],
     );
     final weathers = List<Weather>.from(
       jsonDecode(res.body)['consolidated_weather'].map(
