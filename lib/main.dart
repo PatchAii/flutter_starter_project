@@ -22,7 +22,7 @@ Future _initApp() async {
   final futures = <Future>[
     configureDependencies(),
     EasyLocalization.ensureInitialized(),
-    dotenv.load(),
+    dotenv.load(fileName: 'dotenv'),
   ];
   RouteApp.initRoutes();
   Bloc.observer = AppBlocObserver();

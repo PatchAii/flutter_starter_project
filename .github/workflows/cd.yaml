@@ -7,10 +7,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Create env file
-        run: |
-          touch .env
-          echo ENDPOINT='https://www.metaweather.com/' >> .env
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
-      - uses: erickzanardo/flutter-gh-pages@v3
+      - name: Create env file
+        run: |
+          touch dotenv
+          echo ENDPOINT='https://www.metaweather.com/' >> dotenv
+      - uses: erickzanardo/flutter-gh-pages@v6
