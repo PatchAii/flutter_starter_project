@@ -62,7 +62,6 @@ class RouteApp {
                 route: 'AccessDenied',
               ),
             ),
-<<<<<<< HEAD
       '/posts': (route) => MaterialPage(
             child: PostsPage(userId: route.queryParameters['userId']),
           ),
@@ -72,10 +71,6 @@ class RouteApp {
                 subtitle: route.queryParameters['subtitle'],
                 description: route.queryParameters['description']),
           ),
-      '/bottom': (route) => const BottomSheetPage(
-            child: Text(''),
-          ),
-=======
       '/settings/bottomsheet': (_) => BottomSheetPage(
             child: Container(
               color: Colors.greenAccent,
@@ -97,7 +92,6 @@ class RouteApp {
               ),
             ),
           )
->>>>>>> main
     },
   );
 
@@ -164,93 +158,3 @@ class RouteAppTitleObserver extends RoutemasterObserver {
     }
   }
 }
-<<<<<<< HEAD
-
-class NoAnimationPage<T> extends TransitionPage<T> {
-  NoAnimationPage({required Widget child})
-      : super(
-          child: child,
-          pushTransition: PageTransition.none,
-          popTransition: PageTransition.none,
-        );
-}
-
-class AnimationPage extends Page {
-  const AnimationPage({required this.child});
-
-  final Widget child;
-
-  @override
-  Route createRoute(BuildContext context) {
-    return PageRouteBuilder(
-      settings: this,
-      pageBuilder: (context, animation, animation2) {
-        final tween = Tween(begin: 0.0, end: 1.0);
-        final curveTween = CurveTween(curve: Curves.easeInOut);
-
-        return FadeTransition(
-          opacity: animation.drive(curveTween).drive(tween),
-          child: child,
-        );
-      },
-    );
-  }
-}
-
-class AnimationDisablePage extends Page {
-  const AnimationDisablePage({
-    required this.child,
-  });
-
-  final Widget child;
-
-  @override
-  Route createRoute(BuildContext context) {
-    return PageRouteBuilder(
-      settings: this,
-      barrierDismissible: true,
-      transitionDuration: const Duration(),
-      pageBuilder: (_, __, ___) {
-        return child;
-      },
-    );
-  }
-}
-
-class DialogPage extends Page<void> {
-  final Widget child;
-
-  const DialogPage({
-    required this.child,
-  });
-
-  @override
-  Route<void> createRoute(BuildContext context) {
-    return DialogRoute(
-      context: context,
-      builder: (context) => child,
-      settings: this,
-    );
-  }
-}
-
-class BottomSheetPage extends Page<void> {
-  final Widget child;
-
-  const BottomSheetPage({required this.child});
-
-  @override
-  Route<void> createRoute(BuildContext context) {
-    return MaterialPageRoute(
-        builder: (context) {
-          return Container(
-            height: 300.0,
-            color: Colors.red,
-          );
-        },
-        settings: this,
-        fullscreenDialog: true);
-  }
-}
-=======
->>>>>>> main

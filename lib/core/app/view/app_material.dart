@@ -86,12 +86,6 @@ class _ConsumerAppState extends State<ConsumerApp> {
         routeInformationParser: RouteApp.routeInformationParser,
         themeMode: ThemeMode.light,
         theme: ThemeData(
-<<<<<<< HEAD
-          primaryColor: Colors.green,
-          colorScheme: const ColorScheme.light(
-            primary: Colors.green,
-          ).copyWith(secondary: Colors.greenAccent),
-=======
           primaryColor: const Color(0xFF6EC818),
           colorScheme: const ColorScheme.light(
             primary: Color(0xFF6EC818),
@@ -102,7 +96,6 @@ class _ConsumerAppState extends State<ConsumerApp> {
               TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
             },
           ),
->>>>>>> main
         ),
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
