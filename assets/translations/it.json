@@ -2,5 +2,6 @@
   "weather": "Tempo",
   "profile": "Profilo",
   "login": "Login",
-  "error": "Errore"
+  "error": "Errore",
+  "posts":"Posts"
 }
