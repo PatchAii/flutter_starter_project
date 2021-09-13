@@ -42,5 +42,15 @@ Future<void> main() async {
         await screenMatchesGolden(tester, 'profile_content');
       });
     });
+
+    testGoldens('ProfileActions', (tester) async {
+      await mockNetworkImagesFor(() async {
+        final builder = getDefaultBuilder(
+          const ProfileActions(),
+        );
+        await tester.pumpDeviceBuilder(builder);
+        await screenMatchesGolden(tester, 'profile_actions');
+      });
+    });
   });
 }
