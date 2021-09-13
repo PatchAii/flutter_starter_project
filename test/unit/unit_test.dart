@@ -33,4 +33,9 @@ void main() {
     final g = Geo.fromJson(fixture('geo.json'));
     expect(g.toJson(), fixture('geo.json'));
   });
+
+  test('Test Post model', () {
+    final p = Post.fromJson(fixture('post.json'));
+    expect(p.toJson(), fixture('post.json'));
+  });
 }
