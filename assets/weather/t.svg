@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 18 18" style="enable-background:new 0 0 18 18;" xml:space="preserve">
+<g>
+	<defs>
+		<rect id="SVGID_1_" width="18" height="18"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<path style="clip-path:url(#SVGID_2_);fill-rule:evenodd;clip-rule:evenodd;fill:#BEBDBD;" d="M14.5,3
+		c-0.213,0-0.42,0.026-0.623,0.062C13.453,1.308,11.883,0,10,0C7.791,0,6,1.791,6,4c0,0.276-0.225,0.5-0.5,0.5
+		C5.223,4.5,5,4.276,5,4c0-0.622,0.127-1.212,0.336-1.762C4.918,2.089,4.469,2,4,2C1.791,2,0,3.791,0,6s1.791,4,4,4h10.5
+		c1.932,0,3.5-1.566,3.5-3.5S16.432,3,14.5,3"/>
+	<polygon style="clip-path:url(#SVGID_2_);fill-rule:evenodd;clip-rule:evenodd;fill:#DBBD45;" points="11.057,11 7.143,11 5,14 
+		7.855,14 5,18 13,12.857 9.57,12.857 	"/>
+</g>
+</svg>
