@@ -168,107 +168,93 @@ class ProfileData extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Card(
-          child: (context.layout.breakpoint > LayoutBreakpoint.xs)
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: CircleAvatar(
-                        radius: 75.0,
-                        backgroundImage:
-                            Image.network('https://placekitten.com/500/500')
-                                .image,
-                        backgroundColor: Colors.transparent,
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Id: ${user.id}',
-                              style: Theme.of(context).textTheme.bodyText2,
-                            ),
-                            Text(
-                              'Name: ${user.name}',
-                              style: Theme.of(context).textTheme.headline5,
-                            ),
-                            Text(
-                              'Username: ${user.username}',
-                              style: Theme.of(context).textTheme.headline5,
-                            ),
-                            Text(
-                              'Email: ${user.email}',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            Text(
-                              'Phone: ${user.phone}',
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                            Text(
-                              'Website: ${user.website}',
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: CircleAvatar(
-                        radius: 75.0,
-                        backgroundImage:
-                            Image.network('https://placekitten.com/500/500')
-                                .image,
-                        backgroundColor: Colors.transparent,
-                      ),
-                    ),
-                    Row(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: CircleAvatar(
+                  radius: (context.layout.breakpoint > LayoutBreakpoint.xs)
+                      ? 75.0
+                      : 25.0,
+                  backgroundImage:
+                      Image.network('https://placekitten.com/500/500').image,
+                  backgroundColor: Colors.transparent,
+                ),
+              ),
+              if (context.layout.breakpoint > LayoutBreakpoint.xs)
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Id: ${user.id}',
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
-                              Text(
-                                'Name: ${user.name}',
-                                style: Theme.of(context).textTheme.headline5,
-                              ),
-                              Text(
-                                'Username: ${user.username}',
-                                style: Theme.of(context).textTheme.headline5,
-                              ),
-                              Text(
-                                'Email: ${user.email}',
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                              Text(
-                                'Phone: ${user.phone}',
-                                style: Theme.of(context).textTheme.bodyText1,
-                              ),
-                              Text(
-                                'Website: ${user.website}',
-                                style: Theme.of(context).textTheme.bodyText1,
-                              ),
-                            ],
-                          ),
+                        Text(
+                          'Id: ${user.id}',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        Text(
+                          'Name: ${user.name}',
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                        Text(
+                          'Username: ${user.username}',
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                        Text(
+                          'Email: ${user.email}',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        Text(
+                          'Phone: ${user.phone}',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Text(
+                          'Website: ${user.website}',
+                          style: Theme.of(context).textTheme.bodyText1,
                         ),
                       ],
                     ),
-                  ],
+                  ),
+                )
+              else
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Id: ${user.id}',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        Text(
+                          'Name: ${user.name}',
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                        Text(
+                          'Username: ${user.username}',
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                        Text(
+                          'Email: ${user.email}',
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                        Text(
+                          'Phone: ${user.phone}',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Text(
+                          'Website: ${user.website}',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
+            ],
+          ),
         ),
       ),
     );
