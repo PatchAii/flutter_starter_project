@@ -46,6 +46,7 @@ flutter:
     - dotenv
     - assets/logo/
     - assets/translations/
+    - assets/weather/
 
 flutter_gen:
   output: lib/core/gen/

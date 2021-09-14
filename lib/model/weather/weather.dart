@@ -53,3 +53,16 @@ enum WeatherStateAbbr {
   lc,
   c,
 }
+
+enum WeatherStateName {
+  Snow,
+  Sleet,
+  Hail,
+  Thunderstorm,
+  HeavyRain,
+  LightRain,
+  Showers,
+  HeavyCloud,
+  LightCloud,
+  Clear,
+}
