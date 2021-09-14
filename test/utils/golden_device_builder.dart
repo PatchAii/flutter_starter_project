@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:layout/layout.dart';
 
 DeviceBuilder getDefaultBuilder(Widget child) {
   return DeviceBuilder()
@@ -12,6 +13,6 @@ DeviceBuilder getDefaultBuilder(Widget child) {
       ],
     )
     ..addScenario(
-      widget: child,
+      widget: Layout(child: child),
     );
 }

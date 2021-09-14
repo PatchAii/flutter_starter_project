@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_starter_project/core/app/view/app_scaffold.dart';
+import 'package:flutter_starter_project/core/common/notification_dialog.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/route/route_pages.dart';
 import 'package:flutter_starter_project/feature/feature.dart';
+import 'package:flutter_starter_project/feature/posts/view/posts_page.dart';
 import 'package:flutter_starter_project/feature/profile/view/profile_page.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
@@ -31,7 +33,7 @@ class RouteApp {
               child: child,
             ),
             child: const AppScaffold(),
-            paths: ['/weather', '/profile'],
+            paths: ['/weather', '/profile', '/posts'],
           );
         }
       },
@@ -60,6 +62,15 @@ class RouteApp {
                 route: 'AccessDenied',
               ),
             ),
+      '/posts': (route) => MaterialPage(
+            child: PostsPage(userId: route.queryParameters['userId']),
+          ),
+      '/notification': (route) => DialogPage(
+            child: NotificationDialog(
+                title: route.queryParameters['title'] ?? '',
+                subtitle: route.queryParameters['subtitle'],
+                description: route.queryParameters['description']),
+          ),
       '/settings/bottomsheet': (_) => BottomSheetPage(
             child: Container(
               color: Colors.greenAccent,

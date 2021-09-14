@@ -6,6 +6,8 @@
 
 > a template with best practices for starting a new app or becoming familiar with the architecture of our projects
 
+Live Demo: <https://patchaii.github.io/flutter_starter_project/>
+
 ---
 
 ## Tools

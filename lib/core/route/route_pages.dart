@@ -148,3 +148,20 @@ class IosPageRouteBuilder<T> extends PageRoute<T> {
         milliseconds: 300,
       );
 }
+
+class DialogPage extends Page<void> {
+  final Widget child;
+
+  const DialogPage({
+    required this.child,
+  });
+
+  @override
+  Route<void> createRoute(BuildContext context) {
+    return DialogRoute(
+      context: context,
+      builder: (context) => child,
+      settings: this,
+    );
+  }
+}

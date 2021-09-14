@@ -24,6 +24,9 @@ class _AppScaffoldState extends State<AppScaffold> {
       case 1:
         RouteApp.routemaster.push('/profile');
         break;
+      case 2:
+        RouteApp.routemaster.push('/posts');
+        break;
       default:
         RouteApp.routemaster.push('/');
     }
@@ -122,6 +125,10 @@ class NavigationBottomBar extends StatelessWidget {
           icon: const Icon(Icons.person),
           label: LocaleKeys.profile.tr(),
         ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.list),
+          label: LocaleKeys.posts.tr(),
+        ),
       ],
     );
   }
@@ -154,6 +161,10 @@ class NavigationSideBar extends StatelessWidget {
         NavigationRailDestination(
           icon: const Icon(Icons.person),
           label: Text(LocaleKeys.profile.tr()),
+        ),
+        NavigationRailDestination(
+          icon: const Icon(Icons.list),
+          label: Text(LocaleKeys.posts.tr()),
         ),
       ],
     );
