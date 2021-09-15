@@ -17,8 +17,13 @@ class _AppScaffoldState extends State<AppScaffold> {
   @override
   void initState() {
     super.initState();
-
     NotificationController.isNotificationAllowed();
+  }
+
+  @override
+  void dispose() {
+    NotificationController.dispose();
+    super.dispose();
   }
 
   bool extended = true;

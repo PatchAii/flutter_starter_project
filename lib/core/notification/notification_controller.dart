@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
+import 'package:flutter_starter_project/utils/alert/snackbar_controller.dart';
 
 class NotificationController {
   static Future<void> init() async {
@@ -13,6 +16,7 @@ class NotificationController {
           channelDescription: 'Notification channel for basic tests',
           defaultColor: const Color(0xFF6EC818),
           ledColor: Colors.white,
+          importance: NotificationImportance.High,
         ),
         NotificationChannel(
           channelKey: 'badge_channel',
@@ -22,6 +26,7 @@ class NotificationController {
           channelShowBadge: true,
           defaultColor: const Color(0xFF9D50DD),
           ledColor: Colors.green,
+          importance: NotificationImportance.High,
         ),
       ],
     );
@@ -39,8 +44,26 @@ class NotificationController {
   static void listen() {
     AwesomeNotifications().actionStream.listen(
       (receivedNotification) {
+        if (Platform.isIOS) {
+          AwesomeNotifications().getGlobalBadgeCounter().then((value) =>
+              AwesomeNotifications().setGlobalBadgeCounter(value - 1));
+        }
+        if (receivedNotification.payload?['redirect'] != null) {
+          RouteApp.routemaster
+              .push('${receivedNotification.payload?['redirect']}');
+          return;
+        }
+
         RouteApp.routemaster.push(
             '/notification?title=${receivedNotification.title}&subtitle=${receivedNotification.id}&description=${receivedNotification.payload}');
+      },
+    );
+
+    AwesomeNotifications().createdStream.listen(
+      (notification) {
+        SnackBarController.showSnackbar(
+          'Notification Created on ${notification.channelKey}',
+        );
       },
     );
   }
@@ -66,5 +89,22 @@ class NotificationController {
         body: 'This notification does activate badge indicator',
       ),
     );
+  }
+
+  static Future<void> createRedirectNotification() async {
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 1,
+        channelKey: 'basic_channel',
+        title: 'Redirect Notification',
+        body: 'Redirect body',
+        payload: {'redirect': '/settings'},
+      ),
+    );
+  }
+
+  static void dispose() {
+    AwesomeNotifications().actionSink.close();
+    AwesomeNotifications().createdSink.close();
   }
 }

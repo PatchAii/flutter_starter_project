@@ -138,6 +138,15 @@ class ProfileActions extends StatelessWidget {
         const SizedBox(
           height: 16.0,
         ),
+        ElevatedButton(
+          onPressed: () async {
+            await NotificationController.createRedirectNotification();
+          },
+          child: const Text('createRedirectNotification'),
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
       ],
     );
   }
