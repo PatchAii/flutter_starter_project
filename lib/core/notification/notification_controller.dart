@@ -11,7 +11,7 @@ class NotificationController {
           channelKey: 'basic_channel',
           channelName: 'Basic notifications',
           channelDescription: 'Notification channel for basic tests',
-          defaultColor: const Color(0xFF6EC818F),
+          defaultColor: const Color(0xFF6EC818),
           ledColor: Colors.white,
         ),
         NotificationChannel(
@@ -20,8 +20,8 @@ class NotificationController {
           channelDescription:
               'Notification channel to activate badge indicator',
           channelShowBadge: true,
-          defaultColor: Color(0xFF9D50DD),
-          ledColor: Colors.yellow,
+          defaultColor: const Color(0xFF9D50DD),
+          ledColor: Colors.green,
         ),
       ],
     );
