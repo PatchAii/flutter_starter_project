@@ -23,6 +23,7 @@ Future _initApp() async {
     configureDependencies(),
     EasyLocalization.ensureInitialized(),
     dotenv.load(fileName: 'dotenv'),
+    NotificationController.init(),
   ];
   RouteApp.initRoutes();
   Bloc.observer = AppBlocObserver();

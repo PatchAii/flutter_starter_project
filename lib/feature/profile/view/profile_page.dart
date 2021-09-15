@@ -120,6 +120,15 @@ class ProfileActions extends StatelessWidget {
         const SizedBox(
           height: 16.0,
         ),
+        ElevatedButton(
+          onPressed: () async {
+            await NotificationController.create();
+          },
+          child: const Text('create notification'),
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
       ],
     );
   }

@@ -14,6 +14,13 @@ class AppScaffold extends StatefulWidget {
 }
 
 class _AppScaffoldState extends State<AppScaffold> {
+  @override
+  void initState() {
+    super.initState();
+
+    NotificationController.isNotificationAllowed();
+  }
+
   bool extended = true;
 
   Future<void> _onIndexSelect(newIndex) async {
