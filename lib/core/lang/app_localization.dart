@@ -15,14 +15,14 @@ class CodegenLoader extends AssetLoader{
   }
 
   static const Map<String,dynamic> en = {
-  "weather": "Weather",
+  "pokedex": "Pokedex",
   "profile": "Profile",
   "login": "Login",
   "error": "Error",
   "posts": "Posts"
 };
 static const Map<String,dynamic> it = {
-  "weather": "Tempo",
+  "pokedex": "Pokedex",
   "profile": "Profilo",
   "login": "Login",
   "error": "Errore",

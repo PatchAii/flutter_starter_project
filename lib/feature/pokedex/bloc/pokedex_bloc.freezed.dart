@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
-part of 'weather_bloc.dart';
+part of 'pokedex_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,8 +13,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$WeatherEventTearOff {
-  const _$WeatherEventTearOff();
+class _$PokedexEventTearOff {
+  const _$PokedexEventTearOff();
 
   _Fetch fetch() {
     return const _Fetch();
@@ -22,10 +22,10 @@ class _$WeatherEventTearOff {
 }
 
 /// @nodoc
-const $WeatherEvent = _$WeatherEventTearOff();
+const $PokedexEvent = _$PokedexEventTearOff();
 
 /// @nodoc
-mixin _$WeatherEvent {
+mixin _$PokedexEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
@@ -51,19 +51,19 @@ mixin _$WeatherEvent {
 }
 
 /// @nodoc
-abstract class $WeatherEventCopyWith<$Res> {
-  factory $WeatherEventCopyWith(
-          WeatherEvent value, $Res Function(WeatherEvent) then) =
-      _$WeatherEventCopyWithImpl<$Res>;
+abstract class $PokedexEventCopyWith<$Res> {
+  factory $PokedexEventCopyWith(
+          PokedexEvent value, $Res Function(PokedexEvent) then) =
+      _$PokedexEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$WeatherEventCopyWithImpl<$Res> implements $WeatherEventCopyWith<$Res> {
-  _$WeatherEventCopyWithImpl(this._value, this._then);
+class _$PokedexEventCopyWithImpl<$Res> implements $PokedexEventCopyWith<$Res> {
+  _$PokedexEventCopyWithImpl(this._value, this._then);
 
-  final WeatherEvent _value;
+  final PokedexEvent _value;
   // ignore: unused_field
-  final $Res Function(WeatherEvent) _then;
+  final $Res Function(PokedexEvent) _then;
 }
 
 /// @nodoc
@@ -73,7 +73,7 @@ abstract class _$FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$FetchCopyWithImpl<$Res> extends _$WeatherEventCopyWithImpl<$Res>
+class __$FetchCopyWithImpl<$Res> extends _$PokedexEventCopyWithImpl<$Res>
     implements _$FetchCopyWith<$Res> {
   __$FetchCopyWithImpl(_Fetch _value, $Res Function(_Fetch) _then)
       : super(_value, (v) => _then(v as _Fetch));
@@ -89,7 +89,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'WeatherEvent.fetch()';
+    return 'PokedexEvent.fetch()';
   }
 
   @override
@@ -141,22 +141,21 @@ class _$_Fetch implements _Fetch {
   }
 }
 
-abstract class _Fetch implements WeatherEvent {
+abstract class _Fetch implements PokedexEvent {
   const factory _Fetch() = _$_Fetch;
 }
 
 /// @nodoc
-class _$WeatherStateTearOff {
-  const _$WeatherStateTearOff();
+class _$PokedexStateTearOff {
+  const _$PokedexStateTearOff();
 
   _Loading loading() {
     return const _Loading();
   }
 
-  _Loaded loaded({required String city, required List<Weather> weathers}) {
+  _Loaded loaded({required List<GetPokedex$Query$Pokemon?>? pokedex}) {
     return _Loaded(
-      city: city,
-      weathers: weathers,
+      pokedex: pokedex,
     );
   }
 
@@ -166,21 +165,21 @@ class _$WeatherStateTearOff {
 }
 
 /// @nodoc
-const $WeatherState = _$WeatherStateTearOff();
+const $PokedexState = _$PokedexStateTearOff();
 
 /// @nodoc
-mixin _$WeatherState {
+mixin _$PokedexState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String city, List<Weather> weathers) loaded,
+    required TResult Function(List<GetPokedex$Query$Pokemon?>? pokedex) loaded,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String city, List<Weather> weathers)? loaded,
+    TResult Function(List<GetPokedex$Query$Pokemon?>? pokedex)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -203,19 +202,19 @@ mixin _$WeatherState {
 }
 
 /// @nodoc
-abstract class $WeatherStateCopyWith<$Res> {
-  factory $WeatherStateCopyWith(
-          WeatherState value, $Res Function(WeatherState) then) =
-      _$WeatherStateCopyWithImpl<$Res>;
+abstract class $PokedexStateCopyWith<$Res> {
+  factory $PokedexStateCopyWith(
+          PokedexState value, $Res Function(PokedexState) then) =
+      _$PokedexStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$WeatherStateCopyWithImpl<$Res> implements $WeatherStateCopyWith<$Res> {
-  _$WeatherStateCopyWithImpl(this._value, this._then);
+class _$PokedexStateCopyWithImpl<$Res> implements $PokedexStateCopyWith<$Res> {
+  _$PokedexStateCopyWithImpl(this._value, this._then);
 
-  final WeatherState _value;
+  final PokedexState _value;
   // ignore: unused_field
-  final $Res Function(WeatherState) _then;
+  final $Res Function(PokedexState) _then;
 }
 
 /// @nodoc
@@ -225,7 +224,7 @@ abstract class _$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$LoadingCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
+class __$LoadingCopyWithImpl<$Res> extends _$PokedexStateCopyWithImpl<$Res>
     implements _$LoadingCopyWith<$Res> {
   __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
       : super(_value, (v) => _then(v as _Loading));
@@ -241,7 +240,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'WeatherState.loading()';
+    return 'PokedexState.loading()';
   }
 
   @override
@@ -256,7 +255,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String city, List<Weather> weathers) loaded,
+    required TResult Function(List<GetPokedex$Query$Pokemon?>? pokedex) loaded,
     required TResult Function() error,
   }) {
     return loading();
@@ -266,7 +265,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String city, List<Weather> weathers)? loaded,
+    TResult Function(List<GetPokedex$Query$Pokemon?>? pokedex)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -301,7 +300,7 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements WeatherState {
+abstract class _Loading implements PokedexState {
   const factory _Loading() = _$_Loading;
 }
 
@@ -309,11 +308,11 @@ abstract class _Loading implements WeatherState {
 abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
-  $Res call({String city, List<Weather> weathers});
+  $Res call({List<GetPokedex$Query$Pokemon?>? pokedex});
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
+class __$LoadedCopyWithImpl<$Res> extends _$PokedexStateCopyWithImpl<$Res>
     implements _$LoadedCopyWith<$Res> {
   __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
       : super(_value, (v) => _then(v as _Loaded));
@@ -323,18 +322,13 @@ class __$LoadedCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? city = freezed,
-    Object? weathers = freezed,
+    Object? pokedex = freezed,
   }) {
     return _then(_Loaded(
-      city: city == freezed
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      weathers: weathers == freezed
-          ? _value.weathers
-          : weathers // ignore: cast_nullable_to_non_nullable
-              as List<Weather>,
+      pokedex: pokedex == freezed
+          ? _value.pokedex
+          : pokedex // ignore: cast_nullable_to_non_nullable
+              as List<GetPokedex$Query$Pokemon?>?,
     ));
   }
 }
@@ -342,34 +336,27 @@ class __$LoadedCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded({required this.city, required this.weathers});
+  const _$_Loaded({required this.pokedex});
 
   @override
-  final String city;
-  @override
-  final List<Weather> weathers;
+  final List<GetPokedex$Query$Pokemon?>? pokedex;
 
   @override
   String toString() {
-    return 'WeatherState.loaded(city: $city, weathers: $weathers)';
+    return 'PokedexState.loaded(pokedex: $pokedex)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Loaded &&
-            (identical(other.city, city) ||
-                const DeepCollectionEquality().equals(other.city, city)) &&
-            (identical(other.weathers, weathers) ||
-                const DeepCollectionEquality()
-                    .equals(other.weathers, weathers)));
+            (identical(other.pokedex, pokedex) ||
+                const DeepCollectionEquality().equals(other.pokedex, pokedex)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(city) ^
-      const DeepCollectionEquality().hash(weathers);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(pokedex);
 
   @JsonKey(ignore: true)
   @override
@@ -380,22 +367,22 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String city, List<Weather> weathers) loaded,
+    required TResult Function(List<GetPokedex$Query$Pokemon?>? pokedex) loaded,
     required TResult Function() error,
   }) {
-    return loaded(city, weathers);
+    return loaded(pokedex);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String city, List<Weather> weathers)? loaded,
+    TResult Function(List<GetPokedex$Query$Pokemon?>? pokedex)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(city, weathers);
+      return loaded(pokedex);
     }
     return orElse();
   }
@@ -425,12 +412,12 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements WeatherState {
-  const factory _Loaded(
-      {required String city, required List<Weather> weathers}) = _$_Loaded;
+abstract class _Loaded implements PokedexState {
+  const factory _Loaded({required List<GetPokedex$Query$Pokemon?>? pokedex}) =
+      _$_Loaded;
 
-  String get city => throw _privateConstructorUsedError;
-  List<Weather> get weathers => throw _privateConstructorUsedError;
+  List<GetPokedex$Query$Pokemon?>? get pokedex =>
+      throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
 }
@@ -442,7 +429,7 @@ abstract class _$ErrorCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ErrorCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
+class __$ErrorCopyWithImpl<$Res> extends _$PokedexStateCopyWithImpl<$Res>
     implements _$ErrorCopyWith<$Res> {
   __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
       : super(_value, (v) => _then(v as _Error));
@@ -458,7 +445,7 @@ class _$_Error implements _Error {
 
   @override
   String toString() {
-    return 'WeatherState.error()';
+    return 'PokedexState.error()';
   }
 
   @override
@@ -473,7 +460,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(String city, List<Weather> weathers) loaded,
+    required TResult Function(List<GetPokedex$Query$Pokemon?>? pokedex) loaded,
     required TResult Function() error,
   }) {
     return error();
@@ -483,7 +470,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(String city, List<Weather> weathers)? loaded,
+    TResult Function(List<GetPokedex$Query$Pokemon?>? pokedex)? loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -518,6 +505,6 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements WeatherState {
+abstract class _Error implements PokedexState {
   const factory _Error() = _$_Error;
 }
