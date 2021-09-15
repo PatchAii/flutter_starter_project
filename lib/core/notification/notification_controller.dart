@@ -13,7 +13,16 @@ class NotificationController {
           channelDescription: 'Notification channel for basic tests',
           defaultColor: const Color(0xFF6EC818F),
           ledColor: Colors.white,
-        )
+        ),
+        NotificationChannel(
+          channelKey: 'badge_channel',
+          channelName: 'Badge indicator notifications',
+          channelDescription:
+              'Notification channel to activate badge indicator',
+          channelShowBadge: true,
+          defaultColor: Color(0xFF9D50DD),
+          ledColor: Colors.yellow,
+        ),
       ],
     );
   }
@@ -36,13 +45,25 @@ class NotificationController {
     );
   }
 
-  static Future<void> create() async {
+  static Future<void> createBasicNotification() async {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: 1,
         channelKey: 'basic_channel',
         title: 'Simple Notification',
         body: 'Simple body',
+        payload: {'a': 'b'},
+      ),
+    );
+  }
+
+  static Future<void> createBadgeNotification() async {
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 2,
+        channelKey: 'badge_channel',
+        title: 'Badge test notification',
+        body: 'This notification does activate badge indicator',
       ),
     );
   }
