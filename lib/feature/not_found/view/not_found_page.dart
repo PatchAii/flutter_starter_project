@@ -24,7 +24,7 @@ class NotFoundPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                RouteApp.routemaster.push('/weather');
+                RouteApp.routemaster.push('/pokedex');
               },
               child: const Text('Home'),
             )

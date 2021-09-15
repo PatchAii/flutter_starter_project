@@ -20,9 +20,9 @@ class MaterialBannerController {
               onPressed: () {
                 rootScaffoldMessengerKey.currentState!
                     .hideCurrentMaterialBanner();
-                RouteApp.routemaster.push('/weather');
+                RouteApp.routemaster.push('/pokedex');
               },
-              child: const Text('Go to weather'),
+              child: const Text('Go to pokedex'),
             ),
             TextButton(
               onPressed: () {

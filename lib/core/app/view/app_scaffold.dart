@@ -19,7 +19,7 @@ class _AppScaffoldState extends State<AppScaffold> {
   Future<void> _onIndexSelect(newIndex) async {
     switch (newIndex) {
       case 0:
-        RouteApp.routemaster.push('/weather');
+        RouteApp.routemaster.push('/pokedex');
         break;
       case 1:
         RouteApp.routemaster.push('/profile');
@@ -119,7 +119,7 @@ class NavigationBottomBar extends StatelessWidget {
       items: [
         BottomNavigationBarItem(
           icon: const Icon(Icons.wb_sunny),
-          label: LocaleKeys.weather.tr(),
+          label: LocaleKeys.pokedex.tr(),
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.person),
@@ -156,7 +156,7 @@ class NavigationSideBar extends StatelessWidget {
       destinations: [
         NavigationRailDestination(
           icon: const Icon(Icons.wb_sunny),
-          label: Text(LocaleKeys.weather.tr()),
+          label: Text(LocaleKeys.pokedex.tr()),
         ),
         NavigationRailDestination(
           icon: const Icon(Icons.person),

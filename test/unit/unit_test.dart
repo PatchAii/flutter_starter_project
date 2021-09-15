@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../utils/fixture_reader.dart';
 
 void main() {
-  test('Test Weather model', () {
+/*   test('Test Weather model', () {
     final w = Weather.fromJson(fixture('weather.json'));
     expect(w.toJson(), fixture('weather.json'));
   });
@@ -13,7 +13,7 @@ void main() {
     final c = City.fromJson(fixture('city.json'));
     expect(c.toJson(), fixture('city.json'));
   });
-
+ */
   test('Test User model', () {
     final u = User.fromJson(fixture('user.json'));
     expect(u.toJson(), fixture('user.json'));

@@ -16,11 +16,11 @@ jobs:
     - name: Create env file
       run: |
         touch dotenv
-        echo ENDPOINT='https://cors-anywhere.herokuapp.com/https://meta-weather.vercel.app' >> dotenv
+        echo ENDPOINT='https://graphql-pokemon2.now.sh/graphql' >> dotenv
     - uses: subosito/flutter-action@v1
     - run: flutter pub get
     - run: flutter test --coverage test/unit
-    - run: lcov --remove coverage/lcov.info 'lib/*/*.freezed.dart' 'lib/*/*.g.dart' 'lib/*/*.part.dart' 'lib/core/gen/*.dart' -o coverage/lcov.info
+    - run: lcov --remove coverage/lcov.info 'lib/*/*.freezed.dart' 'lib/*/*.g.dart' 'lib/*/*.part.dart' 'lib/core/gen/*.dart' 'lib/graphql/*.dart' -o coverage/lcov.info
     - name: Report code coverage
       uses: zgosalvez/github-actions-report-lcov@v1
       with:

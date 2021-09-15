@@ -27,6 +27,7 @@ dependencies:
   routemaster: ^0.10.0-dev2
 
 dev_dependencies:
+  artemis: ^7.1.1-beta.1
   bloc_test: ^8.1.0
   build_runner: ^2.1.0
   ficcanaso: ^2.0.7
@@ -46,7 +47,6 @@ flutter:
     - dotenv
     - assets/logo/
     - assets/translations/
-    - assets/weather/
 
 flutter_gen:
   output: lib/core/gen/

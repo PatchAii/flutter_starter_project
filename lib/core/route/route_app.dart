@@ -33,13 +33,13 @@ class RouteApp {
               child: child,
             ),
             child: const AppScaffold(),
-            paths: ['/weather', '/profile', '/posts'],
+            paths: ['/pokedex', '/profile', '/posts'],
           );
         }
       },
-      '/weather': (_) => const MaterialPage(
-            name: 'Weather',
-            child: WeatherPage(),
+      '/pokedex': (_) => const MaterialPage(
+            name: 'Pokedex',
+            child: PokedexPage(),
           ),
       '/profile': (_) => const MaterialPage(
             name: 'Profile',
