@@ -83,3 +83,46 @@ flutter pub run build_runner build
 # Code generator "build_runner" with confict remove
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
+
+___
+
+## Notifications
+
+Local and push notification are handled by **Awesome_notification**
+<https://pub.dev/packages/awesome_notifications>
+
+To send a notification using FCM services, you need to send a POST to:
+
+```
+https://fcm.googleapis.com/fcm/send
+```
+
+To avoid misbehavior on Android and IOS you should send an empty **notification** field and use only **data** field for your data.
+
+Here's an example of a POST request **body**:
+
+```
+{
+    "to" : "[YOUR APP FCM TOKEN]",
+    "mutable_content" : true,
+    "content_available": true,
+    "priority": "high",
+    "data" : {
+        "content": {
+            "id": 100,
+            "channelKey": "basic_channel",
+            "title": "Basic message",
+            "body": "This is the body of a basic FCM message"
+        }
+    }
+}
+```
+
+Inside **headers** define:
+
+```
+Content-type: application/json
+Authorization: key=[server_key]
+```
+
+---
