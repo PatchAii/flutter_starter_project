@@ -84,7 +84,7 @@ flutter pub run build_runner build
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-___
+---
 
 ## Notifications
 
@@ -93,7 +93,7 @@ Local and push notification are handled by **Awesome_notification**
 
 To send a notification using FCM services, you need to send a POST to:
 
-```
+```sh
 https://fcm.googleapis.com/fcm/send
 ```
 
@@ -101,7 +101,7 @@ To avoid misbehavior on Android and IOS you should send an empty **notification*
 
 Here's an example of a POST request **body**:
 
-```
+```javascript
 {
     "to" : "[YOUR APP FCM TOKEN]",
     "mutable_content" : true,
@@ -120,7 +120,7 @@ Here's an example of a POST request **body**:
 
 Inside **headers** define:
 
-```
+```javascript
 Content-type: application/json
 Authorization: key=[server_key]
 ```

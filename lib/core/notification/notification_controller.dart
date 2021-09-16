@@ -11,7 +11,9 @@ import 'package:flutter_starter_project/utils/alert/snackbar_controller.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   await NotificationController.handleRemoteNotification(
-      message: message, background: true);
+    message: message,
+    background: true,
+  );
 }
 
 class NotificationController {
@@ -53,25 +55,31 @@ class NotificationController {
   }
 
   static void listen() {
-    FirebaseMessaging.instance.getToken().then((token) {
-      debugPrint('FCMTOKEN: $token');
-    });
+    FirebaseMessaging.instance.getToken().then(
+      (token) {
+        debugPrint('FCMTOKEN: $token');
+      },
+    );
 
     AwesomeNotifications().actionStream.listen(
       (receivedNotification) {
         if (Platform.isIOS) {
-          AwesomeNotifications().getGlobalBadgeCounter().then((value) =>
-              AwesomeNotifications().setGlobalBadgeCounter(value - 1));
+          AwesomeNotifications().getGlobalBadgeCounter().then(
+                (value) =>
+                    AwesomeNotifications().setGlobalBadgeCounter(value - 1),
+              );
         }
 
         if (receivedNotification.payload?['redirect'] != null) {
-          RouteApp.routemaster
-              .push('${receivedNotification.payload?['redirect']}');
+          RouteApp.routemaster.push(
+            '${receivedNotification.payload?['redirect']}',
+          );
           return;
         }
 
         RouteApp.routemaster.push(
-            '/notification?title=${receivedNotification.title}&subtitle=${receivedNotification.id}&description=${receivedNotification.payload}');
+          '/notification?title=${receivedNotification.title}&subtitle=${receivedNotification.id}&description=${receivedNotification.payload}',
+        );
       },
     );
 
@@ -101,12 +109,17 @@ class NotificationController {
       final content = jsonDecode(message.data['content']);
       await AwesomeNotifications().createNotification(
         content: NotificationContent(
-            id: content['id'],
-            channelKey: content['channelKey'],
-            title: content['title'],
-            body: content['body'],
-            payload: message.data.map(
-                (key, value) => MapEntry(key, content['payload'].toString()))),
+          id: content['id'],
+          channelKey: content['channelKey'],
+          title: content['title'],
+          body: content['body'],
+          payload: message.data.map(
+            (key, value) => MapEntry(
+              key,
+              content['payload'].toString(),
+            ),
+          ),
+        ),
       );
     }
   }
