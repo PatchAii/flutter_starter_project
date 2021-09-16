@@ -1,9 +1,17 @@
 import 'dart:io';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/utils/alert/snackbar_controller.dart';
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print('Handling a background message: ${message.messageId}');
+  await NotificationController.createBasicNotification();
+}
 
 class NotificationController {
   static Future<void> init() async {
@@ -30,6 +38,8 @@ class NotificationController {
         ),
       ],
     );
+    await Firebase.initializeApp();
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
 
   static Future<void> isNotificationAllowed() async {
@@ -42,12 +52,16 @@ class NotificationController {
   }
 
   static void listen() {
+    FirebaseMessaging.instance.getToken().then((token) {
+      print('FCMTOKEN: $token');
+    });
     AwesomeNotifications().actionStream.listen(
       (receivedNotification) {
         if (Platform.isIOS) {
           AwesomeNotifications().getGlobalBadgeCounter().then((value) =>
               AwesomeNotifications().setGlobalBadgeCounter(value - 1));
         }
+
         if (receivedNotification.payload?['redirect'] != null) {
           RouteApp.routemaster
               .push('${receivedNotification.payload?['redirect']}');
@@ -66,10 +80,31 @@ class NotificationController {
         );
       },
     );
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+      await createBasicNotification();
+
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+      }
+    });
   }
 
   static Future<void> createBasicNotification() async {
+    final interval = NotificationInterval(
+      interval: 5,
+    );
+    final calendar = NotificationCalendar(
+      /* weekday: notificationSchedule.dayOfTheWeek,
+      hour: notificationSchedule.timeOfDay.hour,
+      minute: notificationSchedule.timeOfDay.minute, */
+      second: 0,
+      millisecond: 0,
+    );
     await AwesomeNotifications().createNotification(
+      schedule: calendar,
       content: NotificationContent(
         id: 1,
         channelKey: 'basic_channel',
