@@ -93,17 +93,20 @@ class NotificationController {
     required RemoteMessage message,
     bool background = false,
   }) async {
-    if (message.notification == null) return;
-    await AwesomeNotifications().createNotification(
-      content: NotificationContent(
-        id: 1,
-        channelKey: 'basic_channel',
-        title: message.notification!.title,
-        body: message.notification!.body,
-        payload:
-            message.data.map((key, value) => MapEntry(key, value.toString())),
-      ),
-    );
+    if (message.notification != null) {
+      return;
+    } else {
+      await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 1,
+          channelKey: 'basic_channel',
+          title: message.notification!.title,
+          body: message.notification!.body,
+          payload:
+              message.data.map((key, value) => MapEntry(key, value.toString())),
+        ),
+      );
+    }
   }
 
   static Future<void> createBasicNotification() async {
