@@ -9,7 +9,8 @@ import 'package:flutter_starter_project/utils/alert/snackbar_controller.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  await NotificationController.createBasicNotification();
+  await NotificationController.handleRemoteNotification(
+      message: message, background: true);
 }
 
 class NotificationController {
@@ -84,12 +85,25 @@ class NotificationController {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       /* print('Got a message whilst in the foreground!');
       print('Message data: ${message.data}'); */
-      await createBasicNotification();
-
-      if (message.notification != null) {
-        //print('Message also contained a notification: ${message.notification}');
-      }
+      await handleRemoteNotification(message: message);
     });
+  }
+
+  static Future<void> handleRemoteNotification({
+    required RemoteMessage message,
+    bool background = false,
+  }) async {
+    if (message.notification == null) return;
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 1,
+        channelKey: 'basic_channel',
+        title: message.notification!.title,
+        body: message.notification!.body,
+        payload:
+            message.data.map((key, value) => MapEntry(key, value.toString())),
+      ),
+    );
   }
 
   static Future<void> createBasicNotification() async {
