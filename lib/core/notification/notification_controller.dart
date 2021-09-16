@@ -9,7 +9,6 @@ import 'package:flutter_starter_project/utils/alert/snackbar_controller.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print('Handling a background message: ${message.messageId}');
   await NotificationController.createBasicNotification();
 }
 
@@ -53,8 +52,9 @@ class NotificationController {
 
   static void listen() {
     FirebaseMessaging.instance.getToken().then((token) {
-      print('FCMTOKEN: $token');
+      debugPrint('FCMTOKEN: $token');
     });
+
     AwesomeNotifications().actionStream.listen(
       (receivedNotification) {
         if (Platform.isIOS) {
@@ -82,27 +82,27 @@ class NotificationController {
     );
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      print('Got a message whilst in the foreground!');
-      print('Message data: ${message.data}');
+      /* print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}'); */
       await createBasicNotification();
 
       if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification}');
+        //print('Message also contained a notification: ${message.notification}');
       }
     });
   }
 
   static Future<void> createBasicNotification() async {
-    final interval = NotificationInterval(
+    /* final interval = NotificationInterval(
       interval: 5,
-    );
-    final calendar = NotificationCalendar(
-      /* weekday: notificationSchedule.dayOfTheWeek,
+    ); */
+    /* final calendar = NotificationCalendar(
+       weekday: notificationSchedule.dayOfTheWeek,
       hour: notificationSchedule.timeOfDay.hour,
-      minute: notificationSchedule.timeOfDay.minute, */
+      minute: notificationSchedule.timeOfDay.minute,
       second: 0,
       millisecond: 0,
-    );
+    );*/
     await AwesomeNotifications().createNotification(
       //schedule: calendar,
       content: NotificationContent(
