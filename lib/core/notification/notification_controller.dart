@@ -104,7 +104,7 @@ class NotificationController {
       millisecond: 0,
     );
     await AwesomeNotifications().createNotification(
-      schedule: calendar,
+      //schedule: calendar,
       content: NotificationContent(
         id: 1,
         channelKey: 'basic_channel',
