@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -96,15 +97,16 @@ class NotificationController {
     if (message.notification != null) {
       return;
     } else {
+      //await AwesomeNotifications().createNotificationFromJsonData(message.data);
+      final content = jsonDecode(message.data['content']);
       await AwesomeNotifications().createNotification(
         content: NotificationContent(
-          id: 1,
-          channelKey: 'basic_channel',
-          title: message.notification!.title,
-          body: message.notification!.body,
-          payload:
-              message.data.map((key, value) => MapEntry(key, value.toString())),
-        ),
+            id: content['id'],
+            channelKey: content['channelKey'],
+            title: content['title'],
+            body: content['body'],
+            payload: message.data.map(
+                (key, value) => MapEntry(key, content['payload'].toString()))),
       );
     }
   }
