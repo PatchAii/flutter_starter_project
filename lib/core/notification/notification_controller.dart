@@ -45,7 +45,7 @@ class NotificationController {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
 
-  static Future<void> isNotificationAllowed() async {
+  static Future<void> isNotificationAllowedOrListen() async {
     final isAllowed = await AwesomeNotifications().isNotificationAllowed();
     if (!isAllowed) {
       RouteApp.routemaster.push('/notificationpermission');
@@ -63,7 +63,8 @@ class NotificationController {
 
     AwesomeNotifications().actionStream.listen(
       (receivedNotification) {
-        if (Platform.isIOS) {
+        if (Platform.isIOS &&
+            receivedNotification.channelKey == 'badge_channel') {
           AwesomeNotifications().getGlobalBadgeCounter().then(
                 (value) =>
                     AwesomeNotifications().setGlobalBadgeCounter(value - 1),
