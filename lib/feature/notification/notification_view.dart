@@ -14,116 +14,133 @@ class NotificationPage extends StatelessWidget {
     return Scaffold(
       appBar: subPage ? null : AppBar(),
       body: Center(
-        child: Column(
-          children: [
-            Text(
-              'Notification',
-              style: Theme.of(context).textTheme.headline3,
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                await NotificationController.createBasicNotification();
-              },
-              child: const Text('Basic notification'),
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                await NotificationController.createBadgeNotification();
-              },
-              child: const Text('Badge notification'),
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                await NotificationController.createRedirectNotification();
-              },
-              child: const Text('Redirect notification'),
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            Text(
-              'Repeated',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                final sec = await pickSeconds(context);
-                if (sec != null) {
-                  //Se metto un numero di secondi sotto ai 60 crasha
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(
+                'Notification',
+                style: Theme.of(context).textTheme.headline3,
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await NotificationController.createBasicNotification();
+                },
+                child: const Text('Basic notification'),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await NotificationController.createBadgeNotification();
+                },
+                child: const Text('Badge notification'),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await NotificationController.createRedirectNotification();
+                },
+                child: const Text('Redirect notification'),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              Text(
+                'Repeated',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  final sec = await pickSeconds(context);
+                  if (sec != null) {
+                    //Se metto un numero di secondi sotto ai 60 crasha
+                    await NotificationController
+                        .createSecondsRepeatingNotification(
+                      sec,
+                    );
+                  }
+                },
+                child: const Text('Repeating notification'),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              Text(
+                'Scheduled',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  final plan = await pickSchedule(context);
+                  if (plan != null) {
+                    await NotificationController.createScheduledNotification(
+                      notificationSchedule: plan,
+                    );
+                  }
+                },
+                child: const Text('Scheduled notification, once'),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  final plan = await pickSchedule(context);
+                  if (plan != null) {
+                    await NotificationController.createScheduledNotification(
+                      notificationSchedule: plan,
+                      repeats: true,
+                    );
+                  }
+                },
+                child: const Text('Scheduled notification, repeat'),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
                   await NotificationController
-                      .createSecondsRepeatingNotification(
-                    sec,
-                  );
-                }
-              },
-              child: const Text('Repeating notification'),
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            Text(
-              'Scheduled',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                final plan = await pickSchedule(context);
-                if (plan != null) {
-                  await NotificationController.createScheduledNotification(
-                    plan,
-                  );
-                }
-              },
-              child: const Text('Weekly scheduled notification'),
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                await NotificationController
-                    .createMinuteRepeatingNotification();
-              },
-              child: const Text('Minute repeating notification'),
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                await NotificationController
-                    .createTargetRepeatingNotification();
-              },
-              child: const Text('Every hour at minute 10 and 30 seconds'),
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                await NotificationController.cancelScheduledNotifications();
-              },
-              child: const Text('Cancel all scheduled'),
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-          ],
+                      .createMinuteRepeatingNotification();
+                },
+                child: const Text('Minute repeating notification'),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await NotificationController
+                      .createTargetRepeatingNotification();
+                },
+                child: const Text('Every hour at minute 10 and 30 seconds'),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await NotificationController.cancelScheduledNotifications();
+                },
+                child: const Text('Cancel all scheduled'),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -226,5 +243,51 @@ class NotificationPage extends StatelessWidget {
         });
 
     return selectedTime;
+  }
+
+  Future<int?> pickNotificationCalendar(
+    BuildContext context,
+  ) async {
+    await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text(
+              'NotificationCalendar',
+              textAlign: TextAlign.center,
+            ),
+            content: Column(
+              children: [
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Day',
+                  ),
+                ),
+                const TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Hour',
+                  ),
+                ),
+                const TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Minute',
+                  ),
+                ),
+                const TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Minute',
+                  ),
+                )
+              ],
+            ),
+          );
+        });
+
+    return null;
   }
 }

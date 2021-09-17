@@ -182,20 +182,23 @@ class NotificationController {
           id: createUniqueId(),
           channelKey: 'scheduled_channel',
           title: 'Notification at every $seconds seconds',
-          body: 'This notification was schedule to repeat.',
+          body: 'This notification reschedule itself every $seconds seconds.',
         ),
         schedule: NotificationInterval(
             interval: seconds, timeZone: localTimeZone, repeats: true));
   }
 
-  static Future<void> createScheduledNotification(
-      NotificationWeekAndTime notificationSchedule) async {
+  static Future<void> createScheduledNotification({
+    required NotificationWeekAndTime notificationSchedule,
+    bool repeats = false,
+  }) async {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: createUniqueId(),
         channelKey: 'scheduled_channel',
-        title: '${Emojis.wheater_droplet} Add some water to your plant!',
-        body: 'Water your plant regularly to keep it healthy.',
+        title: '${Emojis.office_calendar} This is a scheduled notification',
+        body:
+            'It should be ${notificationSchedule.timeOfDay.toString()} of day ${notificationSchedule.dayOfTheWeek.toString()} of the week.',
         notificationLayout: NotificationLayout.Default,
       ),
       actionButtons: [
@@ -205,13 +208,12 @@ class NotificationController {
         ),
       ],
       schedule: NotificationCalendar(
-        weekday: notificationSchedule.dayOfTheWeek,
-        hour: notificationSchedule.timeOfDay.hour,
-        minute: notificationSchedule.timeOfDay.minute,
-        second: 0,
-        millisecond: 0,
-        repeats: true,
-      ),
+          weekday: notificationSchedule.dayOfTheWeek,
+          hour: notificationSchedule.timeOfDay.hour,
+          minute: notificationSchedule.timeOfDay.minute,
+          second: 0,
+          millisecond: 0,
+          repeats: repeats),
     );
   }
 
