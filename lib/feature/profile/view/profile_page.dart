@@ -113,7 +113,16 @@ class ProfileActions extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             RouteApp.routemaster.push(
-                '/notification?title=Kimi&subtitle=Raikkonen&description=AlfaRomeo Raicing ORLEN');
+                '/dialog?title=Kimi&subtitle=Raikkonen&description=AlfaRomeo Raicing ORLEN');
+          },
+          child: const Text('/dialog'),
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            RouteApp.routemaster.push('/notification');
           },
           child: const Text('/notification'),
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class NotificationDialog extends StatelessWidget {
-  const NotificationDialog({
+class GenericDialog extends StatelessWidget {
+  const GenericDialog({
     Key? key,
     required this.title,
     this.subtitle,
