@@ -108,12 +108,10 @@ Here's an example of a POST request **body**:
     "content_available": true,
     "priority": "high",
     "data" : {
-        "content": {
-            "id": 100,
-            "channelKey": "basic_channel",
-            "title": "Basic message",
-            "body": "This is the body of a basic FCM message"
-        }
+        "id": 100,
+        "channelKey": "basic_channel",
+        "title": "Basic message",
+        "body": "This is the body of a basic FCM message"
     }
 }
 ```

@@ -106,19 +106,15 @@ class NotificationController {
       return;
     } else {
       //await AwesomeNotifications().createNotificationFromJsonData(message.data);
-      final content = jsonDecode(message.data['content']);
+      final data = message.data;
+      final payload = Map<String, String>.from(jsonDecode(data['payload']));
       await AwesomeNotifications().createNotification(
         content: NotificationContent(
-          id: content['id'],
-          channelKey: content['channelKey'],
-          title: content['title'],
-          body: content['body'],
-          payload: message.data.map(
-            (key, value) => MapEntry(
-              key,
-              content['payload'].toString(),
-            ),
-          ),
+          id: int.tryParse(data['id']),
+          channelKey: data['channelKey'],
+          title: data['title'],
+          body: data['body'],
+          payload: payload,
         ),
       );
     }
