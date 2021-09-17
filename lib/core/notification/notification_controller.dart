@@ -18,7 +18,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 class NotificationController {
   static Future<void> init() async {
-    _isWeb(() async {
+    await _isWeb(() async {
       await AwesomeNotifications().initialize(
         null,
         [
@@ -49,7 +49,7 @@ class NotificationController {
   }
 
   static Future<void> isNotificationAllowedOrListen() async {
-    _isWeb(() async {
+    await _isWeb(() async {
       final isAllowed = await AwesomeNotifications().isNotificationAllowed();
       if (!isAllowed) {
         RouteApp.routemaster.push('/notificationpermission');
@@ -108,7 +108,7 @@ class NotificationController {
     required RemoteMessage message,
     bool background = false,
   }) async {
-    _isWeb(() async {
+    await _isWeb(() async {
       if (message.notification != null) {
         return;
       } else {
@@ -127,7 +127,7 @@ class NotificationController {
   }
 
   static Future<void> createBasicNotification() async {
-    _isWeb(
+    await _isWeb(
       () async {
         /* final interval = NotificationInterval(
       interval: 5,
@@ -155,7 +155,7 @@ class NotificationController {
   }
 
   static Future<void> createBadgeNotification() async {
-    _isWeb(
+    await _isWeb(
       () async {
         await AwesomeNotifications().createNotification(
           content: NotificationContent(
@@ -171,7 +171,7 @@ class NotificationController {
   }
 
   static Future<void> createRedirectNotification() async {
-    _isWeb(
+    await _isWeb(
       () async {
         await AwesomeNotifications().createNotification(
           content: NotificationContent(
@@ -194,9 +194,12 @@ class NotificationController {
     });
   }
 
-  static void _isWeb(Function function, {bool showError = false}) {
+  static Future<void> _isWeb(
+    Function function, {
+    bool showError = false,
+  }) async {
     if (!kIsWeb) {
-      function.call();
+      await function.call();
     } else {
       if (showError) {
         SnackBarController.showSnackbar(
