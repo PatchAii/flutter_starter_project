@@ -39,6 +39,14 @@ class NotificationController {
           ledColor: Colors.green,
           importance: NotificationImportance.High,
         ),
+        NotificationChannel(
+          channelKey: 'scheduled_channel',
+          channelName: 'Scheduled notifications',
+          channelDescription: 'Notification channel for scheduled tests',
+          defaultColor: const Color(0xFF1896C8),
+          ledColor: Colors.white,
+          importance: NotificationImportance.High,
+        ),
       ],
     );
     await Firebase.initializeApp();
@@ -166,8 +174,45 @@ class NotificationController {
     );
   }
 
+  static Future<void> createScheduledNotification(
+      NotificationWeekAndTime notificationSchedule) async {
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 101,
+        channelKey: 'scheduled_channel',
+        title: '${Emojis.wheater_droplet} Add some water to your plant!',
+        body: 'Water your plant regularly to keep it healthy.',
+        notificationLayout: NotificationLayout.Default,
+      ),
+      actionButtons: [
+        NotificationActionButton(
+          key: 'MARK_DONE',
+          label: 'Mark Done',
+        ),
+      ],
+      schedule: NotificationCalendar(
+        weekday: notificationSchedule.dayOfTheWeek,
+        hour: notificationSchedule.timeOfDay.hour,
+        minute: notificationSchedule.timeOfDay.minute,
+        second: 0,
+        millisecond: 0,
+        repeats: true,
+      ),
+    );
+  }
+
   static void dispose() {
     AwesomeNotifications().actionSink.close();
     AwesomeNotifications().createdSink.close();
   }
+}
+
+class NotificationWeekAndTime {
+  final int dayOfTheWeek;
+  final TimeOfDay timeOfDay;
+
+  NotificationWeekAndTime({
+    required this.dayOfTheWeek,
+    required this.timeOfDay,
+  });
 }
