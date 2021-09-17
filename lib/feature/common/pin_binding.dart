@@ -22,16 +22,16 @@ class _PinBindingState extends State<PinBinding> with WidgetsBindingObserver {
       AppLifecycleState appLifecycleState) async {
     switch (appLifecycleState) {
       case AppLifecycleState.resumed:
-        setState(() {
-          pinShow =
-              true && getIt<AppState>().loggedInState == LoggedState.loggedIn;
-        });
         break;
 
       case AppLifecycleState.inactive:
         break;
 
       case AppLifecycleState.paused:
+        setState(() {
+          pinShow =
+              true && getIt<AppState>().loggedInState == LoggedState.loggedIn;
+        });
         break;
 
       case AppLifecycleState.detached:
