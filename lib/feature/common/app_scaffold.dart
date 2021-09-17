@@ -16,8 +16,8 @@ class AppScaffold extends StatefulWidget {
 class _AppScaffoldState extends State<AppScaffold> {
   @override
   void initState() {
+    NotificationController.isNotificationAllowedOrListen();
     super.initState();
-    NotificationController.isNotificationAllowed();
   }
 
   @override
@@ -48,61 +48,72 @@ class _AppScaffoldState extends State<AppScaffold> {
   Widget build(BuildContext context) {
     final pageIndex = TabPage.of(context).controller.index;
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: context.layout.breakpoint > LayoutBreakpoint.sm
-            ? IconButton(
-                icon: const Icon(
-                  Icons.menu,
-                ),
-                onPressed: onExtendedSelect,
+    return WillPopScope(
+      onWillPop: () async {
+        final isHomePage = pageIndex != 0;
+        if (isHomePage) {
+          setState(() {
+            _onIndexSelect(0);
+          });
+        }
+        return !isHomePage;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          leading: context.layout.breakpoint > LayoutBreakpoint.sm
+              ? IconButton(
+                  icon: const Icon(
+                    Icons.menu,
+                  ),
+                  onPressed: onExtendedSelect,
+                )
+              : null,
+          title: GestureDetector(
+            onTap: () {
+              RouteApp.routemaster.push('/');
+            },
+            child: SizedBox(
+              width: 100,
+              child: SvgPicture.asset(
+                Assets.logo.patchai,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                getIt<AppState>().logOut();
+              },
+            )
+          ],
+        ),
+        body: Row(
+          children: [
+            if (context.layout.breakpoint > LayoutBreakpoint.sm) ...[
+              NavigationSideBar(
+                selectedIndex: pageIndex,
+                onIndexSelect: _onIndexSelect,
+                extended: extended,
+              ),
+              const VerticalDivider(thickness: 1, width: 1),
+            ],
+            Expanded(
+              child: PageStackNavigator(
+                key: ValueKey(pageIndex),
+                stack: TabPage.of(context).stacks[pageIndex],
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: context.layout.breakpoint < LayoutBreakpoint.md
+            ? NavigationBottomBar(
+                selectedIndex: pageIndex,
+                onIndexSelect: _onIndexSelect,
               )
             : null,
-        title: GestureDetector(
-          onTap: () {
-            RouteApp.routemaster.push('/');
-          },
-          child: SizedBox(
-            width: 100,
-            child: SvgPicture.asset(
-              Assets.logo.patchai,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              getIt<AppState>().logOut();
-            },
-          )
-        ],
       ),
-      body: Row(
-        children: [
-          if (context.layout.breakpoint > LayoutBreakpoint.sm) ...[
-            NavigationSideBar(
-              selectedIndex: pageIndex,
-              onIndexSelect: _onIndexSelect,
-              extended: extended,
-            ),
-            const VerticalDivider(thickness: 1, width: 1),
-          ],
-          Expanded(
-            child: PageStackNavigator(
-              key: ValueKey(pageIndex),
-              stack: TabPage.of(context).stacks[pageIndex],
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: context.layout.breakpoint < LayoutBreakpoint.md
-          ? NavigationBottomBar(
-              selectedIndex: pageIndex,
-              onIndexSelect: _onIndexSelect,
-            )
-          : null,
     );
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:flutter_starter_project/feature/common/widget/app_loading.dart';
+import 'package:flutter_starter_project/feature/common/app_loading.dart';
 import 'package:flutter_starter_project/feature/posts/bloc/posts_bloc.dart';
 import 'package:flutter_starter_project/model/model.dart';
 
