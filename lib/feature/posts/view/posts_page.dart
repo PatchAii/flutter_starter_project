@@ -88,7 +88,7 @@ class PostCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         RouteApp.routemaster.push(
-            '/notification?title=${post.title}&subtitle=${post.id}&description=${post.body}');
+            '/dialog?title=${post.title}&subtitle=${post.id}&description=${post.body}');
       },
       child: Card(
         clipBehavior: Clip.antiAlias,

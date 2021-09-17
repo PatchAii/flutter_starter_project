@@ -174,11 +174,25 @@ class NotificationController {
     );
   }
 
+  static Future<void> createSecondsRepeatingNotification(seconds) async {
+    final localTimeZone =
+        await AwesomeNotifications().getLocalTimeZoneIdentifier();
+    await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: createUniqueId(),
+          channelKey: 'scheduled_channel',
+          title: 'Notification at every $seconds seconds',
+          body: 'This notification was schedule to repeat.',
+        ),
+        schedule: NotificationInterval(
+            interval: seconds, timeZone: localTimeZone, repeats: true));
+  }
+
   static Future<void> createScheduledNotification(
       NotificationWeekAndTime notificationSchedule) async {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
-        id: 101,
+        id: createUniqueId(),
         channelKey: 'scheduled_channel',
         title: '${Emojis.wheater_droplet} Add some water to your plant!',
         body: 'Water your plant regularly to keep it healthy.',
@@ -201,9 +215,50 @@ class NotificationController {
     );
   }
 
+  static Future<void> createMinuteRepeatingNotification() async {
+    final localTimeZone =
+        await AwesomeNotifications().getLocalTimeZoneIdentifier();
+    await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: createUniqueId(),
+          channelKey: 'scheduled_channel',
+          title: 'Notification at exactly every single minute',
+          body:
+              'This notification was schedule to repeat at every single minute at clock.',
+        ),
+        schedule: NotificationCalendar(
+            second: 0, millisecond: 0, timeZone: localTimeZone, repeats: true));
+  }
+
+  static Future<void> createTargetRepeatingNotification() async {
+    final localTimeZone =
+        await AwesomeNotifications().getLocalTimeZoneIdentifier();
+    await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: createUniqueId(),
+          channelKey: 'scheduled_channel',
+          title: 'Notification every hour when it is 10 minutes and 30 seconds',
+          body:
+              'This notification was schedule to repeat at a specific moment in time.',
+        ),
+        schedule: NotificationCalendar(
+            minute: 10,
+            second: 30,
+            millisecond: 0,
+            timeZone: localTimeZone,
+            repeats: true));
+  }
+
   static void dispose() {
     AwesomeNotifications().actionSink.close();
     AwesomeNotifications().createdSink.close();
+  }
+
+  static Future<void> cancelScheduledNotifications() async {
+    await AwesomeNotifications().cancelAllSchedules();
+    SnackBarController.showSnackbar(
+      'All scheduled notifications have been cancelled',
+    );
   }
 }
 
@@ -215,4 +270,8 @@ class NotificationWeekAndTime {
     required this.dayOfTheWeek,
     required this.timeOfDay,
   });
+}
+
+int createUniqueId() {
+  return DateTime.now().millisecondsSinceEpoch.remainder(100000);
 }

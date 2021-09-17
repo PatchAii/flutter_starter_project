@@ -51,7 +51,30 @@ class NotificationPage extends StatelessWidget {
               height: 16.0,
             ),
             Text(
-              'Schedule',
+              'Repeated',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final sec = await pickSeconds(context);
+                if (sec != null) {
+                  //Se metto un numero di secondi sotto ai 60 crasha
+                  await NotificationController
+                      .createSecondsRepeatingNotification(
+                    sec,
+                  );
+                }
+              },
+              child: const Text('Repeating notification'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            Text(
+              'Scheduled',
               style: Theme.of(context).textTheme.headline4,
             ),
             const SizedBox(
@@ -67,6 +90,35 @@ class NotificationPage extends StatelessWidget {
                 }
               },
               child: const Text('Weekly scheduled notification'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await NotificationController
+                    .createMinuteRepeatingNotification();
+              },
+              child: const Text('Minute repeating notification'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await NotificationController
+                    .createTargetRepeatingNotification();
+              },
+              child: const Text('Every hour at minute 10 and 30 seconds'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await NotificationController.cancelScheduledNotifications();
+              },
+              child: const Text('Cancel all scheduled'),
             ),
             const SizedBox(
               height: 16.0,
@@ -136,5 +188,43 @@ class NotificationPage extends StatelessWidget {
       }
     }
     return null;
+  }
+
+  Future<int?> pickSeconds(
+    BuildContext context,
+  ) async {
+    int? selectedTime;
+
+    await showDialog(
+        context: context,
+        builder: (context) {
+          final times = <int>[
+            60,
+            120,
+            600,
+          ];
+          return AlertDialog(
+            title: const Text(
+              'I want the notification to repeat every:',
+              textAlign: TextAlign.center,
+            ),
+            content: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 3,
+              children: [
+                for (int index = 0; index < times.length; index++)
+                  ElevatedButton(
+                    onPressed: () {
+                      selectedTime = times[index];
+                      Navigator.pop(context);
+                    },
+                    child: Text('${times[index] / 60} min.'),
+                  ),
+              ],
+            ),
+          );
+        });
+
+    return selectedTime;
   }
 }
