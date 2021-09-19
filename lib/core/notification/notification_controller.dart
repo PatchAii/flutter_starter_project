@@ -93,7 +93,7 @@ class NotificationController {
           }
 
           RouteApp.routemaster.push(
-            '/notification?title=${receivedNotification.title}&subtitle=${receivedNotification.id}&description=${receivedNotification.payload}',
+            '/dialog?title=${receivedNotification.title}&subtitle=${receivedNotification.id}&description=${receivedNotification.payload}',
           );
         },
       );
