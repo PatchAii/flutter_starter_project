@@ -76,10 +76,10 @@ class NotificationController {
       );
 
       AwesomeNotifications().actionStream.listen(
-        (receivedNotification) {
+        (receivedNotification) async {
           if (Platform.isIOS &&
               receivedNotification.channelKey == 'badge_channel') {
-            AwesomeNotifications().getGlobalBadgeCounter().then(
+            await AwesomeNotifications().getGlobalBadgeCounter().then(
                   (value) =>
                       AwesomeNotifications().setGlobalBadgeCounter(value - 1),
                 );
@@ -96,6 +96,30 @@ class NotificationController {
             RouteApp.routemaster.push(
               '/dialog?title=${receivedNotification.buttonKeyPressed}',
             );
+            if (receivedNotification.buttonKeyPressed == 'POSTPONE') {
+              final localTimeZone = await getLocalTimeZone();
+              await newNotification(
+                content: NotificationContent(
+                  id: receivedNotification.id,
+                  title: receivedNotification.title,
+                  body: receivedNotification.body,
+                  channelKey: receivedNotification.channelKey,
+                ),
+                actionButtons: [
+                  NotificationActionButton(
+                    key: 'POSTPONE',
+                    label: 'postpone 1 minute',
+                  ),
+                ],
+                schedule: NotificationInterval(
+                  interval: 60,
+                  timeZone: localTimeZone,
+                ),
+              );
+              SnackBarController.showSnackbar(
+                'Notification Postponed by one minute',
+              );
+            }
             return;
           }
 

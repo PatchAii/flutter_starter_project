@@ -61,6 +61,12 @@ class NotificationPage extends StatelessWidget {
               const SizedBox(
                 height: 16.0,
               ),
+              ElevatedButton(
+                onPressed: () async {
+                  await NotificationExamples.createPostponeNotification();
+                },
+                child: const Text('Postpone notification'),
+              ),
               const SizedBox(
                 height: 16.0,
               ),
