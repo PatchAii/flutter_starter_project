@@ -78,7 +78,7 @@ class NotificationController {
   static void listen() {
     _isWeb(
       () {
-        FirebaseMessaging.instance.getToken().then(
+        getFCMToken().listen(
           (token) {
             debugPrint('FCMTOKEN: $token');
           },
@@ -232,5 +232,9 @@ class NotificationController {
 
   static Future<String> getLocalTimeZone() async {
     return AwesomeNotifications().getLocalTimeZoneIdentifier();
+  }
+
+  static Stream<String?> getFCMToken() {
+    return Stream.fromFuture(FirebaseMessaging.instance.getToken());
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/notification/notification_examples.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class NotificationPage extends StatelessWidget {
+class NotificationPage extends StatefulWidget {
   const NotificationPage({
     Key? key,
     this.subPage = false,
@@ -12,9 +12,28 @@ class NotificationPage extends StatelessWidget {
   final bool subPage;
 
   @override
+  State<NotificationPage> createState() => _NotificationPageState();
+}
+
+class _NotificationPageState extends State<NotificationPage> {
+  var token = '';
+
+  @override
+  void initState() {
+    NotificationController.getFCMToken().listen(
+      (token) {
+        setState(() {
+          this.token = token!;
+        });
+      },
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: subPage ? null : AppBar(),
+      appBar: widget.subPage ? null : AppBar(),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -22,10 +41,6 @@ class NotificationPage extends StatelessWidget {
               Text(
                 'Notification',
                 style: Theme.of(context).textTheme.headline3,
-              ),
-              Text(
-                'notification background: ${getIt<SharedPreferences>().getString('notification background')}',
-                style: Theme.of(context).textTheme.headline6,
               ),
               const SizedBox(
                 height: 16.0,
@@ -161,6 +176,48 @@ class NotificationPage extends StatelessWidget {
               ),
               const SizedBox(
                 height: 16.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'FCM token:',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                    const SizedBox(
+                      height: 16.0,
+                    ),
+                    SelectableText(
+                      token,
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 32.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Notification background:',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                    const SizedBox(
+                      height: 16.0,
+                    ),
+                    Text(
+                      '${getIt<SharedPreferences>().getString('notification background')}',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 32.0,
               ),
             ],
           ),
