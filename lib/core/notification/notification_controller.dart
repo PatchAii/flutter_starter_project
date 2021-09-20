@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -7,13 +8,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/notification/notification_week_time.dart';
+import 'package:flutter_starter_project/graphql/graphql_operations_api.dart';
 import 'package:flutter_starter_project/utils/alert/snackbar_controller.dart';
+import 'package:flutter_starter_project/utils/network/graphql_client.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   await NotificationController.handleRemoteNotification(
     message: message,
-    background: true,
   );
 }
 
@@ -54,7 +57,8 @@ class NotificationController {
         );
         await Firebase.initializeApp();
         FirebaseMessaging.onBackgroundMessage(
-            _firebaseMessagingBackgroundHandler);
+          _firebaseMessagingBackgroundHandler,
+        );
       },
     );
   }
@@ -82,10 +86,10 @@ class NotificationController {
         );
 
         AwesomeNotifications().actionStream.listen(
-          (receivedNotification) {
+          (receivedNotification) async {
             if (Platform.isIOS &&
                 receivedNotification.channelKey == 'badge_channel') {
-              AwesomeNotifications().getGlobalBadgeCounter().then(
+              await AwesomeNotifications().getGlobalBadgeCounter().then(
                     (value) =>
                         AwesomeNotifications().setGlobalBadgeCounter(value - 1),
                   );
@@ -95,6 +99,12 @@ class NotificationController {
               RouteApp.routemaster.push(
                 '${receivedNotification.payload?['redirect']}',
               );
+              return;
+            }
+
+            if (receivedNotification.buttonKeyPressed.isNotEmpty) {
+              final res = await GraphqlClient.exec(query: GetPokedexQuery());
+              SnackBarController.showSnackbar(res.data!.pokemons![0]!.name!);
               return;
             }
 
@@ -115,14 +125,31 @@ class NotificationController {
 
   static Future<void> handleRemoteNotification({
     required RemoteMessage message,
-    bool background = false,
   }) async {
     await _isWeb(
       () async {
+        try {
+          final res = await GraphqlClient.exec(query: GetPokedexQuery());
+          SnackBarController.showSnackbar(res.data!.pokemons![0]!.name!);
+
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString(
+            'notification background',
+            jsonEncode(message.data) +
+                DateTime.now().toIso8601String() +
+                res.data!.pokemons![0]!.name!,
+          );
+        } catch (e) {
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString(
+            'notification background',
+            e.toString(),
+          );
+        }
         if (message.notification != null) {
           return;
         } else {
-          final data = message.data;
+          /*  final data = message.data;
           await AwesomeNotifications().createNotification(
             content: NotificationContent(
               id: int.tryParse(data['id']),
@@ -131,7 +158,7 @@ class NotificationController {
               body: data['body'],
               payload: data['payload'],
             ),
-          );
+          ); */
         }
       },
     );
@@ -159,6 +186,12 @@ class NotificationController {
             body: 'Simple body',
             payload: {'a': 'b'},
           ),
+          actionButtons: [
+            NotificationActionButton(
+              key: 'MARK_DONE',
+              label: 'Mark Done',
+            ),
+          ],
         );
       },
       showError: true,

@@ -14,7 +14,7 @@ class RestClient {
     Map<String, dynamic>? body,
     String? endpoint,
   }) async {
-    final e = _initClient(endpoint);
+    final e = await _initClient(endpoint);
 
     final headers = <String, String>{
       'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ class RestClient {
     required String api,
     String? endpoint,
   }) async {
-    final e = _initClient(endpoint);
+    final e = await _initClient(endpoint);
 
     final headers = <String, String>{
       'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ class RestClient {
     required Map<String, dynamic>? body,
     String? endpoint,
   }) async {
-    final e = _initClient(endpoint);
+    final e = await _initClient(endpoint);
 
     final headers = <String, String>{
       'Content-Type': 'application/json',
@@ -61,7 +61,9 @@ class RestClient {
     );
   }
 
-  static String? _initClient(String? endpoint) {
+  static Future<String?> _initClient(String? endpoint) async {
+    await dotenv.load(fileName: 'dotenv');
+
     httpClient ??= http.Client();
     return endpoint ?? dotenv.env['ENDPOINT'];
   }

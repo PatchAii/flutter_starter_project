@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({
@@ -20,6 +21,10 @@ class NotificationPage extends StatelessWidget {
               Text(
                 'Notification',
                 style: Theme.of(context).textTheme.headline3,
+              ),
+              Text(
+                'notification background: ${getIt<SharedPreferences>().getString('notification background')}',
+                style: Theme.of(context).textTheme.headline6,
               ),
               const SizedBox(
                 height: 16.0,
