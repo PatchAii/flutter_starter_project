@@ -33,6 +33,18 @@ to verify proper installation
 flutter doctor -v
 ```
 
+- add `dotenv` (filename: dotenv) file in the root of the project with:
+
+```sh
+ENDPOINT='https://graphql-pokemon2.vercel.app'
+```
+
+- create a firebase project. info here:
+<https://firebase.flutter.dev/docs/overview>
+
+- add `GoogleService-Info.plist` in `/ios/Runner/`:
+- add `google-services.json` in `/android/app/`:
+
 ---
 
 ## Architecture
