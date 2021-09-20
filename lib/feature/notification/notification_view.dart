@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
+import 'package:flutter_starter_project/core/notification/notification_examples.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -31,7 +32,7 @@ class NotificationPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationController.createBasicNotification();
+                  await NotificationExamples.createBasicNotification();
                 },
                 child: const Text('Basic notification'),
               ),
@@ -40,7 +41,7 @@ class NotificationPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationController.createBadgeNotification();
+                  await NotificationExamples.createBadgeNotification();
                 },
                 child: const Text('Badge notification'),
               ),
@@ -49,9 +50,27 @@ class NotificationPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationController.createRedirectNotification();
+                  await NotificationExamples.createRedirectNotification();
                 },
                 child: const Text('Redirect notification'),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await NotificationExamples.createActionNotification();
+                },
+                child: const Text('Action notification'),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await NotificationExamples.createPostponeNotification();
+                },
+                child: const Text('Postpone notification'),
               ),
               const SizedBox(
                 height: 16.0,
@@ -67,8 +86,7 @@ class NotificationPage extends StatelessWidget {
                 onPressed: () async {
                   final sec = await pickSeconds(context);
                   if (sec != null) {
-                    //Se metto un numero di secondi sotto ai 60 crasha
-                    await NotificationController
+                    await NotificationExamples
                         .createSecondsRepeatingNotification(
                       sec,
                     );
@@ -90,7 +108,7 @@ class NotificationPage extends StatelessWidget {
                 onPressed: () async {
                   final plan = await pickSchedule(context);
                   if (plan != null) {
-                    await NotificationController.createScheduledNotification(
+                    await NotificationExamples.createScheduledNotification(
                       notificationSchedule: plan,
                     );
                   }
@@ -104,7 +122,7 @@ class NotificationPage extends StatelessWidget {
                 onPressed: () async {
                   final plan = await pickSchedule(context);
                   if (plan != null) {
-                    await NotificationController.createScheduledNotification(
+                    await NotificationExamples.createScheduledNotification(
                       notificationSchedule: plan,
                       repeats: true,
                     );
@@ -117,7 +135,7 @@ class NotificationPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationController
+                  await NotificationExamples
                       .createMinuteRepeatingNotification();
                 },
                 child: const Text('Minute repeating notification'),
@@ -127,7 +145,7 @@ class NotificationPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationController
+                  await NotificationExamples
                       .createTargetRepeatingNotification();
                 },
                 child: const Text('Every hour at minute 10 and 30 seconds'),

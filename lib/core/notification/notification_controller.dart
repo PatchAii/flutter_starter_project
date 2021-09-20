@@ -7,7 +7,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:flutter_starter_project/core/notification/notification_week_time.dart';
 import 'package:flutter_starter_project/graphql/graphql_operations_api.dart';
 import 'package:flutter_starter_project/utils/alert/snackbar_controller.dart';
 import 'package:flutter_starter_project/utils/network/graphql_client.dart';
@@ -103,6 +102,32 @@ class NotificationController {
             }
 
             if (receivedNotification.buttonKeyPressed.isNotEmpty) {
+              if (receivedNotification.buttonKeyPressed == 'POSTPONE') {
+                final localTimeZone = await getLocalTimeZone();
+                await newNotification(
+                  content: NotificationContent(
+                    id: receivedNotification.id,
+                    title: receivedNotification.title,
+                    body: receivedNotification.body,
+                    channelKey: receivedNotification.channelKey,
+                  ),
+                  actionButtons: [
+                    NotificationActionButton(
+                      key: 'POSTPONE',
+                      label: 'postpone 1 minute',
+                    ),
+                  ],
+                  schedule: NotificationInterval(
+                    interval: 60,
+                    timeZone: localTimeZone,
+                  ),
+                );
+                SnackBarController.showSnackbar(
+                  'Notification Postponed by one minute',
+                );
+                return;
+              }
+
               final res = await GraphqlClient.exec(query: GetPokedexQuery());
               SnackBarController.showSnackbar(res.data!.pokemons![0]!.name!);
               return;
@@ -126,219 +151,38 @@ class NotificationController {
   static Future<void> handleRemoteNotification({
     required RemoteMessage message,
   }) async {
-    await _isWeb(
-      () async {
-        try {
-          final res = await GraphqlClient.exec(query: GetPokedexQuery());
-          SnackBarController.showSnackbar(res.data!.pokemons![0]!.name!);
+    try {
+      final res = await GraphqlClient.exec(query: GetPokedexQuery());
+      SnackBarController.showSnackbar(res.data!.pokemons![0]!.name!);
 
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString(
-            'notification background',
-            jsonEncode(message.data) +
-                DateTime.now().toIso8601String() +
-                res.data!.pokemons![0]!.name!,
-          );
-        } catch (e) {
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString(
-            'notification background',
-            e.toString(),
-          );
-        }
-        if (message.notification != null) {
-          return;
-        } else {
-          /*  final data = message.data;
-          await AwesomeNotifications().createNotification(
-            content: NotificationContent(
-              id: int.tryParse(data['id']),
-              channelKey: data['channelKey'],
-              title: data['title'],
-              body: data['body'],
-              payload: data['payload'],
-            ),
-          ); */
-        }
-      },
-    );
-  }
-
-  static Future<void> createBasicNotification() async {
-    await _isWeb(
-      () async {
-        /* final interval = NotificationInterval(
-      interval: 5,
-    ); */
-        /* final calendar = NotificationCalendar(
-       weekday: notificationSchedule.dayOfTheWeek,
-      hour: notificationSchedule.timeOfDay.hour,
-      minute: notificationSchedule.timeOfDay.minute,
-      second: 0,
-      millisecond: 0,
-    );*/
-        await AwesomeNotifications().createNotification(
-          //schedule: calendar,
-          content: NotificationContent(
-            id: 1,
-            channelKey: 'basic_channel',
-            title: 'Simple Notification',
-            body: 'Simple body',
-            payload: {'a': 'b'},
-          ),
-          actionButtons: [
-            NotificationActionButton(
-              key: 'MARK_DONE',
-              label: 'Mark Done',
-            ),
-          ],
-        );
-      },
-      showError: true,
-    );
-  }
-
-  static Future<void> createBadgeNotification() async {
-    await _isWeb(
-      () async {
-        await AwesomeNotifications().createNotification(
-          content: NotificationContent(
-            id: 2,
-            channelKey: 'badge_channel',
-            title: 'Badge test notification',
-            body: 'This notification does activate badge indicator',
-          ),
-        );
-      },
-      showError: true,
-    );
-  }
-
-  static Future<void> createRedirectNotification() async {
-    await _isWeb(
-      () async {
-        await AwesomeNotifications().createNotification(
-          content: NotificationContent(
-            id: 1,
-            channelKey: 'basic_channel',
-            title: 'Redirect Notification',
-            body: 'Redirect body',
-            payload: {'redirect': '/settings'},
-          ),
-        );
-      },
-      showError: true,
-    );
-  }
-
-  static Future<void> createSecondsRepeatingNotification(seconds) async {
-    await _isWeb(
-      () async {
-        final localTimeZone =
-            await AwesomeNotifications().getLocalTimeZoneIdentifier();
-        await AwesomeNotifications().createNotification(
-          content: NotificationContent(
-            id: _createUniqueId(),
-            channelKey: 'scheduled_channel',
-            title: 'Notification at every $seconds seconds',
-            body: 'This notification reschedule itself every $seconds seconds.',
-          ),
-          schedule: NotificationInterval(
-            interval: seconds,
-            timeZone: localTimeZone,
-            repeats: true,
-          ),
-        );
-      },
-      showError: true,
-    );
-  }
-
-  static Future<void> createScheduledNotification({
-    required NotificationWeekAndTime notificationSchedule,
-    bool repeats = false,
-  }) async {
-    await _isWeb(
-      () async {
-        await AwesomeNotifications().createNotification(
-          content: NotificationContent(
-            id: _createUniqueId(),
-            channelKey: 'scheduled_channel',
-            title: '${Emojis.office_calendar} This is a scheduled notification',
-            body:
-                'It should be ${notificationSchedule.timeOfDay.toString()} of day ${notificationSchedule.dayOfTheWeek.toString()} of the week.',
-            notificationLayout: NotificationLayout.Default,
-          ),
-          actionButtons: [
-            NotificationActionButton(
-              key: 'MARK_DONE',
-              label: 'Mark Done',
-            ),
-          ],
-          schedule: NotificationCalendar(
-            weekday: notificationSchedule.dayOfTheWeek,
-            hour: notificationSchedule.timeOfDay.hour,
-            minute: notificationSchedule.timeOfDay.minute,
-            second: 0,
-            millisecond: 0,
-            repeats: repeats,
-          ),
-        );
-      },
-      showError: true,
-    );
-  }
-
-  static Future<void> createMinuteRepeatingNotification() async {
-    await _isWeb(
-      () async {
-        final localTimeZone =
-            await AwesomeNotifications().getLocalTimeZoneIdentifier();
-        await AwesomeNotifications().createNotification(
-          content: NotificationContent(
-            id: _createUniqueId(),
-            channelKey: 'scheduled_channel',
-            title: 'Notification at exactly every single minute',
-            body:
-                'This notification was schedule to repeat at every single minute at clock.',
-          ),
-          schedule: NotificationCalendar(
-            second: 0,
-            millisecond: 0,
-            timeZone: localTimeZone,
-            repeats: true,
-          ),
-        );
-      },
-      showError: true,
-    );
-  }
-
-  static Future<void> createTargetRepeatingNotification() async {
-    await _isWeb(
-      () async {
-        final localTimeZone =
-            await AwesomeNotifications().getLocalTimeZoneIdentifier();
-        await AwesomeNotifications().createNotification(
-          content: NotificationContent(
-            id: _createUniqueId(),
-            channelKey: 'scheduled_channel',
-            title:
-                'Notification every hour when it is 10 minutes and 30 seconds',
-            body:
-                'This notification was schedule to repeat at a specific moment in time.',
-          ),
-          schedule: NotificationCalendar(
-            minute: 10,
-            second: 30,
-            millisecond: 0,
-            timeZone: localTimeZone,
-            repeats: true,
-          ),
-        );
-      },
-      showError: true,
-    );
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(
+        'notification background',
+        jsonEncode(message.data) +
+            DateTime.now().toIso8601String() +
+            res.data!.pokemons![0]!.name!,
+      );
+    } catch (e) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(
+        'notification background',
+        e.toString(),
+      );
+    }
+    if (message.notification != null) {
+      return;
+    } else {
+      final data = message.data;
+      await newNotification(
+        content: NotificationContent(
+          id: int.tryParse(data['id']),
+          channelKey: data['channelKey'],
+          title: data['title'],
+          body: data['body'],
+          payload: data['payload'],
+        ),
+      );
+    }
   }
 
   static void dispose() {
@@ -346,6 +190,23 @@ class NotificationController {
       AwesomeNotifications().actionSink.close();
       AwesomeNotifications().createdSink.close();
     });
+  }
+
+  static Future<void> newNotification({
+    required NotificationContent content,
+    List<NotificationActionButton>? actionButtons,
+    NotificationSchedule? schedule,
+  }) async {
+    await _isWeb(
+      () async {
+        await AwesomeNotifications().createNotification(
+          content: content,
+          actionButtons: actionButtons,
+          schedule: schedule,
+        );
+      },
+      showError: true,
+    );
   }
 
   static Future<void> _isWeb(
@@ -369,7 +230,7 @@ class NotificationController {
     );
   }
 
-  static int _createUniqueId() {
-    return DateTime.now().millisecondsSinceEpoch.remainder(100000);
+  static Future<String> getLocalTimeZone() async {
+    return AwesomeNotifications().getLocalTimeZoneIdentifier();
   }
 }
