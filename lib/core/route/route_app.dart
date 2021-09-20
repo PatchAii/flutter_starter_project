@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_starter_project/core/common/generic_dialog.dart';
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:flutter_starter_project/core/notification/notification_permission_dialog.dart';
 import 'package:flutter_starter_project/core/route/route_pages.dart';
 import 'package:flutter_starter_project/feature/common/app_scaffold.dart';
+import 'package:flutter_starter_project/feature/common/generic_dialog.dart';
 import 'package:flutter_starter_project/feature/feature.dart';
 import 'package:flutter_starter_project/feature/notification/notification_view.dart';
 import 'package:flutter_starter_project/feature/posts/view/posts_page.dart';
