@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -8,6 +9,9 @@ class RestClient {
   RestClient._();
 
   static Client? httpClient;
+
+  @visibleForTesting
+  static bool testing = false;
 
   static Future<http.Response> post({
     required String api,
@@ -62,7 +66,7 @@ class RestClient {
   }
 
   static Future<String?> _initClient(String? endpoint) async {
-    await dotenv.load(fileName: 'dotenv');
+    if (!testing) await dotenv.load(fileName: 'dotenv');
 
     httpClient ??= http.Client();
     return endpoint ?? dotenv.env['ENDPOINT'];

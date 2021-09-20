@@ -12,6 +12,7 @@ void main() {
       registerFallbackValue(Uri());
 
       RestClient.httpClient = MockHttpClient();
+      RestClient.testing = true;
 
       dotenv.testLoad(
         fileInput: '''
