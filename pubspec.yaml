@@ -8,8 +8,11 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  awesome_notifications: ^0.0.6+10
   bloc: ^7.1.0
   easy_localization: ^3.0.0
+  firebase_core: ^1.6.0
+  firebase_messaging: ^10.0.7
   flutter:
     sdk: flutter
   flutter_bloc: ^7.2.0

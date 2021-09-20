@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_starter_project/core/app/view/app_scaffold.dart';
-import 'package:flutter_starter_project/core/common/notification_dialog.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/route/route_pages.dart';
+import 'package:flutter_starter_project/feature/common/app_scaffold.dart';
+import 'package:flutter_starter_project/feature/common/generic_dialog.dart';
 import 'package:flutter_starter_project/feature/feature.dart';
+import 'package:flutter_starter_project/feature/notification/notification_view.dart';
 import 'package:flutter_starter_project/feature/posts/view/posts_page.dart';
 import 'package:flutter_starter_project/feature/profile/view/profile_page.dart';
 import 'package:provider/provider.dart';
@@ -65,11 +66,14 @@ class RouteApp {
       '/posts': (route) => MaterialPage(
             child: PostsPage(userId: route.queryParameters['userId']),
           ),
-      '/notification': (route) => DialogPage(
-            child: NotificationDialog(
+      '/dialog': (route) => DialogPage(
+            child: GenericDialog(
                 title: route.queryParameters['title'] ?? '',
                 subtitle: route.queryParameters['subtitle'],
                 description: route.queryParameters['description']),
+          ),
+      '/notificationpermission': (route) => const DialogPage(
+            child: NotificationPermissionDialog(),
           ),
       '/settings/bottomsheet': (_) => BottomSheetPage(
             child: Container(
@@ -91,7 +95,11 @@ class RouteApp {
                 ),
               ),
             ),
-          )
+          ),
+      '/notification': (_) => const MaterialPage(
+            name: 'Notification',
+            child: NotificationPage(),
+          ),
     },
   );
 

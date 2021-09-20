@@ -10,15 +10,19 @@ class GraphqlClient {
     required GraphQLQuery<T, U> query,
     String? endpoint,
   }) async {
-    final client = _initClient(endpoint);
+    final client = await _initClient(endpoint);
 
     return client.execute(query);
   }
 
-  static ArtemisClient _initClient(String? endpoint) => ArtemisClient(
-        endpoint ?? dotenv.env['ENDPOINT']!,
-        httpClient: AuthenticatedClient(),
-      );
+  static Future<ArtemisClient> _initClient(String? endpoint) async {
+    await dotenv.load(fileName: 'dotenv');
+
+    return ArtemisClient(
+      endpoint ?? dotenv.env['ENDPOINT']!,
+      httpClient: AuthenticatedClient(),
+    );
+  }
 }
 
 class AuthenticatedClient extends http.BaseClient {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/route/route.dart';
-import 'package:flutter_starter_project/feature/common/widget/app_loading.dart';
+import 'package:flutter_starter_project/feature/common/app_loading.dart';
 import 'package:flutter_starter_project/feature/profile/bloc/profile_bloc.dart';
 import 'package:flutter_starter_project/model/user/user.dart';
 import 'package:layout/layout.dart';
@@ -113,7 +113,16 @@ class ProfileActions extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             RouteApp.routemaster.push(
-                '/notification?title=Kimi&subtitle=Raikkonen&description=AlfaRomeo Raicing ORLEN');
+                '/dialog?title=Kimi&subtitle=Raikkonen&description=AlfaRomeo Raicing ORLEN');
+          },
+          child: const Text('/dialog'),
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            RouteApp.routemaster.push('/notification');
           },
           child: const Text('/notification'),
         ),
