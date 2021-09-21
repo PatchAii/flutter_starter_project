@@ -4,7 +4,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 abstract class NotificationFeatureController {
   NotificationChannel getChannel();
 
-  String getChannelName();
+  bool getBadgeEnabled();
+
+  String getChannelKey();
 
   Future<void> dismissedStream({required ReceivedAction receivedAction});
 

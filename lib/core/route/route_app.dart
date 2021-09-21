@@ -7,7 +7,7 @@ import 'package:flutter_starter_project/feature/common/generic_dialog.dart';
 import 'package:flutter_starter_project/feature/feature.dart';
 import 'package:flutter_starter_project/feature/posts/view/posts_page.dart';
 import 'package:flutter_starter_project/feature/profile/view/profile_page.dart';
-import 'package:flutter_starter_project/feature/profile_notification/profile_notification_view.dart';
+import 'package:flutter_starter_project/feature/profile_notification/view/profile_notification_view.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 

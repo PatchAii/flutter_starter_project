@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/notification/notification_feature_controller.dart';
-import 'package:flutter_starter_project/feature/profile_notification/profile_notification_controller.dart';
 import 'package:flutter_starter_project/utils/alert/snackbar_controller.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -62,7 +61,7 @@ class NotificationController {
         AwesomeNotifications().dismissedStream.listen((dismissedNotification) {
           for (var controller in controllers) {
             if (dismissedNotification.channelKey ==
-                controller.getChannelName()) {
+                controller.getChannelKey()) {
               controller.dismissedStream(
                 receivedAction: dismissedNotification,
               );
@@ -73,7 +72,7 @@ class NotificationController {
 
         AwesomeNotifications().createdStream.listen((createdNotification) {
           for (var controller in controllers) {
-            if (createdNotification.channelKey == controller.getChannelName()) {
+            if (createdNotification.channelKey == controller.getChannelKey()) {
               controller.createdStream(
                 receivedNotification: createdNotification,
               );
@@ -85,7 +84,7 @@ class NotificationController {
         AwesomeNotifications().displayedStream.listen((displayedNotification) {
           for (var controller in controllers) {
             if (displayedNotification.channelKey ==
-                controller.getChannelName()) {
+                controller.getChannelKey()) {
               controller.displayedStream(
                 receivedNotification: displayedNotification,
               );
@@ -98,8 +97,8 @@ class NotificationController {
           (receivedNotification) async {
             for (var controller in controllers) {
               if (receivedNotification.channelKey ==
-                  controller.getChannelName()) {
-                await _badgeControl(ProfileNotificationController.BADGE_ENABLE);
+                  controller.getChannelKey()) {
+                await _badgeControl(controller.getBadgeEnabled());
                 await controller.actionStream(
                   receivedAction: receivedNotification,
                 );
@@ -133,7 +132,7 @@ class NotificationController {
       return;
     } else {
       for (var controller in controllers) {
-        if (message.data['profile_channel'] == controller.getChannelName()) {
+        if (message.data['profile_channel'] == controller.getChannelKey()) {
           await controller.handleRemoteNotification(
             remoteMessage: message,
           );
@@ -187,6 +186,13 @@ class NotificationController {
     await AwesomeNotifications().cancelAllSchedules();
     SnackBarController.showSnackbar(
       'All scheduled notifications have been cancelled',
+    );
+  }
+
+  static Future<void> resetBadgeCount() async {
+    await AwesomeNotifications().resetGlobalBadge();
+    SnackBarController.showSnackbar(
+      'Badge count has been reset',
     );
   }
 

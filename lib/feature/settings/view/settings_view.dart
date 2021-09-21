@@ -29,6 +29,9 @@ class SettingsPage extends StatelessWidget {
             },
             child: const Text('Show SnackBar'),
           ),
+          const SizedBox(
+            height: 16.0,
+          ),
           ElevatedButton(
             onPressed: () {
               MaterialBannerController.showMaterialBanner(
@@ -37,11 +40,35 @@ class SettingsPage extends StatelessWidget {
             },
             child: const Text('Show MaterialBanner'),
           ),
+          const SizedBox(
+            height: 16.0,
+          ),
           ElevatedButton(
             onPressed: () {
               RouteApp.routemaster.push('/settings/bottomsheet');
             },
             child: const Text('Show /settings/bottomsheet'),
+          ),
+          const SizedBox(
+            height: 16.0,
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await NotificationController.cancelScheduledNotifications();
+            },
+            child: const Text('Cancel all scheduled'),
+          ),
+          const SizedBox(
+            height: 16.0,
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await NotificationController.resetBadgeCount();
+            },
+            child: const Text('Reset badge count'),
+          ),
+          const SizedBox(
+            height: 16.0,
           ),
         ],
       ),

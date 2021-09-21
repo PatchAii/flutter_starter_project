@@ -9,66 +9,6 @@ import 'package:flutter_starter_project/utils/utils.dart';
 
 class ProfileNotificationController extends NotificationFeatureController {
   static const CHANNEL_NAME = 'profile_channel';
-  static const BADGE_ENABLE = false;
-
-  @override
-  NotificationChannel getChannel() {
-    return NotificationChannel(
-      channelKey: getChannelName(),
-      channelShowBadge: BADGE_ENABLE,
-      channelName: 'Profile notifications',
-      channelDescription: 'Notification channel for profile page',
-      defaultColor: const Color(0xFFC5C818),
-      ledColor: Colors.white,
-      importance: NotificationImportance.High,
-    );
-  }
-
-  @override
-  String getChannelName() => CHANNEL_NAME;
-
-  @override
-  Future<void> handleRemoteNotification({
-    required RemoteMessage remoteMessage,
-  }) async {
-    SnackBarController.showSnackbar(
-        'ProfileNotificationController: remote notification received');
-
-    final data = remoteMessage.data;
-    await NotificationController.newNotification(
-      content: NotificationContent(
-        id: int.tryParse(data['id']),
-        channelKey: data['channelKey'],
-        title: data['title'],
-        body: data['body'],
-        payload: data['payload'],
-      ),
-    );
-  }
-
-  @override
-  Future<void> dismissedStream({
-    required ReceivedAction receivedAction,
-  }) async {
-    SnackBarController.showSnackbar(
-        'ProfileNotificationController: notification dismissed');
-  }
-
-  @override
-  Future<void> createdStream({
-    required ReceivedNotification receivedNotification,
-  }) async {
-    SnackBarController.showSnackbar(
-        'ProfileNotificationController: notification created');
-  }
-
-  @override
-  Future<void> displayedStream({
-    required ReceivedNotification receivedNotification,
-  }) async {
-    SnackBarController.showSnackbar(
-        'ProfileNotificationController: notification displayed');
-  }
 
   @override
   Future<void> actionStream({
@@ -111,6 +51,68 @@ class ProfileNotificationController extends NotificationFeatureController {
         return;
       }
     }
+  }
+
+  @override
+  Future<void> createdStream({
+    required ReceivedNotification receivedNotification,
+  }) async {
+    SnackBarController.showSnackbar(
+        'ProfileNotificationController: notification created');
+  }
+
+  @override
+  Future<void> dismissedStream({
+    required ReceivedAction receivedAction,
+  }) async {
+    SnackBarController.showSnackbar(
+        'ProfileNotificationController: notification dismissed');
+  }
+
+  @override
+  Future<void> displayedStream({
+    required ReceivedNotification receivedNotification,
+  }) async {
+    SnackBarController.showSnackbar(
+        'ProfileNotificationController: notification displayed');
+  }
+
+  @override
+  bool getBadgeEnabled() => false;
+
+  @override
+  NotificationChannel getChannel() {
+    return NotificationChannel(
+      channelKey: getChannelKey(),
+      channelShowBadge: getBadgeEnabled(),
+      channelName: 'Profile notifications',
+      channelDescription: 'Notification channel for profile page',
+      defaultColor: const Color(0xFFC5C818),
+      ledColor: Colors.white,
+      importance: NotificationImportance.High,
+    );
+  }
+
+  @override
+  String getChannelKey() => CHANNEL_NAME;
+
+  @override
+  Future<void> handleRemoteNotification({
+    required RemoteMessage remoteMessage,
+  }) async {
+    SnackBarController.showSnackbar(
+        'ProfileNotificationController: remote notification received');
+
+    final data = remoteMessage.data;
+    await NotificationController.newNotification(
+      content: NotificationContent(
+        id: int.tryParse(data['id']),
+        channelKey: data['channelKey'],
+        title: data['title'],
+        body: data['body'],
+        payload: data['payload'],
+      ),
+    );
   }
 
   ///Create a basic notification with a title, a body and a payload

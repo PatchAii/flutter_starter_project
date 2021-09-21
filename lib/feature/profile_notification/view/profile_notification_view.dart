@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:flutter_starter_project/feature/profile_notification/profile_notification_controller.dart';
+import 'package:flutter_starter_project/feature/profile_notification/repo/profile_notification_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -49,7 +49,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 onPressed: () async {
                   await ProfileNotificationController.createBasicNotification();
                 },
-                child: const Text('Basic notification'),
+                child: const Text('Basic temp notification'),
               ),
               const SizedBox(
                 height: 16.0,
@@ -169,15 +169,6 @@ class _NotificationPageState extends State<NotificationPage> {
                       .createTargetRepeatingNotification();
                 },
                 child: const Text('Every hour at minute 10 and 30 seconds'),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await NotificationController.cancelScheduledNotifications();
-                },
-                child: const Text('Cancel all scheduled'),
               ),
               const SizedBox(
                 height: 16.0,
