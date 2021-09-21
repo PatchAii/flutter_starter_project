@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -104,13 +106,16 @@ class ProfileNotificationController extends NotificationFeatureController {
         'ProfileNotificationController: remote notification received');
 
     final data = remoteMessage.data;
+    final payload = data['payload'] != null
+        ? Map<String, String>.from(jsonDecode(data['payload']))
+        : null;
     await NotificationController.newNotification(
       content: NotificationContent(
         id: int.tryParse(data['id']),
         channelKey: data['channelKey'],
         title: data['title'],
         body: data['body'],
-        payload: data['payload'],
+        payload: payload,
       ),
     );
   }
@@ -158,7 +163,7 @@ class ProfileNotificationController extends NotificationFeatureController {
     await NotificationController.newNotification(
         content: NotificationContent(
           id: createUniqueId(),
-          channelKey: 'basic_channel',
+          channelKey: CHANNEL_NAME,
           title: 'Action Notification',
           body: 'Action body',
         ),

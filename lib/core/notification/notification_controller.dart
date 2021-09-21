@@ -132,7 +132,7 @@ class NotificationController {
       return;
     } else {
       for (var controller in controllers) {
-        if (message.data['profile_channel'] == controller.getChannelKey()) {
+        if (message.data['channelKey'] == controller.getChannelKey()) {
           await controller.handleRemoteNotification(
             remoteMessage: message,
           );
