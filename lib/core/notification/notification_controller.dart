@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
+import 'package:flutter_starter_project/feature/profile_notification/profile_notification_controller.dart';
 import 'package:flutter_starter_project/graphql/graphql_operations_api.dart';
 import 'package:flutter_starter_project/utils/alert/snackbar_controller.dart';
 import 'package:flutter_starter_project/utils/network/graphql_client.dart';
@@ -20,6 +21,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 class NotificationController {
+  static final profileNotificationController = ProfileNotificationController();
+
   static Future<void> init() async {
     await _isWeb(
       () async {
@@ -52,6 +55,7 @@ class NotificationController {
               ledColor: Colors.white,
               importance: NotificationImportance.High,
             ),
+            profileNotificationController.getChannel(),
           ],
         );
         await Firebase.initializeApp();
@@ -84,6 +88,36 @@ class NotificationController {
           },
         );
 
+        AwesomeNotifications().dismissedStream.listen((dismissedNotification) {
+          if (dismissedNotification.channelKey ==
+              profileNotificationController.getChannelName()) {
+            profileNotificationController.dismissedStream(
+              message: dismissedNotification,
+            );
+            return;
+          }
+        });
+
+        AwesomeNotifications().createdStream.listen((createdNotification) {
+          if (createdNotification.channelKey ==
+              profileNotificationController.getChannelName()) {
+            profileNotificationController.createdStream(
+              message: createdNotification,
+            );
+            return;
+          }
+        });
+
+        AwesomeNotifications().displayedStream.listen((displayedNotification) {
+          if (displayedNotification.channelKey ==
+              profileNotificationController.getChannelName()) {
+            profileNotificationController.displayedStream(
+              message: displayedNotification,
+            );
+            return;
+          }
+        });
+
         AwesomeNotifications().actionStream.listen(
           (receivedNotification) async {
             if (Platform.isIOS &&
@@ -92,6 +126,14 @@ class NotificationController {
                     (value) =>
                         AwesomeNotifications().setGlobalBadgeCounter(value - 1),
                   );
+            }
+
+            if (receivedNotification.channelKey ==
+                profileNotificationController.getChannelName()) {
+              await profileNotificationController.actionStream(
+                message: receivedNotification,
+              );
+              return;
             }
 
             if (receivedNotification.payload?['redirect'] != null) {
@@ -151,6 +193,14 @@ class NotificationController {
   static Future<void> handleRemoteNotification({
     required RemoteMessage message,
   }) async {
+    if (message.data['profile_channel'] ==
+        profileNotificationController.getChannelName()) {
+      await profileNotificationController.handleRemoteNotification(
+        message: message,
+      );
+      return;
+    }
+
     try {
       final res = await GraphqlClient.exec(query: GetPokedexQuery());
       SnackBarController.showSnackbar(res.data!.pokemons![0]!.name!);
@@ -189,6 +239,8 @@ class NotificationController {
     _isWeb(() {
       AwesomeNotifications().actionSink.close();
       AwesomeNotifications().createdSink.close();
+      AwesomeNotifications().dismissedSink.close();
+      AwesomeNotifications().displayedSink.close();
     });
   }
 

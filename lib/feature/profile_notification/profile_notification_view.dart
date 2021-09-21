@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:flutter_starter_project/core/notification/notification_examples.dart';
+import 'package:flutter_starter_project/feature/profile_notification/profile_notification_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -47,7 +47,7 @@ class _NotificationPageState extends State<NotificationPage> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationExamples.createBasicNotification();
+                  await ProfileNotificationController.createBasicNotification();
                 },
                 child: const Text('Basic notification'),
               ),
@@ -56,7 +56,7 @@ class _NotificationPageState extends State<NotificationPage> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationExamples.createBadgeNotification();
+                  await ProfileNotificationController.createBadgeNotification();
                 },
                 child: const Text('Badge notification'),
               ),
@@ -65,7 +65,8 @@ class _NotificationPageState extends State<NotificationPage> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationExamples.createRedirectNotification();
+                  await ProfileNotificationController
+                      .createRedirectNotification();
                 },
                 child: const Text('Redirect notification'),
               ),
@@ -74,7 +75,8 @@ class _NotificationPageState extends State<NotificationPage> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationExamples.createActionNotification();
+                  await ProfileNotificationController
+                      .createActionNotification();
                 },
                 child: const Text('Action notification'),
               ),
@@ -83,7 +85,8 @@ class _NotificationPageState extends State<NotificationPage> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationExamples.createPostponeNotification();
+                  await ProfileNotificationController
+                      .createPostponeNotification();
                 },
                 child: const Text('Postpone notification'),
               ),
@@ -101,7 +104,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 onPressed: () async {
                   final sec = await pickSeconds(context);
                   if (sec != null) {
-                    await NotificationExamples
+                    await ProfileNotificationController
                         .createSecondsRepeatingNotification(
                       sec,
                     );
@@ -123,7 +126,8 @@ class _NotificationPageState extends State<NotificationPage> {
                 onPressed: () async {
                   final plan = await pickSchedule(context);
                   if (plan != null) {
-                    await NotificationExamples.createScheduledNotification(
+                    await ProfileNotificationController
+                        .createScheduledNotification(
                       notificationSchedule: plan,
                     );
                   }
@@ -137,7 +141,8 @@ class _NotificationPageState extends State<NotificationPage> {
                 onPressed: () async {
                   final plan = await pickSchedule(context);
                   if (plan != null) {
-                    await NotificationExamples.createScheduledNotification(
+                    await ProfileNotificationController
+                        .createScheduledNotification(
                       notificationSchedule: plan,
                       repeats: true,
                     );
@@ -150,7 +155,7 @@ class _NotificationPageState extends State<NotificationPage> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationExamples
+                  await ProfileNotificationController
                       .createMinuteRepeatingNotification();
                 },
                 child: const Text('Minute repeating notification'),
@@ -160,7 +165,7 @@ class _NotificationPageState extends State<NotificationPage> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await NotificationExamples
+                  await ProfileNotificationController
                       .createTargetRepeatingNotification();
                 },
                 child: const Text('Every hour at minute 10 and 30 seconds'),
