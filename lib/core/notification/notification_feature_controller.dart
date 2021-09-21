@@ -6,23 +6,17 @@ abstract class NotificationFeatureController {
 
   String getChannelName();
 
-  Future<void> dismissedStream({
-    required ReceivedAction message,
-  });
+  Future<void> dismissedStream({required ReceivedAction receivedAction});
 
-  Future<void> createdStream({
-    required ReceivedNotification message,
-  });
+  Future<void> createdStream(
+      {required ReceivedNotification receivedNotification});
 
-  Future<void> displayedStream({
-    required ReceivedNotification message,
-  });
+  Future<void> displayedStream(
+      {required ReceivedNotification receivedNotification});
 
-  Future<void> actionStream({
-    required ReceivedAction message,
-  });
+  Future<void> actionStream({required ReceivedAction receivedAction});
 
   Future<void> handleRemoteNotification({
-    required RemoteMessage message,
+    required RemoteMessage remoteMessage,
   });
 }

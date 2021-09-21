@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_starter_project/core/core.dart';
+import 'package:flutter_starter_project/feature/profile_notification/profile_notification_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,11 @@ Future _initApp() async {
     configureDependencies(),
     EasyLocalization.ensureInitialized(),
     dotenv.load(fileName: 'dotenv'),
-    NotificationController.init(),
+    NotificationController.init(
+      [
+        ProfileNotificationController(),
+      ],
+    ),
   ];
   RouteApp.initRoutes();
   Bloc.observer = AppBlocObserver();

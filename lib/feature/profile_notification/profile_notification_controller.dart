@@ -1,6 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/notification/notification_controller.dart';
 import 'package:flutter_starter_project/core/notification/notification_feature_controller.dart';
 import 'package:flutter_starter_project/core/notification/notification_week_time.dart';
@@ -8,11 +9,13 @@ import 'package:flutter_starter_project/utils/utils.dart';
 
 class ProfileNotificationController extends NotificationFeatureController {
   static const CHANNEL_NAME = 'profile_channel';
+  static const BADGE_ENABLE = false;
 
   @override
   NotificationChannel getChannel() {
     return NotificationChannel(
       channelKey: getChannelName(),
+      channelShowBadge: BADGE_ENABLE,
       channelName: 'Profile notifications',
       channelDescription: 'Notification channel for profile page',
       defaultColor: const Color(0xFFC5C818),
@@ -26,29 +29,26 @@ class ProfileNotificationController extends NotificationFeatureController {
 
   @override
   Future<void> handleRemoteNotification({
-    required RemoteMessage message,
+    required RemoteMessage remoteMessage,
   }) async {
     SnackBarController.showSnackbar(
         'ProfileNotificationController: remote notification received');
-    if (message.notification != null) {
-      return;
-    } else {
-      final data = message.data;
-      await NotificationController.newNotification(
-        content: NotificationContent(
-          id: int.tryParse(data['id']),
-          channelKey: data['channelKey'],
-          title: data['title'],
-          body: data['body'],
-          payload: data['payload'],
-        ),
-      );
-    }
+
+    final data = remoteMessage.data;
+    await NotificationController.newNotification(
+      content: NotificationContent(
+        id: int.tryParse(data['id']),
+        channelKey: data['channelKey'],
+        title: data['title'],
+        body: data['body'],
+        payload: data['payload'],
+      ),
+    );
   }
 
   @override
   Future<void> dismissedStream({
-    required ReceivedAction message,
+    required ReceivedAction receivedAction,
   }) async {
     SnackBarController.showSnackbar(
         'ProfileNotificationController: notification dismissed');
@@ -56,7 +56,7 @@ class ProfileNotificationController extends NotificationFeatureController {
 
   @override
   Future<void> createdStream({
-    required ReceivedNotification message,
+    required ReceivedNotification receivedNotification,
   }) async {
     SnackBarController.showSnackbar(
         'ProfileNotificationController: notification created');
@@ -64,7 +64,7 @@ class ProfileNotificationController extends NotificationFeatureController {
 
   @override
   Future<void> displayedStream({
-    required ReceivedNotification message,
+    required ReceivedNotification receivedNotification,
   }) async {
     SnackBarController.showSnackbar(
         'ProfileNotificationController: notification displayed');
@@ -72,10 +72,45 @@ class ProfileNotificationController extends NotificationFeatureController {
 
   @override
   Future<void> actionStream({
-    required ReceivedAction message,
+    required ReceivedAction receivedAction,
   }) async {
     SnackBarController.showSnackbar(
         'ProfileNotificationController: notification action');
+
+    if (receivedAction.payload?['redirect'] != null) {
+      RouteApp.routemaster.push(
+        '${receivedAction.payload?['redirect']}',
+      );
+      return;
+    }
+
+    if (receivedAction.buttonKeyPressed.isNotEmpty) {
+      if (receivedAction.buttonKeyPressed == 'POSTPONE') {
+        final localTimeZone = await NotificationController.getLocalTimeZone();
+        await NotificationController.newNotification(
+          content: NotificationContent(
+            id: receivedAction.id,
+            title: receivedAction.title,
+            body: receivedAction.body,
+            channelKey: receivedAction.channelKey,
+          ),
+          actionButtons: [
+            NotificationActionButton(
+              key: 'POSTPONE',
+              label: 'postpone 1 minute',
+            ),
+          ],
+          schedule: NotificationInterval(
+            interval: 60,
+            timeZone: localTimeZone,
+          ),
+        );
+        SnackBarController.showSnackbar(
+          'Notification Postponed by one minute',
+        );
+        return;
+      }
+    }
   }
 
   ///Create a basic notification with a title, a body and a payload
@@ -108,7 +143,7 @@ class ProfileNotificationController extends NotificationFeatureController {
     await NotificationController.newNotification(
       content: NotificationContent(
         id: createUniqueId(),
-        channelKey: 'basic_channel',
+        channelKey: CHANNEL_NAME,
         title: 'Redirect Notification',
         body: 'Redirect body',
         payload: {'redirect': '/settings'},
@@ -142,7 +177,7 @@ class ProfileNotificationController extends NotificationFeatureController {
     await NotificationController.newNotification(
         content: NotificationContent(
           id: createUniqueId(),
-          channelKey: 'basic_channel',
+          channelKey: CHANNEL_NAME,
           title: 'Postpone Notification',
           body: 'Postpone body',
         ),
@@ -160,7 +195,7 @@ class ProfileNotificationController extends NotificationFeatureController {
     await NotificationController.newNotification(
         content: NotificationContent(
           id: createUniqueId(),
-          channelKey: 'scheduled_channel',
+          channelKey: CHANNEL_NAME,
           title: 'Notification at every $seconds seconds',
           body: 'This notification reschedule itself every $seconds seconds.',
         ),
@@ -176,7 +211,7 @@ class ProfileNotificationController extends NotificationFeatureController {
     await NotificationController.newNotification(
       content: NotificationContent(
         id: createUniqueId(),
-        channelKey: 'scheduled_channel',
+        channelKey: CHANNEL_NAME,
         title: '${Emojis.office_calendar} This is a scheduled notification',
         body:
             'It should be ${notificationSchedule.timeOfDay.toString()} of day ${notificationSchedule.dayOfTheWeek.toString()} of the week.',
@@ -204,7 +239,7 @@ class ProfileNotificationController extends NotificationFeatureController {
     await NotificationController.newNotification(
         content: NotificationContent(
           id: createUniqueId(),
-          channelKey: 'scheduled_channel',
+          channelKey: CHANNEL_NAME,
           title: 'Notification at exactly every single minute',
           body:
               'This notification was schedule to repeat at every single minute at clock.',
@@ -219,7 +254,7 @@ class ProfileNotificationController extends NotificationFeatureController {
     await NotificationController.newNotification(
         content: NotificationContent(
           id: createUniqueId(),
-          channelKey: 'scheduled_channel',
+          channelKey: CHANNEL_NAME,
           title: 'Notification every hour when it is 10 minutes and 30 seconds',
           body:
               'This notification was schedule to repeat at a specific moment in time.',
