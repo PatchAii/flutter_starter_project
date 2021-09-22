@@ -122,9 +122,9 @@ class ProfileActions extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            RouteApp.routemaster.push('/notification');
+            RouteApp.routemaster.push('/profile/notification');
           },
-          child: const Text('/notification'),
+          child: const Text('/profile/notification'),
         ),
         const SizedBox(
           height: 16.0,

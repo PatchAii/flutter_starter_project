@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter_starter_project/feature/pokedex/repo/pokedex_repo.dart';
 import 'package:flutter_starter_project/graphql/graphql_operations_api.dart';
@@ -15,31 +13,28 @@ part 'pokedex_state.dart';
 class PokedexBloc extends Bloc<PokedexEvent, PokedexState> {
   PokedexBloc({
     required this.repo,
-  }) : super(const PokedexState.loading());
+  }) : super(const PokedexState.loading()) {
+    on<PokedexEvent>((event, emit) async {
+      await event.map(
+        fetch: (event) => _fetch(event, emit),
+      );
+    });
+  }
 
   final PokedexRepo repo;
 
-  @override
-  Stream<PokedexState> mapEventToState(
-    PokedexEvent event,
-  ) async* {
-    yield* event.map(
-      fetch: _fetch,
-    );
-  }
-
-  Stream<PokedexState> _fetch(_Fetch event) async* {
+  Future _fetch(_Fetch event, Emitter<PokedexState> emit) async {
     try {
-      yield const PokedexState.loading();
+      emit(const PokedexState.loading());
       final pokedex = await repo.getPokedex();
-      yield PokedexState.loaded(
+      emit(PokedexState.loaded(
         pokedex: pokedex,
-      );
+      ));
     } catch (e) {
       SnackBarController.showSnackbar(
         'SnackBar from getPokedex',
       );
-      yield const PokedexState.error();
+      emit(const PokedexState.error());
     }
   }
 }

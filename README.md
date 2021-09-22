@@ -37,6 +37,7 @@ flutter doctor -v
 
 ```sh
 ENDPOINT='https://graphql-pokemon2.vercel.app'
+ENVIRONMENT='dev/prod/qa'
 ```
 
 - create a firebase project. info here:

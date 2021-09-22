@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:provider/src/provider.dart';
 
@@ -15,8 +16,9 @@ class PinBinding extends StatefulWidget {
 }
 
 class _PinBindingState extends State<PinBinding> with WidgetsBindingObserver {
-  bool pinShow =
-      true && getIt<AppState>().loggedInState == LoggedState.loggedIn;
+  bool pinShow = dotenv.env['ENVIRONMENT'] != 'dev' &&
+      true &&
+      getIt<AppState>().loggedInState == LoggedState.loggedIn;
   @override
   Future<void> didChangeAppLifecycleState(
       AppLifecycleState appLifecycleState) async {
@@ -29,8 +31,9 @@ class _PinBindingState extends State<PinBinding> with WidgetsBindingObserver {
 
       case AppLifecycleState.paused:
         setState(() {
-          pinShow =
-              true && getIt<AppState>().loggedInState == LoggedState.loggedIn;
+          pinShow = dotenv.env['ENVIRONMENT'] != 'dev' &&
+              true &&
+              getIt<AppState>().loggedInState == LoggedState.loggedIn;
         });
         break;
 
