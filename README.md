@@ -79,6 +79,34 @@ flutter test --update-goldens
 
 ---
 
+## ✨Mago Merlino✨
+
+<https://github.com/PatchAii/mago-merlino>
+
+- generate a new feature (bloc/repo/view) using the magic powers of mago merlino:
+
+```sh
+# install dart
+brew install dart
+
+# activate ✨mago_merlino✨
+dart pub global activate -sgit https://github.com/PatchAii/mago-merlino.git
+
+```
+
+- then 🎶 listen to this: <https://www.youtube.com/watch?v=Tb75RjpvBIk>
+
+```sh
+# do some ✨magic✨
+dart pub global run mago_merlino:mago_merlino create-feature --path lib/feature/abc
+
+#or
+
+dart pub global run mago_merlino:mago_merlino create-feature abc
+```
+
+---
+
 ## Translations
 
 Update transaltions:
