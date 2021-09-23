@@ -61,7 +61,7 @@ class BottomSheetPage extends Page {
                 ? MediaQuery.of(context).size.height * heightPerc!
                 : null,
             child: Padding(
-              padding: const EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.only(top: 32),
               child: ClipRRect(
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(

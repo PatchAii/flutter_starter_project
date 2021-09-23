@@ -52,17 +52,10 @@ class RouteApp {
               subPage: true,
             ),
           ),
-      '/settings': (_) => canUserAccessPage()
-          ? const SwipableBackPage(
-              name: 'Settings',
-              child: SettingsPage(),
-            )
-          : const MaterialPage(
-              name: 'AccessDenied',
-              child: NotFoundPage(
-                route: 'AccessDenied',
-              ),
-            ),
+      '/settings': (_) => const SwipableBackPage(
+            name: 'Settings',
+            child: SettingsPage(),
+          ),
       '/posts': (route) => MaterialPage(
             child: PostsPage(userId: route.queryParameters['userId']),
           ),
@@ -75,21 +68,19 @@ class RouteApp {
       '/notificationpermission': (route) => const DialogPage(
             child: NotificationPermissionDialog(),
           ),
-      '/settings/bottomsheet': (_) => BottomSheetPage(
-            child: Container(
-              color: Colors.greenAccent,
-              child: const Center(
+      '/settings/bottomsheet': (_) => const BottomSheetPage(
+            child: Material(
+              child: Center(
                 child: Text(
                   'settigs BottomSheet',
                 ),
               ),
             ),
           ),
-      '/profile/bottomsheet': (_) => BottomSheetPage(
+      '/profile/bottomsheet': (_) => const BottomSheetPage(
             heightPerc: .5,
-            child: Container(
-              color: Colors.orange,
-              child: const Center(
+            child: Material(
+              child: Center(
                 child: Text(
                   'profile BottomSheet',
                 ),
@@ -108,12 +99,28 @@ class RouteApp {
   static final loggedOutRoutes = RouteMap(
     onUnknownRoute: (_) => const Redirect('/'),
     routes: {
-      '/': (route) => const MaterialPage(
-            name: 'Login',
-            child: LoginPage(
-              key: ValueKey('LoginPage'),
+      '/': (route) => caruselHasBeenShown()
+          ? const MaterialPage(
+              name: 'Login',
+              child: LoginPage(
+                key: ValueKey('LoginPage'),
+              ),
+            )
+          : MaterialPage(
+              name: 'Carusel',
+              child: Material(
+                child: Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      getIt<AppState>().setCaruselHasBeenShown(true);
+                    },
+                    child: const Text(
+                      'Carusel',
+                    ),
+                  ),
+                ),
+              ),
             ),
-          ),
     },
   );
 
@@ -133,10 +140,10 @@ class RouteApp {
     },
   );
 
-  static bool canUserAccessPage() =>
-      getIt<AppState>().loggedInState == LoggedState.loggedIn;
+  static bool caruselHasBeenShown() => getIt<AppState>().caruselHasBeenShown;
 
-  static bool onBoardingRequired() => getIt<AppState>().onBoardRequired();
+  static bool onBoardingRequired() =>
+      getIt<AppState>().user?.onBoardRequired() ?? false;
 
   static void initRoutes() {
     Routemaster.setPathUrlStrategy();

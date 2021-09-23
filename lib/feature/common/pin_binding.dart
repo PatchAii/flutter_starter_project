@@ -77,7 +77,7 @@ class _PinBindingState extends State<PinBinding> with WidgetsBindingObserver {
           child: Container(
             height: MediaQuery.of(context).size.height / 2,
             width: MediaQuery.of(context).size.width,
-            color: Colors.deepPurple,
+            color: Theme.of(context).primaryColor,
           ),
         ),
         AnimatedPositioned(
@@ -86,7 +86,7 @@ class _PinBindingState extends State<PinBinding> with WidgetsBindingObserver {
           child: Container(
             height: MediaQuery.of(context).size.height / 2,
             width: MediaQuery.of(context).size.width,
-            color: Colors.deepPurpleAccent,
+            color: Theme.of(context).primaryColor,
           ),
         ),
         if (pinShow)

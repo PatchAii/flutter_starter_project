@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/feature/profile_notification/repo/profile_notification_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({
@@ -34,8 +33,8 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: widget.subPage ? null : AppBar(),
-      body: Center(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Center(
           child: Column(
             children: [
               Text(
@@ -204,10 +203,6 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     const SizedBox(
                       height: 16.0,
-                    ),
-                    Text(
-                      '${getIt<SharedPreferences>().getString('notification background')}',
-                      style: Theme.of(context).textTheme.headline6,
                     ),
                   ],
                 ),
