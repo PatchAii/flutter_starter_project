@@ -9,15 +9,15 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink,
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text(
+          'OnBoarding',
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'OnBoarding',
-            ),
             ElevatedButton(
               onPressed: () {
                 getIt<AppState>().setUserProperties();

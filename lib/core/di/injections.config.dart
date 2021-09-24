@@ -4,10 +4,8 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-import 'package:flutter_starter_project/core/app/changenotifier/app_state.dart'
-    as _i10;
-import 'package:flutter_starter_project/core/dependency_injection/register_module.dart'
-    as _i11;
+import 'package:flutter_starter_project/core/app/repo/app_state.dart' as _i10;
+import 'package:flutter_starter_project/core/di/register_module.dart' as _i11;
 import 'package:flutter_starter_project/feature/pokedex/bloc/pokedex_bloc.dart'
     as _i7;
 import 'package:flutter_starter_project/feature/pokedex/repo/pokedex_repo.dart'

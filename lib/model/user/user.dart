@@ -5,6 +5,8 @@ part 'user.g.dart';
 
 @freezed
 class User with _$User {
+  const User._();
+
   const factory User({
     required int id,
     String? name,
@@ -17,6 +19,14 @@ class User with _$User {
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  bool onBoardRequired() {
+    if (name != null && email != null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
 
 @freezed

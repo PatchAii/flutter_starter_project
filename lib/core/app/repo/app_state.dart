@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/model/model.dart';
+import 'package:flutter_starter_project/utils/utils.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,16 +19,15 @@ class AppState extends ChangeNotifier {
 
   LoggedState get loggedInState {
     final isLoggedIn =
-        getIt<SharedPreferences>().getBool('isLoggedIn') ?? false;
+        getIt<SharedPreferences>().getBool(SHARED_PREFS_ISLOGGEDIN) ?? false;
     _loggedInState = isLoggedIn ? LoggedState.loggedIn : LoggedState.loggedOut;
-
     return _loggedInState;
   }
 
   User? get user {
     if (_user != null) return _user;
 
-    final userMap = getIt<SharedPreferences>().getString('user');
+    final userMap = getIt<SharedPreferences>().getString(SHARED_PREFS_USER);
     if (userMap != null) {
       _user = User.fromJson(jsonDecode(userMap));
     }
@@ -35,22 +35,13 @@ class AppState extends ChangeNotifier {
     return _user;
   }
 
-  bool onBoardRequired() {
-    if (user != null && user!.name != null && user!.email != null) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  bool get caruselHasBeenShown =>
+      getIt<SharedPreferences>().getBool(SHARED_PREFS_CARUSELHASBEENSHOWN) ??
+      false;
 
-  void logIn() {
-    _loggedInState = LoggedState.loggedIn;
-    getIt<SharedPreferences>().setBool('isLoggedIn', true);
-    getIt<SharedPreferences>().setString(
-      'user',
-      jsonEncode(const User(id: 1).toJson()),
-    );
-
+  Future<void> setCaruselHasBeenShown(bool value) async {
+    await getIt<SharedPreferences>()
+        .setBool(SHARED_PREFS_CARUSELHASBEENSHOWN, value);
     notifyListeners();
   }
 
@@ -61,7 +52,7 @@ class AppState extends ChangeNotifier {
       email: 'Raikkonen',
     );
     getIt<SharedPreferences>().setString(
-      'user',
+      SHARED_PREFS_USER,
       jsonEncode(
         _user!.toJson(),
       ),
@@ -69,11 +60,26 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void logIn() {
+    _loggedInState = LoggedState.loggedIn;
+    getIt<SharedPreferences>().setBool(SHARED_PREFS_ISLOGGEDIN, true);
+    getIt<SharedPreferences>().setString(
+      SHARED_PREFS_USER,
+      jsonEncode(const User(id: 1).toJson()),
+    );
+
+    notifyListeners();
+  }
+
   Future<void> logOut() async {
     _loggedInState = LoggedState.loggedOut;
     _user = null;
-    await getIt<SharedPreferences>().setBool('isLoggedIn', false);
-    await getIt<SharedPreferences>().remove('user');
+
+    await getIt<SharedPreferences>().setBool(SHARED_PREFS_ISLOGGEDIN, false);
+    await getIt<SharedPreferences>().remove(SHARED_PREFS_USER);
+    await getIt<SharedPreferences>().remove(SHARED_PREFS_CARUSELHASBEENSHOWN);
+
+    NotificationController.dispose();
 
     notifyListeners();
   }

@@ -32,6 +32,7 @@ Future _initApp() async {
   ];
   RouteApp.initRoutes();
   Bloc.observer = AppBlocObserver();
+  EasyLocalization.logger.enableBuildModes = [];
 
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
