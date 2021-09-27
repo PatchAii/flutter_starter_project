@@ -128,6 +128,15 @@ class ProfileActions extends StatelessWidget {
         const SizedBox(
           height: 16.0,
         ),
+        ElevatedButton(
+          onPressed: () {
+            RouteApp.routemaster.push('/remote-widget');
+          },
+          child: const Text('/remote-widget'),
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
       ],
     );
   }
