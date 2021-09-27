@@ -68,7 +68,7 @@ flutter test
 
 ```sh
 flutter test --coverage
-flutter test --coverage && lcov --remove coverage/lcov.info 'lib/*/*.freezed.dart' 'lib/*/*.g.dart' 'lib/*/*.part.dart' 'lib/core/gen/*.dart' -o coverage/lcov.info && genhtml coverage/lcov.info --output=coverage && open coverage/index.html
+flutter test --coverage && lcov --remove coverage/lcov.info 'lib/*/*.freezed.dart' 'lib/*/*.g.dart' 'lib/*/*.graphql.dart' 'lib/*/*.part.dart' 'lib/core/gen/*.dart' 'lib/utils/constants/*.dart' 'lib/core/di/*.config.dart' 'lib/core/lang/*.dart' -o coverage/lcov.info && genhtml coverage/lcov.info --output=coverage && open coverage/index.html
 ```
 
 - golden
