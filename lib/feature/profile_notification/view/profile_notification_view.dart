@@ -33,185 +33,200 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: widget.subPage ? null : AppBar(),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Text(
-                'Notification',
-                style: Theme.of(context).textTheme.headline3,
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await ProfileNotificationController.createBasicNotification();
-                },
-                child: const Text('Basic temp notification'),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await ProfileNotificationController.createBadgeNotification();
-                },
-                child: const Text('Badge notification'),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ElevatedButton(
-                onPressed: () async {
+      body: NotificationContent(
+        token: token,
+      ),
+    );
+  }
+}
+
+class NotificationContent extends StatelessWidget {
+  final token;
+
+  const NotificationContent({
+    Key? key,
+    this.token,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Center(
+        child: Column(
+          children: [
+            Text(
+              'Notification',
+              style: Theme.of(context).textTheme.headline3,
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await ProfileNotificationController.createBasicNotification();
+              },
+              child: const Text('Basic temp notification'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await ProfileNotificationController.createBadgeNotification();
+              },
+              child: const Text('Badge notification'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await ProfileNotificationController
+                    .createRedirectNotification();
+              },
+              child: const Text('Redirect notification'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await ProfileNotificationController.createActionNotification();
+              },
+              child: const Text('Action notification'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await ProfileNotificationController
+                    .createPostponeNotification();
+              },
+              child: const Text('Postpone notification'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            Text(
+              'Repeated',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final sec = await pickSeconds(context);
+                if (sec != null) {
                   await ProfileNotificationController
-                      .createRedirectNotification();
-                },
-                child: const Text('Redirect notification'),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ElevatedButton(
-                onPressed: () async {
+                      .createSecondsRepeatingNotification(
+                    sec,
+                  );
+                }
+              },
+              child: const Text('Repeating notification'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            Text(
+              'Scheduled',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final plan = await pickSchedule(context);
+                if (plan != null) {
                   await ProfileNotificationController
-                      .createActionNotification();
-                },
-                child: const Text('Action notification'),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ElevatedButton(
-                onPressed: () async {
+                      .createScheduledNotification(
+                    notificationSchedule: plan,
+                  );
+                }
+              },
+              child: const Text('Scheduled notification, once'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final plan = await pickSchedule(context);
+                if (plan != null) {
                   await ProfileNotificationController
-                      .createPostponeNotification();
-                },
-                child: const Text('Postpone notification'),
+                      .createScheduledNotification(
+                    notificationSchedule: plan,
+                    repeats: true,
+                  );
+                }
+              },
+              child: const Text('Scheduled notification, repeat'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await ProfileNotificationController
+                    .createMinuteRepeatingNotification();
+              },
+              child: const Text('Minute repeating notification'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await ProfileNotificationController
+                    .createTargetRepeatingNotification();
+              },
+              child: const Text('Every hour at minute 10 and 30 seconds'),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Text(
+                    'FCM token:',
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  SelectableText(
+                    token,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ],
               ),
-              const SizedBox(
-                height: 16.0,
+            ),
+            const SizedBox(
+              height: 32.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Text(
+                    'Notification background:',
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                ],
               ),
-              Text(
-                'Repeated',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  final sec = await pickSeconds(context);
-                  if (sec != null) {
-                    await ProfileNotificationController
-                        .createSecondsRepeatingNotification(
-                      sec,
-                    );
-                  }
-                },
-                child: const Text('Repeating notification'),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              Text(
-                'Scheduled',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  final plan = await pickSchedule(context);
-                  if (plan != null) {
-                    await ProfileNotificationController
-                        .createScheduledNotification(
-                      notificationSchedule: plan,
-                    );
-                  }
-                },
-                child: const Text('Scheduled notification, once'),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  final plan = await pickSchedule(context);
-                  if (plan != null) {
-                    await ProfileNotificationController
-                        .createScheduledNotification(
-                      notificationSchedule: plan,
-                      repeats: true,
-                    );
-                  }
-                },
-                child: const Text('Scheduled notification, repeat'),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await ProfileNotificationController
-                      .createMinuteRepeatingNotification();
-                },
-                child: const Text('Minute repeating notification'),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  await ProfileNotificationController
-                      .createTargetRepeatingNotification();
-                },
-                child: const Text('Every hour at minute 10 and 30 seconds'),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Text(
-                      'FCM token:',
-                      style: Theme.of(context).textTheme.headline4,
-                    ),
-                    const SizedBox(
-                      height: 16.0,
-                    ),
-                    SelectableText(
-                      token,
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 32.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Text(
-                      'Notification background:',
-                      style: Theme.of(context).textTheme.headline4,
-                    ),
-                    const SizedBox(
-                      height: 16.0,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 32.0,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 32.0,
+            ),
+          ],
         ),
       ),
     );
