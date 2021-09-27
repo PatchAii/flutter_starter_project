@@ -1,7 +1,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:flutter_starter_project/core/notification/notification_controller.dart';
 
 class NotificationPermissionDialog extends StatelessWidget {
   const NotificationPermissionDialog({Key? key}) : super(key: key);

@@ -4,9 +4,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:flutter_starter_project/core/notification/notification_controller.dart';
 import 'package:flutter_starter_project/core/notification/notification_feature_controller.dart';
-import 'package:flutter_starter_project/core/notification/notification_week_time.dart';
 import 'package:flutter_starter_project/utils/utils.dart';
 
 class ProfileNotificationController extends NotificationFeatureController {
