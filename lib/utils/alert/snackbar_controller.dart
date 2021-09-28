@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_starter_project/utils/utils.dart';
+import 'package:flutter_starter_project/core/core.dart';
 
 class SnackBarController {
   @visibleForTesting

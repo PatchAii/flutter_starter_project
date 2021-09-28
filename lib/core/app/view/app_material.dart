@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/feature/common/pin_binding.dart';
-import 'package:flutter_starter_project/utils/utils.dart';
 import 'package:layout/layout.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
