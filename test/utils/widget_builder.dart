@@ -16,3 +16,9 @@ DeviceBuilder getDefaultBuilder(Widget child) {
       widget: Layout(child: child),
     );
 }
+
+Widget mountApp(Widget child) {
+  return MaterialApp(
+    home: child,
+  );
+}

@@ -1,12 +1,15 @@
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:flutter_starter_project/feature/profile/view/profile_page.dart';
+import 'package:flutter_starter_project/feature/profile/view/widgets/profile_actions.dart';
+import 'package:flutter_starter_project/feature/profile/view/widgets/profile_content.dart';
+import 'package:flutter_starter_project/feature/profile/view/widgets/profile_data.dart';
+import 'package:flutter_starter_project/feature/profile/view/widgets/profile_error.dart';
 import 'package:flutter_starter_project/model/model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
 import '../utils/fixture_reader.dart';
-import '../utils/golden_device_builder.dart';
+import '../utils/widget_builder.dart';
 
 Future<void> main() async {
   EasyLocalization.logger.enableBuildModes = [];
