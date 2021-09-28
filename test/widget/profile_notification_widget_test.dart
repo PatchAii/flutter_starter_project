@@ -34,8 +34,23 @@ Future<void> main() async {
       await tester.ensureVisible(find.byKey(const Key('pick_schedule')));
 
       await tester.tap(find.byKey(const Key('pick_schedule')));
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.pumpAndSettle();
       expect(find.byKey(const Key('pick_schedule_dialog')), findsOneWidget);
+    });
+
+    testWidgets('Open pick seconds dialog on button tap', (tester) async {
+      await tester.pumpWidget(mountApp(const NotificationContent(
+        token: 'token',
+      )));
+      expect(find.byType(NotificationContent), findsOneWidget);
+
+      expect(find.byKey(const Key('pick_seconds')), findsOneWidget);
+
+      await tester.ensureVisible(find.byKey(const Key('pick_seconds')));
+
+      await tester.tap(find.byKey(const Key('pick_seconds')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(const Key('pick_seconds_dialog')), findsOneWidget);
     });
   });
 }

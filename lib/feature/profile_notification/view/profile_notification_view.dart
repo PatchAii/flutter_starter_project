@@ -116,6 +116,7 @@ class NotificationContent extends StatelessWidget {
               height: 16.0,
             ),
             ElevatedButton(
+              key: const Key('pick_seconds'),
               onPressed: () async {
                 final sec = await pickSeconds(context);
                 if (sec != null) {
@@ -309,6 +310,7 @@ class NotificationContent extends StatelessWidget {
             600,
           ];
           return AlertDialog(
+            key: const Key('pick_seconds_dialog'),
             title: const Text(
               'I want the notification to repeat every:',
               textAlign: TextAlign.center,
