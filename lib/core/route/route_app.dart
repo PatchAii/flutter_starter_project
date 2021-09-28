@@ -34,44 +34,25 @@ class RouteApp {
           );
         }
       },
-      '/pokedex': (_) => const MaterialPage(
-            name: 'Pokedex',
-            child: PokedexPage(),
-          ),
-      '/profile': (_) => const MaterialPage(
-            name: 'Profile',
-            child: ProfilePage(),
-          ),
-      '/profile/sub': (_) => const SwipableBackPage(
-            name: 'Settings Sub Page',
-            child: SettingsPage(
-              subPage: true,
-            ),
-          ),
-      '/settings': (_) => const SwipableBackPage(
-            name: 'Settings',
-            child: SettingsPage(),
-          ),
-      '/posts': (route) => MaterialPage(
-            child: PostsPage(userId: route.queryParameters['userId']),
-          ),
       '/dialog': (route) => DialogPage(
             child: GenericDialog(
                 title: route.queryParameters['title'] ?? '',
                 subtitle: route.queryParameters['subtitle'],
                 description: route.queryParameters['description']),
           ),
-      '/notificationpermission': (route) => const DialogPage(
+      '/notification-permission': (route) => const DialogPage(
             child: NotificationPermissionDialog(),
           ),
-      '/settings/bottomsheet': (_) => const BottomSheetPage(
-            child: Material(
-              child: Center(
-                child: Text(
-                  'settigs BottomSheet',
-                ),
-              ),
-            ),
+      '/pokedex': (_) => const MaterialPage(
+            name: 'Pokedex',
+            child: PokedexPage(),
+          ),
+      '/posts': (route) => MaterialPage(
+            child: PostsPage(userId: route.queryParameters['userId']),
+          ),
+      '/profile': (_) => const MaterialPage(
+            name: 'Profile',
+            child: ProfilePage(),
           ),
       '/profile/bottomsheet': (_) => const BottomSheetPage(
             heightPerc: .5,
@@ -87,6 +68,25 @@ class RouteApp {
             name: 'Notification',
             child: NotificationPage(
               subPage: true,
+            ),
+          ),
+      '/profile/sub': (_) => const SwipableBackPage(
+            name: 'Settings Sub Page',
+            child: SettingsPage(
+              subPage: true,
+            ),
+          ),
+      '/settings': (_) => const SwipableBackPage(
+            name: 'Settings',
+            child: SettingsPage(),
+          ),
+      '/settings/bottomsheet': (_) => const BottomSheetPage(
+            child: Material(
+              child: Center(
+                child: Text(
+                  'settigs BottomSheet',
+                ),
+              ),
             ),
           ),
     },
