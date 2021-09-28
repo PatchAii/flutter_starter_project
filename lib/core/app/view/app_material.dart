@@ -92,32 +92,86 @@ class ConsumerApp extends StatefulWidget {
 class _ConsumerAppState extends State<ConsumerApp> {
   @override
   Widget build(BuildContext context) {
-    return Layout(
-      format: MaterialLayoutFormat(),
-      child: MaterialApp.router(
-        scaffoldMessengerKey: rootScaffoldMessengerKey,
-        routeInformationParser: RouteApp.routeInformationParser,
-        themeMode: ThemeMode.light,
-        theme: ThemeData(
-          primaryColor: const Color(0xFF6EC818),
-          colorScheme: const ColorScheme.light(
-            primary: Color(0xFF6EC818),
+    return MaterialApp.router(
+      scaffoldMessengerKey: rootScaffoldMessengerKey,
+      routeInformationParser: RouteApp.routeInformationParser,
+      themeMode: ThemeMode.light,
+      theme: ThemeData(
+        primaryColor: const Color(0xFFcbfbcb),
+        primaryColorDark: const Color(0xFF0c2d24),
+        colorScheme: const ColorScheme.light(
+          primary: Color(0xFFcbfbcb),
+          secondary: Color(0xFFFDEC54),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(
+            color: Color(0xFF0c2d24),
           ),
-          pageTransitionsTheme: const PageTransitionsTheme(
-            builders: {
-              TargetPlatform.android: ZoomPageTransitionsBuilder(),
-              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-            },
+          titleTextStyle: TextStyle(
+            color: Color(0xFF0c2d24),
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        routerDelegate: RouteApp.routemaster,
-        builder: (context, child) {
-          return PinBinding(child: child!);
-        },
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              const Color(0xFF0c2d24),
+            ),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              const Color(0xFF0c2d24),
+            ),
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              const Color(0xFF0c2d24),
+            ),
+          ),
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedItemColor: Color(0xFF0c2d24),
+          unselectedItemColor: Colors.grey,
+        ),
+        navigationRailTheme: const NavigationRailThemeData(
+          selectedIconTheme: IconThemeData(
+            color: Color(0xFF0c2d24),
+          ),
+          selectedLabelTextStyle: TextStyle(
+            color: Color(0xFF0c2d24),
+          ),
+          unselectedIconTheme: IconThemeData(
+            color: Colors.grey,
+          ),
+          unselectedLabelTextStyle: TextStyle(
+            color: Colors.grey,
+          ),
+        ),
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: ZoomPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          },
+        ),
       ),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      routerDelegate: RouteApp.routemaster,
+      builder: (context, child) {
+        return Layout(
+          format: MaterialLayoutFormat(),
+          child: PinBinding(
+            child: child!,
+          ),
+        );
+      },
     );
   }
 }

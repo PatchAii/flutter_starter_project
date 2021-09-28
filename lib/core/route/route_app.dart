@@ -4,6 +4,7 @@ import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/route/route_pages.dart';
 import 'package:flutter_starter_project/feature/common/app_scaffold.dart';
 import 'package:flutter_starter_project/feature/common/generic_dialog.dart';
+import 'package:flutter_starter_project/feature/common/top_bar.dart';
 import 'package:flutter_starter_project/feature/feature.dart';
 import 'package:flutter_starter_project/feature/posts/view/posts_page.dart';
 import 'package:flutter_starter_project/feature/profile/view/profile_page.dart';
@@ -108,8 +109,11 @@ class RouteApp {
             )
           : MaterialPage(
               name: 'Carusel',
-              child: Material(
-                child: Center(
+              child: Scaffold(
+                appBar: const TopBar(
+                  label: 'Carusel',
+                ),
+                body: Center(
                   child: ElevatedButton(
                     onPressed: () {
                       getIt<AppState>().setCaruselHasBeenShown(true);

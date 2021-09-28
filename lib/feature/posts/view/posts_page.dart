@@ -57,18 +57,18 @@ class PostsList extends StatelessWidget {
           flexibleSpace: FlexibleSpaceBar(
             title: Text(
               'Posts',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline4!
-                  .copyWith(color: Colors.white),
+              style: Theme.of(context).textTheme.headline4!,
             ),
           ),
         ),
         SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            final post = posts[index];
-            return PostCard(post: post);
-          }, childCount: posts.length),
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              final post = posts[index];
+              return PostCard(post: post);
+            },
+            childCount: posts.length,
+          ),
         )
       ],
     );
@@ -97,10 +97,9 @@ class PostCard extends StatelessWidget {
           children: [
             ListTile(
               leading: CircleAvatar(
-                backgroundColor: Colors.green,
+                backgroundColor: Theme.of(context).primaryColor,
                 child: Text(
                   post.userId.toString(),
-                  style: const TextStyle(color: Colors.white),
                 ),
               ),
               title: Text(post.title),
@@ -109,7 +108,6 @@ class PostCard extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 post.body,
-                style: TextStyle(color: Colors.black.withOpacity(0.6)),
               ),
             ),
             const Divider(),
@@ -118,16 +116,16 @@ class PostCard extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () => {},
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.share,
-                    color: Colors.blue,
+                    color: Theme.of(context).primaryColorDark,
                   ),
                 ),
                 IconButton(
                   onPressed: () => {},
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.star,
-                    color: Colors.amberAccent,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
               ],

@@ -16,7 +16,6 @@ class GenericDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Material(
-        color: Colors.white,
         elevation: 3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -44,8 +43,7 @@ class GenericDialog extends StatelessWidget {
                   if (subtitle != null)
                     Text(
                       subtitle!,
-                      style: TextStyle(
-                        color: Colors.black.withOpacity(0.7),
+                      style: const TextStyle(
                         fontSize: 14.0,
                       ),
                     ),
@@ -55,8 +53,8 @@ class GenericDialog extends StatelessWidget {
                   if (description != null)
                     Text(
                       description!,
-                      style: const TextStyle(
-                        color: Colors.green,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorDark,
                         fontSize: 16.0,
                       ),
                     ),
