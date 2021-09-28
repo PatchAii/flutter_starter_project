@@ -40,7 +40,7 @@ class NotificationController {
       () async {
         final isAllowed = await AwesomeNotifications().isNotificationAllowed();
         if (!isAllowed) {
-          RouteApp.routemaster.push('/notificationpermission');
+          RouteApp.routemaster.push('/notification-permission');
         } else {
           listen();
         }
