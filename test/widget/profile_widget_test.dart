@@ -55,22 +55,5 @@ Future<void> main() async {
         await screenMatchesGolden(tester, 'profile_actions');
       });
     });
-
-    /*testWidgets('Button is present and triggers navigation after tapped',
-        (WidgetTester tester) async {
-      final mockObserver = MockNavigatorObserver();
-      await tester.pumpWidget(
-        MaterialApp(
-          home: const ProfileActions(),
-          navigatorObservers: [mockObserver],
-        ),
-      );
-
-      expect(find.byKey(const Key('settings_button')), findsOneWidget);
-      await tester.tap(find.byKey(const Key('settings_button')));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(SettingsPage), findsOneWidget);
-    });*/
   });
 }
