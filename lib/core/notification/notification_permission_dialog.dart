@@ -9,7 +9,6 @@ class NotificationPermissionDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Material(
-        color: Colors.white,
         elevation: 3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),

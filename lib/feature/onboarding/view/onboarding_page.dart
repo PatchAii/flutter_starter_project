@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
+import 'package:flutter_starter_project/feature/common/top_bar.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({
@@ -9,10 +10,8 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'OnBoarding',
-        ),
+      appBar: const TopBar(
+        label: 'OnBoarding',
       ),
       body: Center(
         child: Column(

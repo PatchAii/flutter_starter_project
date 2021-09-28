@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_starter_project/feature/common/top_bar.dart';
 import 'package:layout/layout.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -59,27 +59,8 @@ class _AppScaffoldState extends State<AppScaffold> {
         return !isHomePage;
       },
       child: Scaffold(
-        appBar: AppBar(
-          leading: context.layout.breakpoint > LayoutBreakpoint.sm
-              ? IconButton(
-                  icon: const Icon(
-                    Icons.menu,
-                  ),
-                  onPressed: onExtendedSelect,
-                )
-              : null,
-          title: GestureDetector(
-            onTap: () {
-              RouteApp.routemaster.push('/');
-            },
-            child: SizedBox(
-              width: 100,
-              child: SvgPicture.asset(
-                Assets.logo.patchai,
-                color: Colors.white,
-              ),
-            ),
-          ),
+        appBar: TopBar(
+          label: 'Patchai',
           actions: [
             IconButton(
               icon: const Icon(Icons.logout),

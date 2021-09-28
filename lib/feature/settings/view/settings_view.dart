@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/core.dart';
+import 'package:flutter_starter_project/feature/common/top_bar.dart';
 import 'package:flutter_starter_project/utils/utils.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -15,10 +16,8 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: subPage
           ? null
-          : AppBar(
-              title: const Text(
-                'Settings',
-              ),
+          : const TopBar(
+              label: 'Settings',
             ),
       body: Center(
         child: Column(

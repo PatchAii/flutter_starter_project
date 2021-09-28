@@ -87,7 +87,7 @@ class ProfileNotificationController extends NotificationFeatureController {
       channelShowBadge: getBadgeEnabled(),
       channelName: 'Profile notifications',
       channelDescription: 'Notification channel for profile page',
-      defaultColor: const Color(0xFFC5C818),
+      defaultColor: const Color(0xFFcbfbcb),
       ledColor: Colors.white,
       importance: NotificationImportance.High,
     );
