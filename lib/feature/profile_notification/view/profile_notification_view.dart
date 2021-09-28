@@ -153,6 +153,7 @@ class NotificationContent extends StatelessWidget {
               height: 16.0,
             ),
             ElevatedButton(
+              key: const Key('pick_schedule'),
               onPressed: () async {
                 final plan = await pickSchedule(context);
                 if (plan != null) {
@@ -252,6 +253,7 @@ class NotificationContent extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
+            key: const Key('pick_schedule_dialog'),
             title: const Text(
               'I want to be reminded every:',
               textAlign: TextAlign.center,

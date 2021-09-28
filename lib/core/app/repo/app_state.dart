@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/model/model.dart';
-import 'package:flutter_starter_project/utils/utils.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

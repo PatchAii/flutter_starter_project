@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
-import '../utils/golden_device_builder.dart';
+import '../utils/widget_builder.dart';
 
 Future<void> main() async {
   EasyLocalization.logger.enableBuildModes = [];

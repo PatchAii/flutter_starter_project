@@ -21,7 +21,7 @@ jobs:
     - uses: subosito/flutter-action@v1
     - run: flutter pub get
     - run: flutter test --coverage test/unit
-    - run: lcov --remove coverage/lcov.info 'lib/*/*.freezed.dart' 'lib/*/*.g.dart' 'lib/*/*.graphql.dart' 'lib/*/*.part.dart' 'lib/core/gen/*.dart' 'lib/utils/constants/*.dart' 'lib/core/di/*.config.dart' 'lib/core/lang/*.dart' 'lib/feature/*/*/*_event.dart' 'lib/feature/*/*/*_state.dart' 'lib/feature/*/*/*_repo.dart' -o coverage/lcov.info
+    - run: lcov --remove coverage/lcov.info '**/*.freezed.dart' '**/*.g.dart' '**/*.graphql.dart' '**/*.part.dart' '**/*.config.dart' '**/*_event.dart' '**/*_state.dart' '**/*_repo.dart' '**/core/*' '**/*_controller.dart' '**/alert/*.dart' -o coverage/lcov.info
     - name: Report code coverage
       uses: zgosalvez/github-actions-report-lcov@v1
       with:
