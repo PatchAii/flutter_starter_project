@@ -8,7 +8,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsLogoGen {
   const $AssetsLogoGen();
 
-  String get patchai => 'assets/logo/patchai.svg';
+  AssetGenImage get iconLogo =>
+      const AssetGenImage('assets/logo/icon-logo.png');
+  AssetGenImage get icon => const AssetGenImage('assets/logo/icon.png');
 }
 
 class $AssetsTranslationsGen {

@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
 
+import 'package:bloc/bloc.dart';
+import 'package:dante/dante.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_starter_project/core/core.dart';
@@ -13,7 +14,7 @@ void main() async {
   runZonedGuarded(
     () => runApp(const App()),
     (error, stackTrace) {
-      log(error.toString(), stackTrace: stackTrace);
+      Dante.e(error.toString(), error, stackTrace);
     },
   );
 }
@@ -30,11 +31,11 @@ Future _initApp() async {
     ),
   ];
   RouteApp.initRoutes();
-  /*  Bloc.observer = AppBlocObserver(); */
+  Bloc.observer = AppBlocObserver();
   EasyLocalization.logger.enableBuildModes = [];
 
   FlutterError.onError = (details) {
-    log(details.exceptionAsString(), stackTrace: details.stack);
+    Dante.e(details.exceptionAsString(), details.exception, details.stack);
   };
 
   await Future.wait(futures);

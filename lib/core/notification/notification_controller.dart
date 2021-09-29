@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:dante/dante.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -53,7 +54,7 @@ class NotificationController {
       () {
         getFCMToken().listen(
           (token) {
-            debugPrint('FCMTOKEN: $token');
+            Dante.i('FCMTOKEN: $token');
           },
         );
 

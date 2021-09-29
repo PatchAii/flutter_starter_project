@@ -1,25 +1,17 @@
 import 'package:bloc/bloc.dart';
+import 'package:dante/dante.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/feature/common/pin_binding.dart';
 import 'package:layout/layout.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
-
-var logger = Logger(
-  printer: PrettyPrinter(
-    printEmojis: false,
-    methodCount: 0,
-  ),
-  filter: DevelopmentFilter(),
-);
 
 class AppBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
-    logger.d(
+    Dante.d(
       ' *️⃣ ${bloc.runtimeType}\n ⏸ CurrentState: ${change.currentState}\n ⏯ NextState: ${change.nextState}',
     );
   }
@@ -27,7 +19,7 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
-    logger.e('${bloc.runtimeType}\n$error\n$stackTrace');
+    Dante.e('${bloc.runtimeType}\n$error\n$stackTrace');
   }
 }
 
@@ -47,6 +39,7 @@ class App extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.edgeToEdge,
     );
+
     return EasyLocalization(
       supportedLocales: [
         const Locale('en'),
@@ -95,6 +88,7 @@ class _ConsumerAppState extends State<ConsumerApp> {
       scaffoldMessengerKey: rootScaffoldMessengerKey,
       routeInformationParser: RouteApp.routeInformationParser,
       themeMode: ThemeMode.light,
+      restorationScopeId: 'root',
       theme: ThemeData(
         primaryColor: const Color(0xFFcbfbcb),
         primaryColorDark: const Color(0xFF0c2d24),

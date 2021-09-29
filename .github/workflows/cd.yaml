@@ -13,5 +13,5 @@ jobs:
         run: |
           touch dotenv
           echo ENDPOINT='https://graphql-pokemon2.now.sh/graphql' >> dotenv
-          echo ENVIRONMENT='prod' >> dotenv
+          echo ENVIRONMENT='dev' >> dotenv
       - uses: erickzanardo/flutter-gh-pages@v6
