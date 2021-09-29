@@ -60,7 +60,7 @@ class _AppScaffoldState extends State<AppScaffold> {
       },
       child: Scaffold(
         appBar: TopBar(
-          label: 'Patchai',
+          label: 'patchai',
           actions: [
             IconButton(
               icon: const Icon(Icons.logout),

@@ -152,12 +152,12 @@ class RouteApp {
 class RouteAppObsever extends RoutemasterObserver {
   @override
   void didChangeRoute(RouteData routeData, Page page) {
-    //print('New route: ${routeData.path}');
+    /* Dante.i('New route: ${routeData.path}'); */
   }
 
   @override
   void didPop(Route route, Route? previousRoute) {
-    //print('Popped a route');
+    /*  Dante.i('Popped a route: ${previousRoute}'); */
   }
 }
 
