@@ -136,8 +136,15 @@ class IosPageRouteBuilder<T> extends PageRoute<T> {
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    return matchingBuilder.buildTransitions<T>(
-        this, context, animation, secondaryAnimation, child);
+    return ClipRect(
+      child: matchingBuilder.buildTransitions<T>(
+        this,
+        context,
+        animation,
+        secondaryAnimation,
+        child,
+      ),
+    );
   }
 
   @override
