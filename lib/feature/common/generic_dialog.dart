@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class GenericDialog extends StatelessWidget {
-  const GenericDialog({
-    Key? key,
-    required this.title,
-    this.subtitle,
-    this.description,
-  }) : super(key: key);
-
   final String title;
   final String? subtitle;
   final String? description;
+
+  const GenericDialog({
+    required this.title,
+    Key? key,
+    this.subtitle,
+    this.description,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

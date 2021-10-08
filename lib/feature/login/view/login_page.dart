@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(LocaleKeys.login.tr()),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

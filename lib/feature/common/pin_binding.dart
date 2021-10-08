@@ -4,12 +4,12 @@ import 'package:flutter_starter_project/core/core.dart';
 import 'package:provider/src/provider.dart';
 
 class PinBinding extends StatefulWidget {
-  const PinBinding({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
-
   final Widget child;
+
+  const PinBinding({
+    required this.child,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _PinBindingState createState() => _PinBindingState();
@@ -21,7 +21,8 @@ class _PinBindingState extends State<PinBinding> with WidgetsBindingObserver {
       getIt<AppState>().loggedInState == LoggedState.loggedIn;
   @override
   Future<void> didChangeAppLifecycleState(
-      AppLifecycleState appLifecycleState) async {
+    AppLifecycleState appLifecycleState,
+  ) async {
     switch (appLifecycleState) {
       case AppLifecycleState.resumed:
         break;

@@ -35,7 +35,9 @@ void main() {
       act: (bloc) => bloc.add(const PokedexEvent.fetch()),
       expect: () => [
         const PokedexState.loading(),
-        const PokedexState.loaded(pokedex: [])
+        const PokedexState.loaded(
+          pokedex: [],
+        ),
       ],
     );
 
@@ -43,11 +45,23 @@ void main() {
       'emits [PokedexState.loaded] when fetch is added with a non empty list',
       setUp: () {
         when(() => repo.getPokedex()).thenAnswer(
-          (_) => Future.value([
-            GetPokedex$Query$Pokemon.fromJson(fixture('pokemon.json')),
-            GetPokedex$Query$Pokemon.fromJson(fixture('pokemon.json')),
-            GetPokedex$Query$Pokemon.fromJson(fixture('pokemon.json'))
-          ]),
+          (_) => Future.value(
+            [
+              GetPokedex$Query$Pokemon.fromJson(
+                fixture(
+                  'pokemon.json',
+                ),
+              ),
+              GetPokedex$Query$Pokemon.fromJson(
+                fixture(
+                  'pokemon.json',
+                ),
+              ),
+              GetPokedex$Query$Pokemon.fromJson(
+                fixture('pokemon.json'),
+              ),
+            ],
+          ),
         );
       },
       build: () => _getBloc(repo),
@@ -56,11 +70,23 @@ void main() {
         const PokedexState.loading(),
         PokedexState.loaded(
           pokedex: [
-            GetPokedex$Query$Pokemon.fromJson(fixture('pokemon.json')),
-            GetPokedex$Query$Pokemon.fromJson(fixture('pokemon.json')),
-            GetPokedex$Query$Pokemon.fromJson(fixture('pokemon.json'))
+            GetPokedex$Query$Pokemon.fromJson(
+              fixture(
+                'pokemon.json',
+              ),
+            ),
+            GetPokedex$Query$Pokemon.fromJson(
+              fixture(
+                'pokemon.json',
+              ),
+            ),
+            GetPokedex$Query$Pokemon.fromJson(
+              fixture(
+                'pokemon.json',
+              ),
+            ),
           ],
-        )
+        ),
       ],
     );
 

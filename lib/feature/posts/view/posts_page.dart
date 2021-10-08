@@ -6,12 +6,12 @@ import 'package:flutter_starter_project/feature/posts/bloc/posts_bloc.dart';
 import 'package:flutter_starter_project/model/model.dart';
 
 class PostsPage extends StatelessWidget {
+  final String? userId;
+
   const PostsPage({
     Key? key,
     this.userId,
   }) : super(key: key);
-
-  final String? userId;
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +40,13 @@ class PostsPage extends StatelessWidget {
 }
 
 class PostsList extends StatelessWidget {
+  final List<Post> posts;
+
   const PostsList({
-    Key? key,
     required this.posts,
+    Key? key,
   }) : super(key: key);
 
-  final List<Post> posts;
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -69,27 +70,26 @@ class PostsList extends StatelessWidget {
             },
             childCount: posts.length,
           ),
-        )
+        ),
       ],
     );
   }
 }
 
 class PostCard extends StatelessWidget {
-  const PostCard({
-    Key? key,
-    required this.post,
-  }) : super(key: key);
-
   final Post post;
+
+  const PostCard({
+    required this.post,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        RouteApp.routemaster.push(
-            '/dialog?title=${post.title}&subtitle=${post.id}&description=${post.body}');
-      },
+      onTap: () => RouteApp.routemaster.push(
+        '/dialog?title=${post.title}&subtitle=${post.id}&description=${post.body}',
+      ),
       child: Card(
         clipBehavior: Clip.antiAlias,
         child: Column(
@@ -158,7 +158,7 @@ class PostsError extends StatelessWidget {
                   );
             },
             child: const Text('Retry'),
-          )
+          ),
         ],
       ),
     );

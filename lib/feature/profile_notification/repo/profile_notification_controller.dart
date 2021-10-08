@@ -15,7 +15,8 @@ class ProfileNotificationController extends NotificationFeatureController {
     required ReceivedAction receivedAction,
   }) async {
     SnackBarController.showSnackbar(
-        'ProfileNotificationController: notification action');
+      'ProfileNotificationController: notification action',
+    );
 
     if (receivedAction.payload?['redirect'] != null) {
       RouteApp.routemaster.push(
@@ -58,7 +59,8 @@ class ProfileNotificationController extends NotificationFeatureController {
     required ReceivedNotification receivedNotification,
   }) async {
     SnackBarController.showSnackbar(
-        'ProfileNotificationController: notification created');
+      'ProfileNotificationController: notification created',
+    );
   }
 
   @override
@@ -66,7 +68,8 @@ class ProfileNotificationController extends NotificationFeatureController {
     required ReceivedAction receivedAction,
   }) async {
     SnackBarController.showSnackbar(
-        'ProfileNotificationController: notification dismissed');
+      'ProfileNotificationController: notification dismissed',
+    );
   }
 
   @override
@@ -74,7 +77,8 @@ class ProfileNotificationController extends NotificationFeatureController {
     required ReceivedNotification receivedNotification,
   }) async {
     SnackBarController.showSnackbar(
-        'ProfileNotificationController: notification displayed');
+      'ProfileNotificationController: notification displayed',
+    );
   }
 
   @override
@@ -101,7 +105,8 @@ class ProfileNotificationController extends NotificationFeatureController {
     required RemoteMessage remoteMessage,
   }) async {
     SnackBarController.showSnackbar(
-        'ProfileNotificationController: remote notification received');
+      'ProfileNotificationController: remote notification received',
+    );
 
     final data = remoteMessage.data;
     final payload = data['payload'] != null
@@ -159,53 +164,49 @@ class ProfileNotificationController extends NotificationFeatureController {
   ///Create a notification with actionButtons
   static Future<void> createActionNotification() async {
     await NotificationController.newNotification(
-        content: NotificationContent(
-          id: createUniqueId(),
-          channelKey: CHANNEL_NAME,
-          title: 'Action Notification',
-          body: 'Action body',
-        ),
-        actionButtons: [
-          NotificationActionButton(
-            key: 'ACTION 1',
-            label: 'Action 1',
-          ),
-          NotificationActionButton(
-            key: 'ACTION 2',
-            label: 'Action 2',
-          ),
-        ]);
+      content: NotificationContent(
+        id: createUniqueId(),
+        channelKey: CHANNEL_NAME,
+        title: 'Action Notification',
+        body: 'Action body',
+      ),
+    );
   }
 
   ///Create a notification which can be postponed
   static Future<void> createPostponeNotification() async {
     await NotificationController.newNotification(
-        content: NotificationContent(
-          id: createUniqueId(),
-          channelKey: CHANNEL_NAME,
-          title: 'Postpone Notification',
-          body: 'Postpone body',
+      content: NotificationContent(
+        id: createUniqueId(),
+        channelKey: CHANNEL_NAME,
+        title: 'Postpone Notification',
+        body: 'Postpone body',
+      ),
+      actionButtons: [
+        NotificationActionButton(
+          key: 'POSTPONE',
+          label: 'postpone 1 minute',
         ),
-        actionButtons: [
-          NotificationActionButton(
-            key: 'POSTPONE',
-            label: 'postpone 1 minute',
-          ),
-        ]);
+      ],
+    );
   }
 
   ///Create a notification which will be repeated every [seconds], starting from the moment is created.
   static Future<void> createSecondsRepeatingNotification(seconds) async {
     final localTimeZone = await NotificationController.getLocalTimeZone();
     await NotificationController.newNotification(
-        content: NotificationContent(
-          id: createUniqueId(),
-          channelKey: CHANNEL_NAME,
-          title: 'Notification at every $seconds seconds',
-          body: 'This notification reschedule itself every $seconds seconds.',
-        ),
-        schedule: NotificationInterval(
-            interval: seconds, timeZone: localTimeZone, repeats: true));
+      content: NotificationContent(
+        id: createUniqueId(),
+        channelKey: CHANNEL_NAME,
+        title: 'Notification at every $seconds seconds',
+        body: 'This notification reschedule itself every $seconds seconds.',
+      ),
+      schedule: NotificationInterval(
+        interval: seconds,
+        timeZone: localTimeZone,
+        repeats: true,
+      ),
+    );
   }
 
   ///Create a notification which will be display at a specific moment in time
@@ -229,12 +230,13 @@ class ProfileNotificationController extends NotificationFeatureController {
         ),
       ],
       schedule: NotificationCalendar(
-          weekday: notificationSchedule.dayOfTheWeek,
-          hour: notificationSchedule.timeOfDay.hour,
-          minute: notificationSchedule.timeOfDay.minute,
-          second: 0,
-          millisecond: 0,
-          repeats: repeats),
+        weekday: notificationSchedule.dayOfTheWeek,
+        hour: notificationSchedule.timeOfDay.hour,
+        minute: notificationSchedule.timeOfDay.minute,
+        second: 0,
+        millisecond: 0,
+        repeats: repeats,
+      ),
     );
   }
 
@@ -242,34 +244,41 @@ class ProfileNotificationController extends NotificationFeatureController {
   static Future<void> createMinuteRepeatingNotification() async {
     final localTimeZone = await NotificationController.getLocalTimeZone();
     await NotificationController.newNotification(
-        content: NotificationContent(
-          id: createUniqueId(),
-          channelKey: CHANNEL_NAME,
-          title: 'Notification at exactly every single minute',
-          body:
-              'This notification was schedule to repeat at every single minute at clock.',
-        ),
-        schedule: NotificationCalendar(
-            second: 0, millisecond: 0, timeZone: localTimeZone, repeats: true));
+      content: NotificationContent(
+        id: createUniqueId(),
+        channelKey: CHANNEL_NAME,
+        title: 'Notification at exactly every single minute',
+        body:
+            'This notification was schedule to repeat at every single minute at clock.',
+      ),
+      schedule: NotificationCalendar(
+        second: 0,
+        millisecond: 0,
+        timeZone: localTimeZone,
+        repeats: true,
+      ),
+    );
   }
 
   ///Create a notification scheduled to repeat at every single occurrence of a specific moment in time
   static Future<void> createTargetRepeatingNotification() async {
     final localTimeZone = await NotificationController.getLocalTimeZone();
     await NotificationController.newNotification(
-        content: NotificationContent(
-          id: createUniqueId(),
-          channelKey: CHANNEL_NAME,
-          title: 'Notification every hour when it is 10 minutes and 30 seconds',
-          body:
-              'This notification was schedule to repeat at a specific moment in time.',
-        ),
-        schedule: NotificationCalendar(
-            minute: 10,
-            second: 30,
-            millisecond: 0,
-            timeZone: localTimeZone,
-            repeats: true));
+      content: NotificationContent(
+        id: createUniqueId(),
+        channelKey: CHANNEL_NAME,
+        title: 'Notification every hour when it is 10 minutes and 30 seconds',
+        body:
+            'This notification was schedule to repeat at a specific moment in time.',
+      ),
+      schedule: NotificationCalendar(
+        minute: 10,
+        second: 30,
+        millisecond: 0,
+        timeZone: localTimeZone,
+        repeats: true,
+      ),
+    );
   }
 
   static int createUniqueId() {

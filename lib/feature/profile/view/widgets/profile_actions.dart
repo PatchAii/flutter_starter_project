@@ -63,7 +63,8 @@ class ProfileActions extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             RouteApp.routemaster.push(
-                '/dialog?title=Kimi&subtitle=Raikkonen&description=AlfaRomeo Raicing ORLEN');
+              '/dialog?title=Kimi&subtitle=Raikkonen&description=AlfaRomeo Raicing ORLEN',
+            );
           },
           child: const Text('/dialog'),
         ),

@@ -41,11 +41,25 @@ void main() {
       'emits [PostsState.loaded] when fetch is added with a non empty list',
       setUp: () {
         when(() => repo.fetchPosts()).thenAnswer(
-          (_) => Future.value([
-            Post.fromJson(fixture('post.json')),
-            Post.fromJson(fixture('post.json')),
-            Post.fromJson(fixture('post.json'))
-          ]),
+          (_) => Future.value(
+            [
+              Post.fromJson(
+                fixture(
+                  'post.json',
+                ),
+              ),
+              Post.fromJson(
+                fixture(
+                  'post.json',
+                ),
+              ),
+              Post.fromJson(
+                fixture(
+                  'post.json',
+                ),
+              ),
+            ],
+          ),
         );
       },
       build: () => _getBloc(repo),
@@ -53,9 +67,21 @@ void main() {
       expect: () => [
         const PostsState.loading(),
         PostsState.loaded(posts: [
-          Post.fromJson(fixture('post.json')),
-          Post.fromJson(fixture('post.json')),
-          Post.fromJson(fixture('post.json'))
+          Post.fromJson(
+            fixture(
+              'post.json',
+            ),
+          ),
+          Post.fromJson(
+            fixture(
+              'post.json',
+            ),
+          ),
+          Post.fromJson(
+            fixture(
+              'post.json',
+            ),
+          ),
         ]),
       ],
     );
@@ -65,9 +91,21 @@ void main() {
       setUp: () {
         when(() => repo.fetchPostsByUserId('1')).thenAnswer(
           (_) => Future.value([
-            Post.fromJson(fixture('post.json')),
-            Post.fromJson(fixture('post.json')),
-            Post.fromJson(fixture('post.json'))
+            Post.fromJson(
+              fixture(
+                'post.json',
+              ),
+            ),
+            Post.fromJson(
+              fixture(
+                'post.json',
+              ),
+            ),
+            Post.fromJson(
+              fixture(
+                'post.json',
+              ),
+            ),
           ]),
         );
       },
@@ -76,9 +114,21 @@ void main() {
       expect: () => [
         const PostsState.loading(),
         PostsState.loaded(posts: [
-          Post.fromJson(fixture('post.json')),
-          Post.fromJson(fixture('post.json')),
-          Post.fromJson(fixture('post.json'))
+          Post.fromJson(
+            fixture(
+              'post.json',
+            ),
+          ),
+          Post.fromJson(
+            fixture(
+              'post.json',
+            ),
+          ),
+          Post.fromJson(
+            fixture(
+              'post.json',
+            ),
+          ),
         ]),
       ],
     );

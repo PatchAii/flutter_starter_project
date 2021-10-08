@@ -14,6 +14,14 @@ class AppScaffold extends StatefulWidget {
 }
 
 class _AppScaffoldState extends State<AppScaffold> {
+  bool extended = true;
+
+  void onExtendedSelect() {
+    setState(() {
+      extended = !extended;
+    });
+  }
+
   @override
   void initState() {
     NotificationController.isNotificationAllowedOrListen();
@@ -26,38 +34,12 @@ class _AppScaffoldState extends State<AppScaffold> {
     super.dispose();
   }
 
-  bool extended = true;
-
-  Future<void> _onIndexSelect(newIndex) async {
-    switch (newIndex) {
-      case 0:
-        RouteApp.routemaster.push('/pokedex');
-        break;
-      case 1:
-        RouteApp.routemaster.push('/profile');
-        break;
-      case 2:
-        RouteApp.routemaster.push('/posts');
-        break;
-      default:
-        RouteApp.routemaster.push('/');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final pageIndex = TabPage.of(context).controller.index;
 
     return WillPopScope(
-      onWillPop: () async {
-        final isHomePage = pageIndex != 0;
-        if (isHomePage) {
-          setState(() {
-            _onIndexSelect(0);
-          });
-        }
-        return !isHomePage;
-      },
+      onWillPop: _onWillPop,
       child: Scaffold(
         appBar: TopBar(
           label: 'patchai',
@@ -67,7 +49,7 @@ class _AppScaffoldState extends State<AppScaffold> {
               onPressed: () {
                 getIt<AppState>().logOut();
               },
-            )
+            ),
           ],
         ),
         body: Row(
@@ -98,22 +80,44 @@ class _AppScaffoldState extends State<AppScaffold> {
     );
   }
 
-  void onExtendedSelect() {
-    setState(() {
-      extended = !extended;
-    });
+  Future<bool> _onWillPop() async {
+    final pageIndex = TabPage.of(context).controller.index;
+
+    final isHomePage = pageIndex != 0;
+    if (isHomePage) {
+      setState(() {
+        _onIndexSelect(0);
+      });
+    }
+    return !isHomePage;
+  }
+
+  Future<void> _onIndexSelect(newIndex) async {
+    switch (newIndex) {
+      case 0:
+        RouteApp.routemaster.push('/pokedex');
+        break;
+      case 1:
+        RouteApp.routemaster.push('/profile');
+        break;
+      case 2:
+        RouteApp.routemaster.push('/posts');
+        break;
+      default:
+        RouteApp.routemaster.push('/');
+    }
   }
 }
 
 class NavigationBottomBar extends StatelessWidget {
-  const NavigationBottomBar({
-    Key? key,
-    required this.selectedIndex,
-    required this.onIndexSelect,
-  }) : super(key: key);
-
   final Function(int) onIndexSelect;
   final int selectedIndex;
+
+  const NavigationBottomBar({
+    required this.selectedIndex,
+    required this.onIndexSelect,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -139,16 +143,16 @@ class NavigationBottomBar extends StatelessWidget {
 }
 
 class NavigationSideBar extends StatelessWidget {
-  const NavigationSideBar({
-    Key? key,
-    required this.selectedIndex,
-    required this.onIndexSelect,
-    required this.extended,
-  }) : super(key: key);
-
   final Function(int) onIndexSelect;
   final bool extended;
   final int selectedIndex;
+
+  const NavigationSideBar({
+    required this.selectedIndex,
+    required this.onIndexSelect,
+    required this.extended,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

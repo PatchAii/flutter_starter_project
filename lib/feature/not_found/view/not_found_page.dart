@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/route/route.dart';
 
 class NotFoundPage extends StatelessWidget {
-  const NotFoundPage({
-    Key? key,
-    required this.route,
-  }) : super(key: key);
-
   final String route;
+
+  const NotFoundPage({
+    required this.route,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class NotFoundPage extends StatelessWidget {
                 RouteApp.routemaster.push('/pokedex');
               },
               child: const Text('Home'),
-            )
+            ),
           ],
         ),
       ),

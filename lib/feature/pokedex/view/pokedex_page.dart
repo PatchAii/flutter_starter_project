@@ -36,12 +36,12 @@ class PokedexPage extends StatelessWidget {
 }
 
 class PokedexList extends StatelessWidget {
-  const PokedexList({
-    Key? key,
-    required this.pokedex,
-  }) : super(key: key);
-
   final List<GetPokedex$Query$Pokemon?>? pokedex;
+
+  const PokedexList({
+    required this.pokedex,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class PokedexList extends StatelessWidget {
               },
               childCount: pokedex!.length,
             ),
-          )
+          ),
       ],
     );
   }
@@ -107,7 +107,7 @@ class PokedexError extends StatelessWidget {
                   );
             },
             child: const Text('Retry'),
-          )
+          ),
         ],
       ),
     );
@@ -115,11 +115,13 @@ class PokedexError extends StatelessWidget {
 }
 
 class PokemonCardGrid extends StatelessWidget {
-  const PokemonCardGrid({
-    Key? key,
-    required this.pokemon,
-  }) : super(key: key);
   final GetPokedex$Query$Pokemon pokemon;
+
+  const PokemonCardGrid({
+    required this.pokemon,
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -194,11 +196,13 @@ class PokemonCardGrid extends StatelessWidget {
 }
 
 class PokemonCardList extends StatelessWidget {
-  const PokemonCardList({
-    Key? key,
-    required this.pokemon,
-  }) : super(key: key);
   final GetPokedex$Query$Pokemon pokemon;
+
+  const PokemonCardList({
+    required this.pokemon,
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(

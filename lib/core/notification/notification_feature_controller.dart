@@ -10,11 +10,13 @@ abstract class NotificationFeatureController {
 
   Future<void> dismissedStream({required ReceivedAction receivedAction});
 
-  Future<void> createdStream(
-      {required ReceivedNotification receivedNotification});
+  Future<void> createdStream({
+    required ReceivedNotification receivedNotification,
+  });
 
-  Future<void> displayedStream(
-      {required ReceivedNotification receivedNotification});
+  Future<void> displayedStream({
+    required ReceivedNotification receivedNotification,
+  });
 
   Future<void> actionStream({required ReceivedAction receivedAction});
 

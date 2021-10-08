@@ -23,8 +23,10 @@ class ProfileError extends StatelessWidget {
                     const ProfileEvent.fetch(),
                   );
             },
-            child: const Text('Retry'),
-          )
+            child: const Text(
+              'Retry',
+            ),
+          ),
         ],
       ),
     );
