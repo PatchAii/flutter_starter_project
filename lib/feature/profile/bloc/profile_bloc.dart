@@ -12,6 +12,8 @@ part 'profile_state.dart';
 
 @injectable
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
+  final ProfileRepo repo;
+
   ProfileBloc({
     required this.repo,
   }) : super(const ProfileState.loading()) {
@@ -21,8 +23,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
     });
   }
-
-  final ProfileRepo repo;
 
   Future _fetch(_Fetch event, Emitter<ProfileState> emit) async {
     try {

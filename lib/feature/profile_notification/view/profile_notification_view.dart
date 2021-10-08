@@ -3,12 +3,12 @@ import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/feature/profile_notification/repo/profile_notification_controller.dart';
 
 class NotificationPage extends StatefulWidget {
+  final bool subPage;
+
   const NotificationPage({
     Key? key,
     this.subPage = false,
   }) : super(key: key);
-
-  final bool subPage;
 
   @override
   State<NotificationPage> createState() => _NotificationPageState();
@@ -251,46 +251,52 @@ class NotificationContent extends StatelessWidget {
     int? selectedDay;
 
     await showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            key: const Key('pick_schedule_dialog'),
-            title: const Text(
-              'I want to be reminded every:',
-              textAlign: TextAlign.center,
-            ),
-            content: Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 3,
-              children: [
-                for (int index = 0; index < weekdays.length; index++)
-                  ElevatedButton(
-                    onPressed: () {
-                      selectedDay = index + 1;
-                      Navigator.pop(context);
-                    },
-                    child: Text(weekdays[index]),
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          key: const Key('pick_schedule_dialog'),
+          title: const Text(
+            'I want to be reminded every:',
+            textAlign: TextAlign.center,
+          ),
+          content: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 3,
+            children: [
+              for (int index = 0; index < weekdays.length; index++)
+                ElevatedButton(
+                  onPressed: () {
+                    selectedDay = index + 1;
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    weekdays[index],
                   ),
-              ],
-            ),
-          );
-        });
+                ),
+            ],
+          ),
+        );
+      },
+    );
 
     if (selectedDay != null) {
       timeOfDay = await showTimePicker(
-          context: context,
-          initialTime: TimeOfDay.fromDateTime(
-            now.add(
-              const Duration(minutes: 1),
-            ),
+        context: context,
+        initialTime: TimeOfDay.fromDateTime(
+          now.add(
+            const Duration(minutes: 1),
           ),
-          builder: (BuildContext context, Widget? child) {
-            return child!;
-          });
+        ),
+        builder: (BuildContext context, Widget? child) {
+          return child!;
+        },
+      );
 
       if (timeOfDay != null) {
         return NotificationWeekAndTime(
-            dayOfTheWeek: selectedDay!, timeOfDay: timeOfDay);
+          dayOfTheWeek: selectedDay!,
+          timeOfDay: timeOfDay,
+        );
       }
     }
     return null;
@@ -302,35 +308,38 @@ class NotificationContent extends StatelessWidget {
     int? selectedTime;
 
     await showDialog(
-        context: context,
-        builder: (context) {
-          final times = <int>[
-            60,
-            120,
-            600,
-          ];
-          return AlertDialog(
-            key: const Key('pick_seconds_dialog'),
-            title: const Text(
-              'I want the notification to repeat every:',
-              textAlign: TextAlign.center,
-            ),
-            content: Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 3,
-              children: [
-                for (int index = 0; index < times.length; index++)
-                  ElevatedButton(
-                    onPressed: () {
-                      selectedTime = times[index];
-                      Navigator.pop(context);
-                    },
-                    child: Text('${times[index] / 60} min.'),
+      context: context,
+      builder: (context) {
+        final times = <int>[
+          60,
+          120,
+          600,
+        ];
+        return AlertDialog(
+          key: const Key('pick_seconds_dialog'),
+          title: const Text(
+            'I want the notification to repeat every:',
+            textAlign: TextAlign.center,
+          ),
+          content: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 3,
+            children: [
+              for (int index = 0; index < times.length; index++)
+                ElevatedButton(
+                  onPressed: () {
+                    selectedTime = times[index];
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    '${times[index] / 60} min.',
                   ),
-              ],
-            ),
-          );
-        });
+                ),
+            ],
+          ),
+        );
+      },
+    );
 
     return selectedTime;
   }

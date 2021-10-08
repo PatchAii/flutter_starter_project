@@ -11,6 +11,8 @@ part 'pokedex_state.dart';
 
 @injectable
 class PokedexBloc extends Bloc<PokedexEvent, PokedexState> {
+  final PokedexRepo repo;
+
   PokedexBloc({
     required this.repo,
   }) : super(const PokedexState.loading()) {
@@ -20,8 +22,6 @@ class PokedexBloc extends Bloc<PokedexEvent, PokedexState> {
       );
     });
   }
-
-  final PokedexRepo repo;
 
   Future _fetch(_Fetch event, Emitter<PokedexState> emit) async {
     try {

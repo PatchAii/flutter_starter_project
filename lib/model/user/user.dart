@@ -21,11 +21,7 @@ class User with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   bool onBoardRequired() {
-    if (name != null && email != null) {
-      return false;
-    } else {
-      return true;
-    }
+    return name != null && email != null ? false : true;
   }
 }
 

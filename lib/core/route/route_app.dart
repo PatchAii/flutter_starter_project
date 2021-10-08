@@ -19,26 +19,27 @@ class RouteApp {
     },
     routes: {
       '/': (_) {
-        if (onBoardingRequired()) {
-          return const SwipableBackPage(
-            name: 'Onboarding',
-            child: OnboardingPage(),
-          );
-        } else {
-          return TabPage(
-            pageBuilder: (child) => MaterialPage(
-              child: child,
-            ),
-            child: const AppScaffold(),
-            paths: ['/pokedex', '/profile', '/posts'],
-          );
-        }
+        return onBoardingRequired()
+            ? const SwipableBackPage(
+                name: 'Onboarding',
+                child: OnboardingPage(),
+              )
+            : TabPage(
+                pageBuilder: (child) => MaterialPage(child: child),
+                child: const AppScaffold(),
+                paths: [
+                  '/pokedex',
+                  '/profile',
+                  '/posts',
+                ],
+              );
       },
       '/dialog': (route) => DialogPage(
             child: GenericDialog(
-                title: route.queryParameters['title'] ?? '',
-                subtitle: route.queryParameters['subtitle'],
-                description: route.queryParameters['description']),
+              title: route.queryParameters['title'] ?? '',
+              subtitle: route.queryParameters['subtitle'],
+              description: route.queryParameters['description'],
+            ),
           ),
       '/notification-permission': (route) => const DialogPage(
             child: NotificationPermissionDialog(),
@@ -126,7 +127,6 @@ class RouteApp {
   static const routeInformationParser = RoutemasterParser();
   static final routemaster = RoutemasterDelegate(
     observers: [
-      RouteAppObsever(),
       RouteAppTitleObserver(),
     ],
     routesBuilder: (context) {
@@ -146,18 +146,6 @@ class RouteApp {
 
   static void initRoutes() {
     Routemaster.setPathUrlStrategy();
-  }
-}
-
-class RouteAppObsever extends RoutemasterObserver {
-  @override
-  void didChangeRoute(RouteData routeData, Page page) {
-    /* Dante.i('New route: ${routeData.path}'); */
-  }
-
-  @override
-  void didPop(Route route, Route? previousRoute) {
-    /*  Dante.i('Popped a route: ${previousRoute}'); */
   }
 }
 

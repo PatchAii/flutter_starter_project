@@ -20,7 +20,8 @@ class NotificationController {
   static late final List<NotificationFeatureController> controllers;
 
   static Future<void> init(
-      List<NotificationFeatureController> controllersList) async {
+    List<NotificationFeatureController> controllersList,
+  ) async {
     controllers = controllersList;
     await _isWeb(
       () async {
@@ -117,14 +118,6 @@ class NotificationController {
     );
   }
 
-  static Future<void> _badgeControl(bool badge) async {
-    if (Platform.isIOS && badge) {
-      await AwesomeNotifications().getGlobalBadgeCounter().then(
-            (value) => AwesomeNotifications().setGlobalBadgeCounter(value - 1),
-          );
-    }
-  }
-
   static Future<void> handleRemoteNotification({
     required RemoteMessage message,
   }) async {
@@ -168,20 +161,6 @@ class NotificationController {
     );
   }
 
-  static Future<void> _isWeb(
-    Function function, {
-    bool showError = false,
-  }) async {
-    if (!kIsWeb) {
-      await function.call();
-    } else {
-      if (showError) {
-        SnackBarController.showSnackbar(
-            'Noification is not supported on web yet...');
-      }
-    }
-  }
-
   static Future<void> cancelScheduledNotifications() async {
     await AwesomeNotifications().cancelAllSchedules();
     SnackBarController.showSnackbar(
@@ -202,5 +181,28 @@ class NotificationController {
 
   static Stream<String?> getFCMToken() {
     return Stream.fromFuture(FirebaseMessaging.instance.getToken());
+  }
+
+  static Future<void> _isWeb(
+    Function function, {
+    bool showError = false,
+  }) async {
+    if (!kIsWeb) {
+      await function.call();
+    } else {
+      if (showError) {
+        SnackBarController.showSnackbar(
+          'Noification is not supported on web yet...',
+        );
+      }
+    }
+  }
+
+  static Future<void> _badgeControl(bool badge) async {
+    if (Platform.isIOS && badge) {
+      await AwesomeNotifications().getGlobalBadgeCounter().then(
+            (value) => AwesomeNotifications().setGlobalBadgeCounter(value - 1),
+          );
+    }
   }
 }

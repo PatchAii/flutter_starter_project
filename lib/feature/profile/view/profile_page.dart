@@ -20,9 +20,10 @@ class ProfilePage extends StatelessWidget {
         body: BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
             return state.map(
-                loading: (state) => const AppLoading(),
-                loaded: (state) => ProfileContent(user: state.user),
-                error: (state) => const ProfileError());
+              loading: (state) => const AppLoading(),
+              loaded: (state) => ProfileContent(user: state.user),
+              error: (state) => const ProfileError(),
+            );
           },
         ),
       ),

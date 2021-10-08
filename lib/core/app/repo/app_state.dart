@@ -24,7 +24,9 @@ class AppState extends ChangeNotifier {
   }
 
   User? get user {
-    if (_user != null) return _user;
+    if (_user != null) {
+      return _user;
+    }
 
     final userMap = getIt<SharedPreferences>().getString(SHARED_PREFS_USER);
     if (userMap != null) {

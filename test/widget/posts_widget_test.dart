@@ -37,9 +37,21 @@ Future<void> main() async {
         final builder = getDefaultBuilder(
           PostsList(
             posts: [
-              Post.fromJson(fixture('post.json')),
-              Post.fromJson(fixture('post.json')),
-              Post.fromJson(fixture('post.json'))
+              Post.fromJson(
+                fixture(
+                  'post.json',
+                ),
+              ),
+              Post.fromJson(
+                fixture(
+                  'post.json',
+                ),
+              ),
+              Post.fromJson(
+                fixture(
+                  'post.json',
+                ),
+              ),
             ],
           ),
         );

@@ -33,7 +33,13 @@ void main() {
       act: (bloc) => bloc.add(const ProfileEvent.fetch()),
       expect: () => [
         const ProfileState.loading(),
-        ProfileState.loaded(user: User.fromJson(fixture('user.json')))
+        ProfileState.loaded(
+          user: User.fromJson(
+            fixture(
+              'user.json',
+            ),
+          ),
+        ),
       ],
     );
 

@@ -6,12 +6,12 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 class RestClient {
-  RestClient._();
-
   static Client? httpClient;
 
   @visibleForTesting
   static bool testing = false;
+
+  RestClient._();
 
   static Future<http.Response> post({
     required String api,
@@ -66,7 +66,9 @@ class RestClient {
   }
 
   static Future<String?> _initClient(String? endpoint) async {
-    if (!testing) await dotenv.load(fileName: 'dotenv');
+    if (!testing) {
+      await dotenv.load(fileName: 'dotenv');
+    }
 
     httpClient ??= http.Client();
     return endpoint ?? dotenv.env['ENDPOINT'];
