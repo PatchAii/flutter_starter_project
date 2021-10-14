@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 class PokedexRepo {
   Future<List<GetPokedex$Query$Pokemon?>?> getPokedex() async {
     final res = await GraphqlClient.exec(query: GetPokedexQuery());
+
     return res.data!.pokemons;
   }
 }

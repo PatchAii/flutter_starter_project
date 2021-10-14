@@ -16,24 +16,6 @@ class AppScaffold extends StatefulWidget {
 class _AppScaffoldState extends State<AppScaffold> {
   bool extended = true;
 
-  void onExtendedSelect() {
-    setState(() {
-      extended = !extended;
-    });
-  }
-
-  @override
-  void initState() {
-    NotificationController.isNotificationAllowedOrListen();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    NotificationController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final pageIndex = TabPage.of(context).controller.index;
@@ -80,16 +62,22 @@ class _AppScaffoldState extends State<AppScaffold> {
     );
   }
 
-  Future<bool> _onWillPop() async {
-    final pageIndex = TabPage.of(context).controller.index;
+  @override
+  void dispose() {
+    NotificationController.dispose();
+    super.dispose();
+  }
 
-    final isHomePage = pageIndex != 0;
-    if (isHomePage) {
-      setState(() {
-        _onIndexSelect(0);
-      });
-    }
-    return !isHomePage;
+  @override
+  void initState() {
+    NotificationController.isNotificationAllowedOrListen();
+    super.initState();
+  }
+
+  void onExtendedSelect() {
+    setState(() {
+      extended = !extended;
+    });
   }
 
   Future<void> _onIndexSelect(newIndex) async {
@@ -107,17 +95,30 @@ class _AppScaffoldState extends State<AppScaffold> {
         RouteApp.routemaster.push('/');
     }
   }
+
+  Future<bool> _onWillPop() async {
+    final pageIndex = TabPage.of(context).controller.index;
+
+    final isHomePage = pageIndex != 0;
+    if (isHomePage) {
+      setState(() {
+        _onIndexSelect(0);
+      });
+    }
+
+    return !isHomePage;
+  }
 }
 
 class NavigationBottomBar extends StatelessWidget {
-  final Function(int) onIndexSelect;
-  final int selectedIndex;
-
   const NavigationBottomBar({
     required this.selectedIndex,
     required this.onIndexSelect,
     Key? key,
   }) : super(key: key);
+
+  final Function(int) onIndexSelect;
+  final int selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -143,16 +144,16 @@ class NavigationBottomBar extends StatelessWidget {
 }
 
 class NavigationSideBar extends StatelessWidget {
-  final Function(int) onIndexSelect;
-  final bool extended;
-  final int selectedIndex;
-
   const NavigationSideBar({
     required this.selectedIndex,
     required this.onIndexSelect,
     required this.extended,
     Key? key,
   }) : super(key: key);
+
+  final bool extended;
+  final Function(int) onIndexSelect;
+  final int selectedIndex;
 
   @override
   Widget build(BuildContext context) {

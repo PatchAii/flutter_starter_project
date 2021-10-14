@@ -12,6 +12,7 @@ class ProfileRepo {
       endpoint: 'https://jsonplaceholder.typicode.com/',
     );
     final user = User.fromJson(jsonDecode(res.body));
+
     return user;
   }
 }

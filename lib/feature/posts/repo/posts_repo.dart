@@ -6,6 +6,17 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class PostsRepo {
+  Future<Post> fetchPost(int postId) async {
+    final res = await RestClient.get(
+      api: 'posts/$postId',
+      endpoint: 'https://jsonplaceholder.typicode.com/',
+    );
+
+    final post = Post.fromJson(jsonDecode(res.body));
+
+    return post;
+  }
+
   Future<List<Post>> fetchPosts() async {
     final res = await RestClient.get(
       api: 'posts',
@@ -18,6 +29,7 @@ class PostsRepo {
         },
       ),
     );
+
     return posts;
   }
 
@@ -33,16 +45,7 @@ class PostsRepo {
         },
       ),
     );
+
     return posts;
-  }
-
-  Future<Post> fetchPost(int postId) async {
-    final res = await RestClient.get(
-      api: 'posts/$postId',
-      endpoint: 'https://jsonplaceholder.typicode.com/',
-    );
-
-    final post = Post.fromJson(jsonDecode(res.body));
-    return post;
   }
 }

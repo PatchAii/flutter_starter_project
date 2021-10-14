@@ -12,8 +12,6 @@ part 'posts_state.dart';
 
 @injectable
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
-  final PostsRepo repo;
-
   PostsBloc({
     required this.repo,
   }) : super(const PostsState.loading()) {
@@ -24,6 +22,8 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       );
     });
   }
+
+  final PostsRepo repo;
 
   Future _fetch(_Fetch event, Emitter<PostsState> emit) async {
     try {

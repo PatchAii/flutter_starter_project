@@ -4,12 +4,12 @@ import 'package:flutter_starter_project/feature/profile/view/widgets/profile_dat
 import 'package:flutter_starter_project/model/model.dart';
 
 class ProfileContent extends StatelessWidget {
-  final User user;
-
   const ProfileContent({
     required this.user,
     Key? key,
   }) : super(key: key);
+
+  final User user;
 
   @override
   Widget build(BuildContext context) {

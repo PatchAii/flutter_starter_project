@@ -4,12 +4,12 @@ import 'package:flutter_starter_project/feature/common/top_bar.dart';
 import 'package:flutter_starter_project/utils/utils.dart';
 
 class SettingsPage extends StatelessWidget {
-  final bool subPage;
-
   const SettingsPage({
     Key? key,
     this.subPage = false,
   }) : super(key: key);
+
+  final bool subPage;
 
   @override
   Widget build(BuildContext context) {

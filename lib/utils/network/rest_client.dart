@@ -6,12 +6,27 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 class RestClient {
-  static Client? httpClient;
+  RestClient._();
 
+  static Client? httpClient;
   @visibleForTesting
   static bool testing = false;
 
-  RestClient._();
+  static Future<http.Response> get({
+    required String api,
+    String? endpoint,
+  }) async {
+    final e = await _initClient(endpoint);
+
+    final headers = <String, String>{
+      'Content-Type': 'application/json',
+    };
+
+    return httpClient!.get(
+      Uri.parse('$e$api'),
+      headers: headers,
+    );
+  }
 
   static Future<http.Response> post({
     required String api,
@@ -28,22 +43,6 @@ class RestClient {
       Uri.parse('$e$api'),
       headers: headers,
       body: jsonEncode(body),
-    );
-  }
-
-  static Future<http.Response> get({
-    required String api,
-    String? endpoint,
-  }) async {
-    final e = await _initClient(endpoint);
-
-    final headers = <String, String>{
-      'Content-Type': 'application/json',
-    };
-
-    return httpClient!.get(
-      Uri.parse('$e$api'),
-      headers: headers,
     );
   }
 
@@ -71,6 +70,7 @@ class RestClient {
     }
 
     httpClient ??= http.Client();
+
     return endpoint ?? dotenv.env['ENDPOINT'];
   }
 }
