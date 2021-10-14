@@ -3,12 +3,12 @@ import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/feature/profile_notification/repo/profile_notification_controller.dart';
 
 class NotificationPage extends StatefulWidget {
-  final bool subPage;
-
   const NotificationPage({
     Key? key,
     this.subPage = false,
   }) : super(key: key);
+
+  final bool subPage;
 
   @override
   State<NotificationPage> createState() => _NotificationPageState();
@@ -16,6 +16,16 @@ class NotificationPage extends StatefulWidget {
 
 class _NotificationPageState extends State<NotificationPage> {
   var token = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: widget.subPage ? null : AppBar(),
+      body: NotificationContent(
+        token: token,
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -28,25 +38,15 @@ class _NotificationPageState extends State<NotificationPage> {
     );
     super.initState();
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: widget.subPage ? null : AppBar(),
-      body: NotificationContent(
-        token: token,
-      ),
-    );
-  }
 }
 
 class NotificationContent extends StatelessWidget {
-  final token;
-
   const NotificationContent({
     Key? key,
     this.token,
   }) : super(key: key);
+
+  final token;
 
   @override
   Widget build(BuildContext context) {
@@ -299,6 +299,7 @@ class NotificationContent extends StatelessWidget {
         );
       }
     }
+
     return null;
   }
 
@@ -315,6 +316,7 @@ class NotificationContent extends StatelessWidget {
           120,
           600,
         ];
+
         return AlertDialog(
           key: const Key('pick_seconds_dialog'),
           title: const Text(

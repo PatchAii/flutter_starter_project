@@ -34,3 +34,6 @@ icon-update:
 
 splash-update:
 	@flutter pub run flutter_native_splash:create --path=icon-app-$(ENV).yaml
+
+check-unused-files:
+	@flutter pub run dart_code_metrics:metrics check-unused-files lib

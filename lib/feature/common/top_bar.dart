@@ -5,18 +5,18 @@ import 'package:layout/layout.dart';
 import 'package:layout/src/layout.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
-  final List<Widget>? actions;
-  final String? label;
-
-  @override
-  final Size preferredSize;
-
   const TopBar({
     Key? key,
     this.actions,
     this.label,
   })  : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
+
+  final List<Widget>? actions;
+  final String? label;
+
+  @override
+  final Size preferredSize;
 
   @override
   _TopBarState createState() => _TopBarState();
@@ -45,13 +45,13 @@ class _TopBarState extends State<TopBar> {
 }
 
 class CircleBlurPainter extends CustomPainter {
-  final double blurSigma;
-  final Color color;
-
   const CircleBlurPainter({
     required this.color,
     required this.blurSigma,
   });
+
+  final double blurSigma;
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {

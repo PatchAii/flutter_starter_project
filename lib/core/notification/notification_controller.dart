@@ -19,6 +19,48 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 class NotificationController {
   static late final List<NotificationFeatureController> controllers;
 
+  static Future<void> cancelScheduledNotifications() async {
+    await AwesomeNotifications().cancelAllSchedules();
+    SnackBarController.showSnackbar(
+      'All scheduled notifications have been cancelled',
+    );
+  }
+
+  static void dispose() {
+    _isWeb(() {
+      AwesomeNotifications().actionSink.close();
+      AwesomeNotifications().createdSink.close();
+      AwesomeNotifications().dismissedSink.close();
+      AwesomeNotifications().displayedSink.close();
+    });
+  }
+
+  static Stream<String?> getFCMToken() {
+    return Stream.fromFuture(FirebaseMessaging.instance.getToken());
+  }
+
+  static Future<String> getLocalTimeZone() async {
+    return AwesomeNotifications().getLocalTimeZoneIdentifier();
+  }
+
+  static Future<void> handleRemoteNotification({
+    required RemoteMessage message,
+  }) async {
+    if (message.notification != null) {
+      return;
+    } else {
+      for (var controller in controllers) {
+        if (message.data['channelKey'] == controller.getChannelKey()) {
+          await controller.handleRemoteNotification(
+            remoteMessage: message,
+          );
+
+          return;
+        }
+      }
+    }
+  }
+
   static Future<void> init(
     List<NotificationFeatureController> controllersList,
   ) async {
@@ -66,6 +108,7 @@ class NotificationController {
               controller.dismissedStream(
                 receivedAction: dismissedNotification,
               );
+
               return;
             }
           }
@@ -77,6 +120,7 @@ class NotificationController {
               controller.createdStream(
                 receivedNotification: createdNotification,
               );
+
               return;
             }
           }
@@ -89,6 +133,7 @@ class NotificationController {
               controller.displayedStream(
                 receivedNotification: displayedNotification,
               );
+
               return;
             }
           }
@@ -103,6 +148,7 @@ class NotificationController {
                 await controller.actionStream(
                   receivedAction: receivedNotification,
                 );
+
                 return;
               }
             }
@@ -116,32 +162,6 @@ class NotificationController {
         );
       },
     );
-  }
-
-  static Future<void> handleRemoteNotification({
-    required RemoteMessage message,
-  }) async {
-    if (message.notification != null) {
-      return;
-    } else {
-      for (var controller in controllers) {
-        if (message.data['channelKey'] == controller.getChannelKey()) {
-          await controller.handleRemoteNotification(
-            remoteMessage: message,
-          );
-          return;
-        }
-      }
-    }
-  }
-
-  static void dispose() {
-    _isWeb(() {
-      AwesomeNotifications().actionSink.close();
-      AwesomeNotifications().createdSink.close();
-      AwesomeNotifications().dismissedSink.close();
-      AwesomeNotifications().displayedSink.close();
-    });
   }
 
   static Future<void> newNotification({
@@ -161,13 +181,6 @@ class NotificationController {
     );
   }
 
-  static Future<void> cancelScheduledNotifications() async {
-    await AwesomeNotifications().cancelAllSchedules();
-    SnackBarController.showSnackbar(
-      'All scheduled notifications have been cancelled',
-    );
-  }
-
   static Future<void> resetBadgeCount() async {
     await AwesomeNotifications().resetGlobalBadge();
     SnackBarController.showSnackbar(
@@ -175,12 +188,12 @@ class NotificationController {
     );
   }
 
-  static Future<String> getLocalTimeZone() async {
-    return AwesomeNotifications().getLocalTimeZoneIdentifier();
-  }
-
-  static Stream<String?> getFCMToken() {
-    return Stream.fromFuture(FirebaseMessaging.instance.getToken());
+  static Future<void> _badgeControl(bool badge) async {
+    if (Platform.isIOS && badge) {
+      await AwesomeNotifications().getGlobalBadgeCounter().then(
+            (value) => AwesomeNotifications().setGlobalBadgeCounter(value - 1),
+          );
+    }
   }
 
   static Future<void> _isWeb(
@@ -195,14 +208,6 @@ class NotificationController {
           'Noification is not supported on web yet...',
         );
       }
-    }
-  }
-
-  static Future<void> _badgeControl(bool badge) async {
-    if (Platform.isIOS && badge) {
-      await AwesomeNotifications().getGlobalBadgeCounter().then(
-            (value) => AwesomeNotifications().setGlobalBadgeCounter(value - 1),
-          );
     }
   }
 }

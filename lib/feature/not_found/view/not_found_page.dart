@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_starter_project/core/route/route.dart';
 
 class NotFoundPage extends StatelessWidget {
-  final String route;
-
   const NotFoundPage({
     required this.route,
     Key? key,
   }) : super(key: key);
+
+  final String route;
 
   @override
   Widget build(BuildContext context) {

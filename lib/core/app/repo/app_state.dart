@@ -16,10 +16,26 @@ class AppState extends ChangeNotifier {
   LoggedState _loggedInState = LoggedState.loggedOut;
   User? _user;
 
+  bool get caruselHasBeenShown =>
+      getIt<SharedPreferences>().getBool(SHARED_PREFS_CARUSELHASBEENSHOWN) ??
+      false;
+
+  void logIn() {
+    _loggedInState = LoggedState.loggedIn;
+    getIt<SharedPreferences>().setBool(SHARED_PREFS_ISLOGGEDIN, true);
+    getIt<SharedPreferences>().setString(
+      SHARED_PREFS_USER,
+      jsonEncode(const User(id: 1).toJson()),
+    );
+
+    notifyListeners();
+  }
+
   LoggedState get loggedInState {
     final isLoggedIn =
         getIt<SharedPreferences>().getBool(SHARED_PREFS_ISLOGGEDIN) ?? false;
     _loggedInState = isLoggedIn ? LoggedState.loggedIn : LoggedState.loggedOut;
+
     return _loggedInState;
   }
 
@@ -36,9 +52,18 @@ class AppState extends ChangeNotifier {
     return _user;
   }
 
-  bool get caruselHasBeenShown =>
-      getIt<SharedPreferences>().getBool(SHARED_PREFS_CARUSELHASBEENSHOWN) ??
-      false;
+  Future<void> logOut() async {
+    _loggedInState = LoggedState.loggedOut;
+    _user = null;
+
+    await getIt<SharedPreferences>().setBool(SHARED_PREFS_ISLOGGEDIN, false);
+    await getIt<SharedPreferences>().remove(SHARED_PREFS_USER);
+    await getIt<SharedPreferences>().remove(SHARED_PREFS_CARUSELHASBEENSHOWN);
+
+    NotificationController.dispose();
+
+    notifyListeners();
+  }
 
   Future<void> setCaruselHasBeenShown(bool value) async {
     await getIt<SharedPreferences>()
@@ -58,30 +83,6 @@ class AppState extends ChangeNotifier {
         _user!.toJson(),
       ),
     );
-    notifyListeners();
-  }
-
-  void logIn() {
-    _loggedInState = LoggedState.loggedIn;
-    getIt<SharedPreferences>().setBool(SHARED_PREFS_ISLOGGEDIN, true);
-    getIt<SharedPreferences>().setString(
-      SHARED_PREFS_USER,
-      jsonEncode(const User(id: 1).toJson()),
-    );
-
-    notifyListeners();
-  }
-
-  Future<void> logOut() async {
-    _loggedInState = LoggedState.loggedOut;
-    _user = null;
-
-    await getIt<SharedPreferences>().setBool(SHARED_PREFS_ISLOGGEDIN, false);
-    await getIt<SharedPreferences>().remove(SHARED_PREFS_USER);
-    await getIt<SharedPreferences>().remove(SHARED_PREFS_CARUSELHASBEENSHOWN);
-
-    NotificationController.dispose();
-
     notifyListeners();
   }
 }

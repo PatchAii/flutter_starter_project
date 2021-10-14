@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class AnimationPage extends Page {
-  final Widget child;
-
   const AnimationPage({required this.child});
+
+  final Widget child;
 
   @override
   Route createRoute(BuildContext context) {
@@ -24,9 +24,9 @@ class AnimationPage extends Page {
 }
 
 class NoAnimationPage extends Page {
-  final Widget child;
-
   const NoAnimationPage({required this.child});
+
+  final Widget child;
 
   @override
   Route createRoute(BuildContext context) {
@@ -42,13 +42,13 @@ class NoAnimationPage extends Page {
 }
 
 class BottomSheetPage extends Page {
-  final Widget child;
-  final double? heightPerc;
-
   const BottomSheetPage({
     required this.child,
     this.heightPerc,
   });
+
+  final Widget child;
+  final double? heightPerc;
 
   @override
   Route<void> createRoute(BuildContext context) {
@@ -90,14 +90,14 @@ class BottomSheetPage extends Page {
 }
 
 class SwipableBackPage extends Page {
-  final Widget child;
-
   const SwipableBackPage({
     required this.child,
     String? name,
   }) : super(
           name: name,
         );
+
+  final Widget child;
 
   @override
   Route createRoute(BuildContext context) {
@@ -111,22 +111,15 @@ class SwipableBackPage extends Page {
 }
 
 class IosPageRouteBuilder<T> extends PageRoute<T> {
-  final PageTransitionsBuilder matchingBuilder =
-      const CupertinoPageTransitionsBuilder();
-
-  final RoutePageBuilder pageBuilder;
-
   IosPageRouteBuilder(
     RouteSettings? settings, {
     required this.pageBuilder,
   }) : super(settings: settings);
-  @override
-  bool get maintainState => true;
 
-  @override
-  Duration get transitionDuration => const Duration(
-        milliseconds: 300,
-      );
+  final PageTransitionsBuilder matchingBuilder =
+      const CupertinoPageTransitionsBuilder();
+
+  final RoutePageBuilder pageBuilder;
 
   @override
   Color get barrierColor => Colors.transparent;
@@ -160,14 +153,22 @@ class IosPageRouteBuilder<T> extends PageRoute<T> {
       ),
     );
   }
+
+  @override
+  bool get maintainState => true;
+
+  @override
+  Duration get transitionDuration => const Duration(
+        milliseconds: 300,
+      );
 }
 
 class DialogPage extends Page<void> {
-  final Widget child;
-
   const DialogPage({
     required this.child,
   });
+
+  final Widget child;
 
   @override
   Route<void> createRoute(BuildContext context) {

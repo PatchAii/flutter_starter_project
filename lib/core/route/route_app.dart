@@ -26,6 +26,7 @@ class RouteApp {
               )
             : TabPage(
                 pageBuilder: (child) => MaterialPage(child: child),
+                backBehavior: TabBackBehavior.history,
                 child: const AppScaffold(),
                 paths: [
                   '/pokedex',
@@ -141,12 +142,12 @@ class RouteApp {
 
   static bool caruselHasBeenShown() => getIt<AppState>().caruselHasBeenShown;
 
-  static bool onBoardingRequired() =>
-      getIt<AppState>().user?.onBoardRequired() ?? false;
-
   static void initRoutes() {
     Routemaster.setPathUrlStrategy();
   }
+
+  static bool onBoardingRequired() =>
+      getIt<AppState>().user?.onBoardRequired() ?? false;
 }
 
 class RouteAppTitleObserver extends RoutemasterObserver {

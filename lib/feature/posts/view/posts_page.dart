@@ -6,12 +6,12 @@ import 'package:flutter_starter_project/feature/posts/bloc/posts_bloc.dart';
 import 'package:flutter_starter_project/model/model.dart';
 
 class PostsPage extends StatelessWidget {
-  final String? userId;
-
   const PostsPage({
     Key? key,
     this.userId,
   }) : super(key: key);
+
+  final String? userId;
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +40,12 @@ class PostsPage extends StatelessWidget {
 }
 
 class PostsList extends StatelessWidget {
-  final List<Post> posts;
-
   const PostsList({
     required this.posts,
     Key? key,
   }) : super(key: key);
+
+  final List<Post> posts;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +66,7 @@ class PostsList extends StatelessWidget {
           delegate: SliverChildBuilderDelegate(
             (context, index) {
               final post = posts[index];
+
               return PostCard(post: post);
             },
             childCount: posts.length,
@@ -77,12 +78,12 @@ class PostsList extends StatelessWidget {
 }
 
 class PostCard extends StatelessWidget {
-  final Post post;
-
   const PostCard({
     required this.post,
     Key? key,
   }) : super(key: key);
+
+  final Post post;
 
   @override
   Widget build(BuildContext context) {

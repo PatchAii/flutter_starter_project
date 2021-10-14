@@ -4,12 +4,12 @@ import 'package:flutter_starter_project/core/core.dart';
 import 'package:provider/src/provider.dart';
 
 class PinBinding extends StatefulWidget {
-  final Widget child;
-
   const PinBinding({
     required this.child,
     Key? key,
   }) : super(key: key);
+
+  final Widget child;
 
   @override
   _PinBindingState createState() => _PinBindingState();
@@ -19,53 +19,6 @@ class _PinBindingState extends State<PinBinding> with WidgetsBindingObserver {
   bool pinShow = dotenv.env['ENVIRONMENT'] != 'dev' &&
       true &&
       getIt<AppState>().loggedInState == LoggedState.loggedIn;
-  @override
-  Future<void> didChangeAppLifecycleState(
-    AppLifecycleState appLifecycleState,
-  ) async {
-    switch (appLifecycleState) {
-      case AppLifecycleState.resumed:
-        break;
-
-      case AppLifecycleState.inactive:
-        break;
-
-      case AppLifecycleState.paused:
-        setState(() {
-          pinShow = dotenv.env['ENVIRONMENT'] != 'dev' &&
-              true &&
-              getIt<AppState>().loggedInState == LoggedState.loggedIn;
-        });
-        break;
-
-      case AppLifecycleState.detached:
-        break;
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    WidgetsBinding.instance!.removeObserver(this);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance!.addObserver(this);
-  }
-
-  @override
-  void didChangeDependencies() {
-    final isLogged =
-        context.watch<AppState>().loggedInState == LoggedState.loggedIn;
-    if (!isLogged) {
-      setState(() {
-        pinShow = false;
-      });
-    }
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,5 +56,53 @@ class _PinBindingState extends State<PinBinding> with WidgetsBindingObserver {
           ),
       ],
     );
+  }
+
+  @override
+  Future<void> didChangeAppLifecycleState(
+    AppLifecycleState appLifecycleState,
+  ) async {
+    switch (appLifecycleState) {
+      case AppLifecycleState.resumed:
+        break;
+
+      case AppLifecycleState.inactive:
+        break;
+
+      case AppLifecycleState.paused:
+        setState(() {
+          pinShow = dotenv.env['ENVIRONMENT'] != 'dev' &&
+              true &&
+              getIt<AppState>().loggedInState == LoggedState.loggedIn;
+        });
+        break;
+
+      case AppLifecycleState.detached:
+        break;
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    final isLogged =
+        context.watch<AppState>().loggedInState == LoggedState.loggedIn;
+    if (!isLogged) {
+      setState(() {
+        pinShow = false;
+      });
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance!.removeObserver(this);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
   }
 }

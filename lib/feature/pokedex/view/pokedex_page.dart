@@ -36,12 +36,12 @@ class PokedexPage extends StatelessWidget {
 }
 
 class PokedexList extends StatelessWidget {
-  final List<GetPokedex$Query$Pokemon?>? pokedex;
-
   const PokedexList({
     required this.pokedex,
     Key? key,
   }) : super(key: key);
+
+  final List<GetPokedex$Query$Pokemon?>? pokedex;
 
   @override
   Widget build(BuildContext context) {
@@ -115,12 +115,12 @@ class PokedexError extends StatelessWidget {
 }
 
 class PokemonCardGrid extends StatelessWidget {
-  final GetPokedex$Query$Pokemon pokemon;
-
   const PokemonCardGrid({
     required this.pokemon,
     Key? key,
   }) : super(key: key);
+
+  final GetPokedex$Query$Pokemon pokemon;
 
   @override
   Widget build(BuildContext context) {
@@ -196,12 +196,12 @@ class PokemonCardGrid extends StatelessWidget {
 }
 
 class PokemonCardList extends StatelessWidget {
-  final GetPokedex$Query$Pokemon pokemon;
-
   const PokemonCardList({
     required this.pokemon,
     Key? key,
   }) : super(key: key);
+
+  final GetPokedex$Query$Pokemon pokemon;
 
   @override
   Widget build(BuildContext context) {
