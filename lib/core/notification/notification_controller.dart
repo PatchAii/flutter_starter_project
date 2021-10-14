@@ -197,7 +197,7 @@ class NotificationController {
   }
 
   static Future<void> _isWeb(
-    Function function, {
+    Function() function, {
     bool showError = false,
   }) async {
     if (!kIsWeb) {
