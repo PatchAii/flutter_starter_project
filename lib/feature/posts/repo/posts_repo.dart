@@ -22,8 +22,9 @@ class PostsRepo {
       api: 'posts',
       endpoint: 'https://jsonplaceholder.typicode.com/',
     );
+    final List<dynamic> decodedJson = jsonDecode(res.body);
     final posts = List<Post>.from(
-      jsonDecode(res.body).map(
+      decodedJson.map(
         (json) {
           return Post.fromJson(json);
         },
@@ -38,8 +39,9 @@ class PostsRepo {
       api: 'posts/?userId=$userId',
       endpoint: 'https://jsonplaceholder.typicode.com/',
     );
+    final List<dynamic> decodedJson = jsonDecode(res.body);
     final posts = List<Post>.from(
-      jsonDecode(res.body).map(
+      decodedJson.map(
         (json) {
           return Post.fromJson(json);
         },
