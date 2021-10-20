@@ -14,6 +14,9 @@ targets:
             - schema: graphql/schema.graphql
               queries_glob: graphql/operations.graphql
               output: lib/graphql/graphql_operations_api.dart
+            - schema: graphql/ship.schema.graphql
+              queries_glob: graphql/ship.query.graphql
+              output: lib/graphql/ship_query.dart
 
           scalar_mapping:
             - graphql_type: Date

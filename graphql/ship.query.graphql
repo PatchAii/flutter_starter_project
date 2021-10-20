@@ -1,0 +1,7 @@
+query get_ships {
+  ships(limit: 10) {
+    image
+    id
+    name
+  }
+}
