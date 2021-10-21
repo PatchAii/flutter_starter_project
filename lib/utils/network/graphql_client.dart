@@ -4,9 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 
 class GraphqlClient {
-  GraphqlClient._();
-
-  static Future<GraphQLResponse<T>> exec<T, U extends JsonSerializable>({
+  Future<GraphQLResponse<T>> exec<T, U extends JsonSerializable>({
     required GraphQLQuery<T, U> query,
     String? endpoint,
   }) async {
@@ -15,7 +13,7 @@ class GraphqlClient {
     return client.execute(query);
   }
 
-  static Future<ArtemisClient> _initClient(String? endpoint) async {
+  Future<ArtemisClient> _initClient(String? endpoint) async {
     await dotenv.load(fileName: 'dotenv');
 
     return ArtemisClient(

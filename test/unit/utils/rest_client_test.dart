@@ -11,9 +11,6 @@ void main() {
     setUpAll(() {
       registerFallbackValue(Uri());
 
-      RestClient.httpClient = MockHttpClient();
-      RestClient.testing = true;
-
       dotenv.testLoad(
         fileInput: '''
           ENDPOINT='https://www.google.com/'
@@ -22,27 +19,29 @@ void main() {
     });
 
     test('GET', () async {
-      when(() => RestClient.httpClient!.get(
+      final restClient = _getRestClient(MockHttpClient());
+      when(() => restClient.httpClient.get(
             captureAny(),
             headers: captureAny(named: 'headers'),
           )).thenAnswer(
         (_) => Future.value(http.Response('', 200)),
       );
-      final r = await RestClient.get(
+      final r = await restClient.get(
         api: 'api',
       );
       expect(r.statusCode, 200);
     });
 
     test('POST', () async {
-      when(() => RestClient.httpClient!.post(
+      final restClient = _getRestClient(MockHttpClient());
+      when(() => restClient.httpClient.post(
             captureAny(),
             headers: captureAny(named: 'headers'),
             body: captureAny(named: 'body'),
           )).thenAnswer(
         (_) => Future.value(http.Response('', 200)),
       );
-      final r = await RestClient.post(
+      final r = await restClient.post(
         api: 'api',
         body: {},
       );
@@ -50,14 +49,15 @@ void main() {
     });
 
     test('PUT', () async {
-      when(() => RestClient.httpClient!.put(
+      final restClient = _getRestClient(MockHttpClient());
+      when(() => restClient.httpClient.put(
             captureAny(),
             headers: captureAny(named: 'headers'),
             body: captureAny(named: 'body'),
           )).thenAnswer(
         (_) => Future.value(http.Response('', 200)),
       );
-      final r = await RestClient.put(
+      final r = await restClient.put(
         api: 'api',
         body: {},
       );
@@ -65,3 +65,6 @@ void main() {
     });
   });
 }
+
+RestClient _getRestClient(MockHttpClient httpClient) =>
+    RestClient(httpClient: httpClient);

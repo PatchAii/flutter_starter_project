@@ -4,8 +4,14 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class PokedexRepo {
+  PokedexRepo({
+    required this.graphqlClient,
+  });
+
+  final GraphqlClient graphqlClient;
+
   Future<List<GetPokedex$Query$Pokemon?>?> getPokedex() async {
-    final res = await GraphqlClient.exec(query: GetPokedexQuery());
+    final res = await graphqlClient.exec(query: GetPokedexQuery());
 
     return res.data!.pokemons;
   }

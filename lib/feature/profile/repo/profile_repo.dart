@@ -6,11 +6,18 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class ProfileRepo {
+  ProfileRepo({
+    required this.restClient,
+  });
+
+  final RestClient restClient;
+
   Future<User> fetchUser() async {
-    final res = await RestClient.get(
+    final res = await restClient.get(
       api: 'users/1',
       endpoint: 'https://jsonplaceholder.typicode.com/',
     );
+
     final user = User.fromJson(jsonDecode(res.body));
 
     return user;

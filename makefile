@@ -14,7 +14,7 @@ test-unit:
 	@flutter test
 
 test-coverage:
-	@flutter test --coverage && lcov --remove coverage/lcov.info '**/*.freezed.dart' '**/*.g.dart' '**/*.graphql.dart' '**/*.part.dart' '**/*.config.dart' '**/*_event.dart' '**/*_state.dart' '**/*_repo.dart' '**/core/*' '**/*_controller.dart' '**/alert/*.dart' -o coverage/lcov.info && genhtml coverage/lcov.info --output=coverage && open coverage/index.html
+	@flutter test --coverage && lcov --remove coverage/lcov.info '**/*.freezed.dart' '**/*.g.dart' '**/*.graphql.dart' '**/*.part.dart' '**/*.config.dart' '**/*_event.dart' '**/*_state.dart' '**/core/*' '**/*_controller.dart' '**/alert/*.dart' -o coverage/lcov.info && genhtml coverage/lcov.info --output=coverage && open coverage/index.html
 
 test-golden:
 	@flutter test --update-goldens
