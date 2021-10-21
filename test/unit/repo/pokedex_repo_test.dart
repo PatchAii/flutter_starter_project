@@ -1,25 +1,24 @@
-import 'dart:convert';
-
-import 'package:artemis/schema/graphql_response.dart';
+import 'package:artemis/artemis.dart';
 import 'package:flutter_starter_project/feature/pokedex/repo/pokedex_repo.dart';
-import 'package:flutter_starter_project/feature/profile/repo/profile_repo.dart';
 import 'package:flutter_starter_project/graphql/graphql_operations_api.dart';
-import 'package:flutter_starter_project/model/model.dart';
 import 'package:flutter_starter_project/utils/network/graphql_client.dart';
-import 'package:flutter_starter_project/utils/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 
 import '../../utils/fixture_reader.dart';
 
 class MockGraphqlClient extends Mock implements GraphqlClient {}
 
+class GraphQLQueryGetPokedexFake extends Fake
+    implements GraphQLQuery<GetPokedex$Query, GetPokedex$Query> {}
+
 void main() {
   late GraphqlClient graphqlClient;
   late PokedexRepo repo;
   group('Pokedex repo', () {
     setUpAll(() {
+      registerFallbackValue(GraphQLQueryGetPokedexFake());
+
       graphqlClient = MockGraphqlClient();
       repo = PokedexRepo(
         graphqlClient: graphqlClient,
@@ -27,23 +26,61 @@ void main() {
     });
 
     test('when getPokedex, return Pokedex', () async {
-      final p = fixture(
-        'pokedex.json',
-      );
-      when(() => graphqlClient.exec<List<GetPokedex$Query$Pokemon?>?, U extends JsonSerializable>(
+      final p = <GetPokedex$Query$Pokemon?>[
+        GetPokedex$Query$Pokemon.fromJson(
+          fixture(
+            'pokemon.json',
+          ),
+        ),
+        GetPokedex$Query$Pokemon.fromJson(
+          fixture(
+            'pokemon.json',
+          ),
+        ),
+        GetPokedex$Query$Pokemon.fromJson(
+          fixture(
+            'pokemon.json',
+          ),
+        ),
+      ];
+
+      when(() => graphqlClient.exec<GetPokedex$Query, GetPokedex$Query>(
             query: captureAny(named: 'query'),
             endpoint: captureAny(named: 'endpoint'),
           )).thenAnswer(
-        (_) => Future.value(GraphQLResponse<List<GetPokedex$Query$Pokemon?>?>),
+        (_) {
+          final x = GetPokedex$Query()
+            ..pokemons = [
+              GetPokedex$Query$Pokemon.fromJson(
+                fixture(
+                  'pokemon.json',
+                ),
+              ),
+              GetPokedex$Query$Pokemon.fromJson(
+                fixture(
+                  'pokemon.json',
+                ),
+              ),
+              GetPokedex$Query$Pokemon.fromJson(
+                fixture(
+                  'pokemon.json',
+                ),
+              ),
+            ];
+
+          return Future.value(
+            GraphQLResponse<GetPokedex$Query>(
+              data: x,
+            ),
+          );
+        },
       );
-      final user = await repo.fetchUser();
+      final pokedex = await repo.getPokedex();
+
       expect(
-        user,
-        User.fromJson(
-          u,
-        ),
+        pokedex,
+        p,
       );
     });
-
   });
 }
