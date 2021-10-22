@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:layout/layout.dart';
-import 'package:layout/src/layout.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
   const TopBar({
