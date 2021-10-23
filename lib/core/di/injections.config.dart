@@ -5,7 +5,8 @@
 // **************************************************************************
 
 import 'package:flutter_starter_project/core/app/repo/app_state.dart' as _i13;
-import 'package:flutter_starter_project/core/di/register_module.dart' as _i14;
+import 'package:flutter_starter_project/core/di/register_module.dart' as _i15;
+import 'package:flutter_starter_project/core/route/route_app.dart' as _i14;
 import 'package:flutter_starter_project/feature/pokedex/bloc/pokedex_bloc.dart'
     as _i8;
 import 'package:flutter_starter_project/feature/pokedex/repo/pokedex_repo.dart'
@@ -50,7 +51,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i12.ProfileBloc>(
       () => _i12.ProfileBloc(repo: get<_i10.ProfileRepo>()));
   gh.singleton<_i13.AppState>(_i13.AppState());
+  gh.singleton<_i14.NavObserver>(_i14.NavObserver());
   return get;
 }
 
-class _$RegisterModule extends _i14.RegisterModule {}
+class _$RegisterModule extends _i15.RegisterModule {}

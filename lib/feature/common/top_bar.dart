@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_starter_project/core/core.dart';
 import 'package:layout/layout.dart';
+import 'package:provider/provider.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
   const TopBar({
@@ -24,7 +26,18 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
 class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
+    final _enableBackButton = context.watch<NavObserver>().enableBackButton;
+
     return AppBar(
+      automaticallyImplyLeading: false,
+      leading: _enableBackButton
+          ? IconButton(
+              icon: const BackButtonIcon(),
+              onPressed: () {
+                RouteApp.routemaster.history.back();
+              },
+            )
+          : null,
       title: Stack(
         alignment: Alignment.center,
         children: [
