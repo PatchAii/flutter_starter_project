@@ -26,7 +26,12 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
 class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
-    final _enableBackButton = context.watch<NavObserver>().enableBackButton;
+    bool _enableBackButton;
+    try {
+      _enableBackButton = context.watch<NavObserver>().enableBackButton;
+    } catch (e) {
+      _enableBackButton = false;
+    }
 
     return AppBar(
       automaticallyImplyLeading: false,
