@@ -66,6 +66,9 @@ class AppProvider extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => getIt<AppState>(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => getIt<NavObserver>(),
+        ),
       ],
       child: const ConsumerApp(),
     );

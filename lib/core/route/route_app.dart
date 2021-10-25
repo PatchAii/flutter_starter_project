@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/route/route_pages.dart';
 import 'package:flutter_starter_project/feature/common/top_bar.dart';
 import 'package:flutter_starter_project/feature/feature.dart';
+import 'package:injectable/injectable.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -26,13 +28,10 @@ class RouteApp {
               )
             : TabPage(
                 pageBuilder: (child) => MaterialPage(child: child),
-                backBehavior: TabBackBehavior.history,
+                backBehavior:
+                    kIsWeb ? TabBackBehavior.history : TabBackBehavior.none,
                 child: const AppScaffold(),
-                paths: [
-                  '/pokedex',
-                  '/profile',
-                  '/posts',
-                ],
+                paths: tabRoutes,
               );
       },
       '/dialog': (route) => DialogPage(
@@ -50,6 +49,7 @@ class RouteApp {
             child: PokedexPage(),
           ),
       '/posts': (route) => MaterialPage(
+            name: 'Posts',
             child: PostsPage(userId: route.queryParameters['userId']),
           ),
       '/profile': (_) => const MaterialPage(
@@ -129,6 +129,7 @@ class RouteApp {
   static final routemaster = RoutemasterDelegate(
     observers: [
       RouteAppTitleObserver(),
+      getIt<NavObserver>(),
     ],
     routesBuilder: (context) {
       switch (context.watch<AppState>().loggedInState) {
@@ -139,6 +140,12 @@ class RouteApp {
       }
     },
   );
+
+  static const tabRoutes = [
+    '/pokedex',
+    '/profile',
+    '/posts',
+  ];
 
   static bool caruselHasBeenShown() => getIt<AppState>().caruselHasBeenShown;
 
@@ -161,5 +168,25 @@ class RouteAppTitleObserver extends RoutemasterObserver {
         ),
       );
     }
+  }
+}
+
+@singleton
+class NavObserver extends RoutemasterObserver with ChangeNotifier {
+  bool _back = false;
+
+  @override
+  void didChangeRoute(RouteData routeData, Page page) {
+    final paths = routeData.fullPath.substring(1).split('/');
+    paths.removeWhere(
+      (path) => RouteApp.tabRoutes.contains('/$path'),
+    );
+    _back = paths.isNotEmpty;
+
+    notifyListeners();
+  }
+
+  bool get enableBackButton {
+    return _back;
   }
 }
