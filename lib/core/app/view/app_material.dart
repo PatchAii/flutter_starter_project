@@ -93,11 +93,11 @@ class _ConsumerAppState extends State<ConsumerApp> {
       themeMode: ThemeMode.light,
       restorationScopeId: 'root',
       theme: ThemeData(
-        primaryColor: const Color(0xFFcbfbcb),
-        primaryColorDark: const Color(0xFF0c2d24),
+        primaryColor: const Color(0xFF9DF5A3),
+        primaryColorDark: const Color(0xFF00211B),
         colorScheme: const ColorScheme.light(
-          primary: Color(0xFFcbfbcb),
-          secondary: Color(0xFFFDEC54),
+          primary: Color(0xFF9DF5A3),
+          secondary: Color(0xFFFFFC97),
         ),
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
