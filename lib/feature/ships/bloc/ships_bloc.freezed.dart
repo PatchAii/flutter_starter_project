@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
-part of 'posts_bloc.dart';
+part of 'ships_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,67 +13,57 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$PostsEventTearOff {
-  const _$PostsEventTearOff();
+class _$ShipsEventTearOff {
+  const _$ShipsEventTearOff();
 
   _Fetch fetch() {
     return const _Fetch();
   }
-
-  _FetchByUserId fetchByUserId(String userId) {
-    return _FetchByUserId(
-      userId,
-    );
-  }
 }
 
 /// @nodoc
-const $PostsEvent = _$PostsEventTearOff();
+const $ShipsEvent = _$ShipsEventTearOff();
 
 /// @nodoc
-mixin _$PostsEvent {
+mixin _$ShipsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
-    required TResult Function(String userId) fetchByUserId,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
-    TResult Function(String userId)? fetchByUserId,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchByUserId value) fetchByUserId,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchByUserId value)? fetchByUserId,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PostsEventCopyWith<$Res> {
-  factory $PostsEventCopyWith(
-          PostsEvent value, $Res Function(PostsEvent) then) =
-      _$PostsEventCopyWithImpl<$Res>;
+abstract class $ShipsEventCopyWith<$Res> {
+  factory $ShipsEventCopyWith(
+          ShipsEvent value, $Res Function(ShipsEvent) then) =
+      _$ShipsEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$PostsEventCopyWithImpl<$Res> implements $PostsEventCopyWith<$Res> {
-  _$PostsEventCopyWithImpl(this._value, this._then);
+class _$ShipsEventCopyWithImpl<$Res> implements $ShipsEventCopyWith<$Res> {
+  _$ShipsEventCopyWithImpl(this._value, this._then);
 
-  final PostsEvent _value;
+  final ShipsEvent _value;
   // ignore: unused_field
-  final $Res Function(PostsEvent) _then;
+  final $Res Function(ShipsEvent) _then;
 }
 
 /// @nodoc
@@ -83,7 +73,7 @@ abstract class _$FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$FetchCopyWithImpl<$Res> extends _$PostsEventCopyWithImpl<$Res>
+class __$FetchCopyWithImpl<$Res> extends _$ShipsEventCopyWithImpl<$Res>
     implements _$FetchCopyWith<$Res> {
   __$FetchCopyWithImpl(_Fetch _value, $Res Function(_Fetch) _then)
       : super(_value, (v) => _then(v as _Fetch));
@@ -99,7 +89,7 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'PostsEvent.fetch()';
+    return 'ShipsEvent.fetch()';
   }
 
   @override
@@ -114,7 +104,6 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
-    required TResult Function(String userId) fetchByUserId,
   }) {
     return fetch();
   }
@@ -123,7 +112,6 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
-    TResult Function(String userId)? fetchByUserId,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -136,7 +124,6 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchByUserId value) fetchByUserId,
   }) {
     return fetch(this);
   }
@@ -145,7 +132,6 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchByUserId value)? fetchByUserId,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -155,136 +141,21 @@ class _$_Fetch implements _Fetch {
   }
 }
 
-abstract class _Fetch implements PostsEvent {
+abstract class _Fetch implements ShipsEvent {
   const factory _Fetch() = _$_Fetch;
 }
 
 /// @nodoc
-abstract class _$FetchByUserIdCopyWith<$Res> {
-  factory _$FetchByUserIdCopyWith(
-          _FetchByUserId value, $Res Function(_FetchByUserId) then) =
-      __$FetchByUserIdCopyWithImpl<$Res>;
-  $Res call({String userId});
-}
-
-/// @nodoc
-class __$FetchByUserIdCopyWithImpl<$Res> extends _$PostsEventCopyWithImpl<$Res>
-    implements _$FetchByUserIdCopyWith<$Res> {
-  __$FetchByUserIdCopyWithImpl(
-      _FetchByUserId _value, $Res Function(_FetchByUserId) _then)
-      : super(_value, (v) => _then(v as _FetchByUserId));
-
-  @override
-  _FetchByUserId get _value => super._value as _FetchByUserId;
-
-  @override
-  $Res call({
-    Object? userId = freezed,
-  }) {
-    return _then(_FetchByUserId(
-      userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_FetchByUserId implements _FetchByUserId {
-  const _$_FetchByUserId(this.userId);
-
-  @override
-  final String userId;
-
-  @override
-  String toString() {
-    return 'PostsEvent.fetchByUserId(userId: $userId)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _FetchByUserId &&
-            (identical(other.userId, userId) ||
-                const DeepCollectionEquality().equals(other.userId, userId)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(userId);
-
-  @JsonKey(ignore: true)
-  @override
-  _$FetchByUserIdCopyWith<_FetchByUserId> get copyWith =>
-      __$FetchByUserIdCopyWithImpl<_FetchByUserId>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() fetch,
-    required TResult Function(String userId) fetchByUserId,
-  }) {
-    return fetchByUserId(userId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetch,
-    TResult Function(String userId)? fetchByUserId,
-    required TResult orElse(),
-  }) {
-    if (fetchByUserId != null) {
-      return fetchByUserId(userId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_FetchByUserId value) fetchByUserId,
-  }) {
-    return fetchByUserId(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_FetchByUserId value)? fetchByUserId,
-    required TResult orElse(),
-  }) {
-    if (fetchByUserId != null) {
-      return fetchByUserId(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FetchByUserId implements PostsEvent {
-  const factory _FetchByUserId(String userId) = _$_FetchByUserId;
-
-  String get userId => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$FetchByUserIdCopyWith<_FetchByUserId> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-class _$PostsStateTearOff {
-  const _$PostsStateTearOff();
+class _$ShipsStateTearOff {
+  const _$ShipsStateTearOff();
 
   _Error error() {
     return const _Error();
   }
 
-  _Loaded loaded({required List<Post> posts}) {
+  _Loaded loaded({required List<GetShips$Query$Ship?>? ships}) {
     return _Loaded(
-      posts: posts,
+      ships: ships,
     );
   }
 
@@ -294,21 +165,21 @@ class _$PostsStateTearOff {
 }
 
 /// @nodoc
-const $PostsState = _$PostsStateTearOff();
+const $ShipsState = _$ShipsStateTearOff();
 
 /// @nodoc
-mixin _$PostsState {
+mixin _$ShipsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() error,
-    required TResult Function(List<Post> posts) loaded,
+    required TResult Function(List<GetShips$Query$Ship?>? ships) loaded,
     required TResult Function() loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? error,
-    TResult Function(List<Post> posts)? loaded,
+    TResult Function(List<GetShips$Query$Ship?>? ships)? loaded,
     TResult Function()? loading,
     required TResult orElse(),
   }) =>
@@ -331,19 +202,19 @@ mixin _$PostsState {
 }
 
 /// @nodoc
-abstract class $PostsStateCopyWith<$Res> {
-  factory $PostsStateCopyWith(
-          PostsState value, $Res Function(PostsState) then) =
-      _$PostsStateCopyWithImpl<$Res>;
+abstract class $ShipsStateCopyWith<$Res> {
+  factory $ShipsStateCopyWith(
+          ShipsState value, $Res Function(ShipsState) then) =
+      _$ShipsStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$PostsStateCopyWithImpl<$Res> implements $PostsStateCopyWith<$Res> {
-  _$PostsStateCopyWithImpl(this._value, this._then);
+class _$ShipsStateCopyWithImpl<$Res> implements $ShipsStateCopyWith<$Res> {
+  _$ShipsStateCopyWithImpl(this._value, this._then);
 
-  final PostsState _value;
+  final ShipsState _value;
   // ignore: unused_field
-  final $Res Function(PostsState) _then;
+  final $Res Function(ShipsState) _then;
 }
 
 /// @nodoc
@@ -353,7 +224,7 @@ abstract class _$ErrorCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ErrorCopyWithImpl<$Res> extends _$PostsStateCopyWithImpl<$Res>
+class __$ErrorCopyWithImpl<$Res> extends _$ShipsStateCopyWithImpl<$Res>
     implements _$ErrorCopyWith<$Res> {
   __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
       : super(_value, (v) => _then(v as _Error));
@@ -369,7 +240,7 @@ class _$_Error implements _Error {
 
   @override
   String toString() {
-    return 'PostsState.error()';
+    return 'ShipsState.error()';
   }
 
   @override
@@ -384,7 +255,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() error,
-    required TResult Function(List<Post> posts) loaded,
+    required TResult Function(List<GetShips$Query$Ship?>? ships) loaded,
     required TResult Function() loading,
   }) {
     return error();
@@ -394,7 +265,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? error,
-    TResult Function(List<Post> posts)? loaded,
+    TResult Function(List<GetShips$Query$Ship?>? ships)? loaded,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
@@ -429,7 +300,7 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements PostsState {
+abstract class _Error implements ShipsState {
   const factory _Error() = _$_Error;
 }
 
@@ -437,11 +308,11 @@ abstract class _Error implements PostsState {
 abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
-  $Res call({List<Post> posts});
+  $Res call({List<GetShips$Query$Ship?>? ships});
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res> extends _$PostsStateCopyWithImpl<$Res>
+class __$LoadedCopyWithImpl<$Res> extends _$ShipsStateCopyWithImpl<$Res>
     implements _$LoadedCopyWith<$Res> {
   __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
       : super(_value, (v) => _then(v as _Loaded));
@@ -451,13 +322,13 @@ class __$LoadedCopyWithImpl<$Res> extends _$PostsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? posts = freezed,
+    Object? ships = freezed,
   }) {
     return _then(_Loaded(
-      posts: posts == freezed
-          ? _value.posts
-          : posts // ignore: cast_nullable_to_non_nullable
-              as List<Post>,
+      ships: ships == freezed
+          ? _value.ships
+          : ships // ignore: cast_nullable_to_non_nullable
+              as List<GetShips$Query$Ship?>?,
     ));
   }
 }
@@ -465,27 +336,27 @@ class __$LoadedCopyWithImpl<$Res> extends _$PostsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded({required this.posts});
+  const _$_Loaded({required this.ships});
 
   @override
-  final List<Post> posts;
+  final List<GetShips$Query$Ship?>? ships;
 
   @override
   String toString() {
-    return 'PostsState.loaded(posts: $posts)';
+    return 'ShipsState.loaded(ships: $ships)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Loaded &&
-            (identical(other.posts, posts) ||
-                const DeepCollectionEquality().equals(other.posts, posts)));
+            (identical(other.ships, ships) ||
+                const DeepCollectionEquality().equals(other.ships, ships)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(posts);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(ships);
 
   @JsonKey(ignore: true)
   @override
@@ -496,22 +367,22 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() error,
-    required TResult Function(List<Post> posts) loaded,
+    required TResult Function(List<GetShips$Query$Ship?>? ships) loaded,
     required TResult Function() loading,
   }) {
-    return loaded(posts);
+    return loaded(ships);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? error,
-    TResult Function(List<Post> posts)? loaded,
+    TResult Function(List<GetShips$Query$Ship?>? ships)? loaded,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(posts);
+      return loaded(ships);
     }
     return orElse();
   }
@@ -541,10 +412,11 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements PostsState {
-  const factory _Loaded({required List<Post> posts}) = _$_Loaded;
+abstract class _Loaded implements ShipsState {
+  const factory _Loaded({required List<GetShips$Query$Ship?>? ships}) =
+      _$_Loaded;
 
-  List<Post> get posts => throw _privateConstructorUsedError;
+  List<GetShips$Query$Ship?>? get ships => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
 }
@@ -556,7 +428,7 @@ abstract class _$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$LoadingCopyWithImpl<$Res> extends _$PostsStateCopyWithImpl<$Res>
+class __$LoadingCopyWithImpl<$Res> extends _$ShipsStateCopyWithImpl<$Res>
     implements _$LoadingCopyWith<$Res> {
   __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
       : super(_value, (v) => _then(v as _Loading));
@@ -572,7 +444,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'PostsState.loading()';
+    return 'ShipsState.loading()';
   }
 
   @override
@@ -587,7 +459,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() error,
-    required TResult Function(List<Post> posts) loaded,
+    required TResult Function(List<GetShips$Query$Ship?>? ships) loaded,
     required TResult Function() loading,
   }) {
     return loading();
@@ -597,7 +469,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? error,
-    TResult Function(List<Post> posts)? loaded,
+    TResult Function(List<GetShips$Query$Ship?>? ships)? loaded,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
@@ -632,6 +504,6 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements PostsState {
+abstract class _Loading implements ShipsState {
   const factory _Loading() = _$_Loading;
 }

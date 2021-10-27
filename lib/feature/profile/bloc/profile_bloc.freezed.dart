@@ -149,8 +149,8 @@ abstract class _Fetch implements ProfileEvent {
 class _$ProfileStateTearOff {
   const _$ProfileStateTearOff();
 
-  _Loading loading() {
-    return const _Loading();
+  _Error error() {
+    return const _Error();
   }
 
   _Loaded loaded({required User user}) {
@@ -159,8 +159,8 @@ class _$ProfileStateTearOff {
     );
   }
 
-  _Error error() {
-    return const _Error();
+  _Loading loading() {
+    return const _Loading();
   }
 }
 
@@ -171,31 +171,31 @@ const $ProfileState = _$ProfileStateTearOff();
 mixin _$ProfileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(User user) loaded,
     required TResult Function() error,
+    required TResult Function(User user) loaded,
+    required TResult Function() loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(User user)? loaded,
     TResult Function()? error,
+    TResult Function(User user)? loaded,
+    TResult Function()? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Loading value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -218,34 +218,34 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$LoadingCopyWith<$Res> {
-  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
-      __$LoadingCopyWithImpl<$Res>;
+abstract class _$ErrorCopyWith<$Res> {
+  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
+      __$ErrorCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$LoadingCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
-    implements _$LoadingCopyWith<$Res> {
-  __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
-      : super(_value, (v) => _then(v as _Loading));
+class __$ErrorCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
+    implements _$ErrorCopyWith<$Res> {
+  __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
+      : super(_value, (v) => _then(v as _Error));
 
   @override
-  _Loading get _value => super._value as _Loading;
+  _Error get _value => super._value as _Error;
 }
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  const _$_Loading();
+class _$_Error implements _Error {
+  const _$_Error();
 
   @override
   String toString() {
-    return 'ProfileState.loading()';
+    return 'ProfileState.error()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Loading);
+    return identical(this, other) || (other is _Error);
   }
 
   @override
@@ -254,23 +254,23 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(User user) loaded,
     required TResult Function() error,
+    required TResult Function(User user) loaded,
+    required TResult Function() loading,
   }) {
-    return loading();
+    return error();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(User user)? loaded,
     TResult Function()? error,
+    TResult Function(User user)? loaded,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading();
+    if (error != null) {
+      return error();
     }
     return orElse();
   }
@@ -278,30 +278,30 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Loading value) loading,
   }) {
-    return loading(this);
+    return error(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    if (error != null) {
+      return error(this);
     }
     return orElse();
   }
 }
 
-abstract class _Loading implements ProfileState {
-  const factory _Loading() = _$_Loading;
+abstract class _Error implements ProfileState {
+  const factory _Error() = _$_Error;
 }
 
 /// @nodoc
@@ -375,9 +375,9 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(User user) loaded,
     required TResult Function() error,
+    required TResult Function(User user) loaded,
+    required TResult Function() loading,
   }) {
     return loaded(user);
   }
@@ -385,9 +385,9 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(User user)? loaded,
     TResult Function()? error,
+    TResult Function(User user)? loaded,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -399,9 +399,9 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Loading value) loading,
   }) {
     return loaded(this);
   }
@@ -409,9 +409,9 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -430,34 +430,34 @@ abstract class _Loaded implements ProfileState {
 }
 
 /// @nodoc
-abstract class _$ErrorCopyWith<$Res> {
-  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
-      __$ErrorCopyWithImpl<$Res>;
+abstract class _$LoadingCopyWith<$Res> {
+  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
+      __$LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$ErrorCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
-    implements _$ErrorCopyWith<$Res> {
-  __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
-      : super(_value, (v) => _then(v as _Error));
+class __$LoadingCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
+    implements _$LoadingCopyWith<$Res> {
+  __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
+      : super(_value, (v) => _then(v as _Loading));
 
   @override
-  _Error get _value => super._value as _Error;
+  _Loading get _value => super._value as _Loading;
 }
 
 /// @nodoc
 
-class _$_Error implements _Error {
-  const _$_Error();
+class _$_Loading implements _Loading {
+  const _$_Loading();
 
   @override
   String toString() {
-    return 'ProfileState.error()';
+    return 'ProfileState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Error);
+    return identical(this, other) || (other is _Loading);
   }
 
   @override
@@ -466,23 +466,23 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(User user) loaded,
     required TResult Function() error,
+    required TResult Function(User user) loaded,
+    required TResult Function() loading,
   }) {
-    return error();
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(User user)? loaded,
     TResult Function()? error,
+    TResult Function(User user)? loaded,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error();
+    if (loading != null) {
+      return loading();
     }
     return orElse();
   }
@@ -490,28 +490,28 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Loading value) loading,
   }) {
-    return error(this);
+    return loading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this);
+    if (loading != null) {
+      return loading(this);
     }
     return orElse();
   }
 }
 
-abstract class _Error implements ProfileState {
-  const factory _Error() = _$_Error;
+abstract class _Loading implements ProfileState {
+  const factory _Loading() = _$_Loading;
 }

@@ -8,3 +8,4 @@ export 'posts/view/posts_page.dart';
 export 'profile/view/profile_page.dart';
 export 'profile_notification/view/profile_notification_view.dart';
 export 'settings/view/settings_view.dart';
+export 'ships/view/ships_page.dart';

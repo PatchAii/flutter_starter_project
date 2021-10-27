@@ -32,6 +32,7 @@ class RouteApp {
                   '/pokedex',
                   '/profile',
                   '/posts',
+                  '/ships',
                 ],
               );
       },
@@ -90,6 +91,10 @@ class RouteApp {
                 ),
               ),
             ),
+          ),
+      '/ships': (_) => const MaterialPage(
+            name: 'Ships',
+            child: ShipsPage(),
           ),
     },
   );

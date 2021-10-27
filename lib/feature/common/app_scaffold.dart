@@ -91,6 +91,9 @@ class _AppScaffoldState extends State<AppScaffold> {
       case 2:
         RouteApp.routemaster.push('/posts');
         break;
+      case 3:
+        RouteApp.routemaster.push('/ships');
+        break;
       default:
         RouteApp.routemaster.push('/');
     }
@@ -138,6 +141,10 @@ class NavigationBottomBar extends StatelessWidget {
           icon: const Icon(Icons.list),
           label: LocaleKeys.posts.tr(),
         ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.list),
+          label: LocaleKeys.ships.tr(),
+        ),
       ],
     );
   }
@@ -174,6 +181,10 @@ class NavigationSideBar extends StatelessWidget {
         NavigationRailDestination(
           icon: const Icon(Icons.list),
           label: Text(LocaleKeys.posts.tr()),
+        ),
+        NavigationRailDestination(
+          icon: const Icon(Icons.list),
+          label: Text(LocaleKeys.ships.tr()),
         ),
       ],
     );
