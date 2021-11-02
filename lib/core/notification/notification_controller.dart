@@ -4,7 +4,6 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:dante/dante.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/notification/notification_feature_controller.dart';
 import 'package:flutter_starter_project/utils/alert/snackbar_controller.dart';
@@ -27,7 +26,7 @@ class NotificationController {
   }
 
   static void dispose() {
-    _isWeb(() {
+    _isPlatformSupported(() {
       AwesomeNotifications().actionSink.close();
       AwesomeNotifications().createdSink.close();
       AwesomeNotifications().dismissedSink.close();
@@ -65,7 +64,7 @@ class NotificationController {
     List<NotificationFeatureController> controllersList,
   ) async {
     controllers = controllersList;
-    await _isWeb(
+    await _isPlatformSupported(
       () async {
         await AwesomeNotifications().initialize(
           null,
@@ -80,7 +79,7 @@ class NotificationController {
   }
 
   static Future<void> isNotificationAllowedOrListen() async {
-    await _isWeb(
+    await _isPlatformSupported(
       () async {
         final isAllowed = await AwesomeNotifications().isNotificationAllowed();
         if (!isAllowed) {
@@ -93,7 +92,7 @@ class NotificationController {
   }
 
   static void listen() {
-    _isWeb(
+    _isPlatformSupported(
       () {
         getFCMToken().listen(
           (token) {
@@ -169,7 +168,7 @@ class NotificationController {
     List<NotificationActionButton>? actionButtons,
     NotificationSchedule? schedule,
   }) async {
-    await _isWeb(
+    await _isPlatformSupported(
       () async {
         await AwesomeNotifications().createNotification(
           content: content,
@@ -196,16 +195,16 @@ class NotificationController {
     }
   }
 
-  static Future<void> _isWeb(
+  static Future<void> _isPlatformSupported(
     Function() function, {
     bool showError = false,
   }) async {
-    if (!kIsWeb) {
+    if (Platform.isAndroid || Platform.isIOS) {
       await function.call();
     } else {
       if (showError) {
         SnackBarController.showSnackbar(
-          'Noification is not supported on web yet...',
+          'Noification is not supported yet...',
         );
       }
     }
