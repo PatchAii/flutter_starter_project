@@ -16,8 +16,8 @@ class AppState extends ChangeNotifier {
   LoggedState _loggedInState = LoggedState.loggedOut;
   User? _user;
 
-  bool get caruselHasBeenShown =>
-      getIt<SharedPreferences>().getBool(SHARED_PREFS_CARUSELHASBEENSHOWN) ??
+  bool get carouselHasBeenShown =>
+      getIt<SharedPreferences>().getBool(SHARED_PREFS_CAROUSELHASBEENSHOWN) ??
       false;
 
   void logIn() {
@@ -58,16 +58,16 @@ class AppState extends ChangeNotifier {
 
     await getIt<SharedPreferences>().setBool(SHARED_PREFS_ISLOGGEDIN, false);
     await getIt<SharedPreferences>().remove(SHARED_PREFS_USER);
-    await getIt<SharedPreferences>().remove(SHARED_PREFS_CARUSELHASBEENSHOWN);
+    await getIt<SharedPreferences>().remove(SHARED_PREFS_CAROUSELHASBEENSHOWN);
 
     NotificationController.dispose();
 
     notifyListeners();
   }
 
-  Future<void> setCaruselHasBeenShown(bool value) async {
+  Future<void> setCarouselHasBeenShown(bool value) async {
     await getIt<SharedPreferences>()
-        .setBool(SHARED_PREFS_CARUSELHASBEENSHOWN, value);
+        .setBool(SHARED_PREFS_CAROUSELHASBEENSHOWN, value);
     notifyListeners();
   }
 

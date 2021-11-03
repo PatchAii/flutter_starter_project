@@ -5,5 +5,5 @@ final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
 
 const SHARED_PREFS_ISLOGGEDIN = 'flutter_starter_project.isLoggedIn';
 const SHARED_PREFS_USER = 'flutter_starter_project.user';
-const SHARED_PREFS_CARUSELHASBEENSHOWN =
-    'flutter_starter_project.caruselHasBeenShown';
+const SHARED_PREFS_CAROUSELHASBEENSHOWN =
+    'flutter_starter_project.carouselHasBeenShown';

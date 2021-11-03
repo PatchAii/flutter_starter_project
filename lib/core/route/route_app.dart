@@ -97,7 +97,7 @@ class RouteApp {
   static final loggedOutRoutes = RouteMap(
     onUnknownRoute: (_) => const Redirect('/'),
     routes: {
-      '/': (route) => caruselHasBeenShown()
+      '/': (route) => carouselHasBeenShown()
           ? const MaterialPage(
               name: 'Login',
               child: LoginPage(
@@ -105,18 +105,18 @@ class RouteApp {
               ),
             )
           : MaterialPage(
-              name: 'Carusel',
+              name: 'Carousel',
               child: Scaffold(
                 appBar: const TopBar(
-                  label: 'Carusel',
+                  label: 'Carousel',
                 ),
                 body: Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      getIt<AppState>().setCaruselHasBeenShown(true);
+                      getIt<AppState>().setCarouselHasBeenShown(true);
                     },
                     child: const Text(
-                      'Carusel',
+                      'Carousel',
                     ),
                   ),
                 ),
@@ -147,7 +147,7 @@ class RouteApp {
     '/posts',
   ];
 
-  static bool caruselHasBeenShown() => getIt<AppState>().caruselHasBeenShown;
+  static bool carouselHasBeenShown() => getIt<AppState>().carouselHasBeenShown;
 
   static void initRoutes() {
     Routemaster.setPathUrlStrategy();
