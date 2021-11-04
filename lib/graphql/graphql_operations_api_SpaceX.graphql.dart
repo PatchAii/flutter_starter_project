@@ -100,7 +100,7 @@ final GET_LAUNCHES_QUERY_DOCUMENT = DocumentNode(definitions: [
                   value: ObjectValueNode(fields: [
                     ObjectFieldNode(
                         name: NameNode(value: 'mission_name'),
-                        value: StringValueNode(value: '$name', isBlock: false))
+                        value: VariableNode(name: NameNode(value: 'name')))
                   ]))
             ],
             directives: [],

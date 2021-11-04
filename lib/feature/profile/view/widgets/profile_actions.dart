@@ -53,6 +53,15 @@ class ProfileActions extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
+            RouteApp.routemaster.push('/profile/spacex');
+          },
+          child: const Text('/profile/spacex'),
+        ),
+        const SizedBox(
+          height: 16.0,
+        ),
+        ElevatedButton(
+          onPressed: () {
             RouteApp.routemaster.push('/posts?userId=2');
           },
           child: const Text('/posts/userId:2'),

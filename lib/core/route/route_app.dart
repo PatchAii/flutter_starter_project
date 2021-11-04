@@ -5,6 +5,7 @@ import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/route/route_pages.dart';
 import 'package:flutter_starter_project/feature/common/top_bar.dart';
 import 'package:flutter_starter_project/feature/feature.dart';
+import 'package:flutter_starter_project/feature/testfeature/view/spacex_page.dart';
 import 'package:injectable/injectable.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
@@ -47,6 +48,10 @@ class RouteApp {
       '/pokedex': (_) => const MaterialPage(
             name: 'Pokedex',
             child: PokedexPage(),
+          ),
+      '/profile/spacex': (_) => const MaterialPage(
+            name: 'Spacex',
+            child: SpacexPage(),
           ),
       '/posts': (route) => MaterialPage(
             name: 'Posts',

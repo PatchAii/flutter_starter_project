@@ -1,6 +1,6 @@
 query get_launches ($name: String!){
   
-  launches(find: {mission_name: "$name"}) {
+  launches(find: {mission_name: $name}) {
     mission_name
     details
     links {
