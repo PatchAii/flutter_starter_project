@@ -4,6 +4,7 @@ targets:
       - lib/**
       - graphql/**
       - schema.graphql
+      - schemaSpaceX.graphql
 
     builders:
       artemis:
@@ -14,7 +15,9 @@ targets:
             - schema: graphql/schema.graphql
               queries_glob: graphql/operations.graphql
               output: lib/graphql/graphql_operations_api.dart
-
+            - schema: graphql/schemaSpaceX.graphql
+              queries_glob: graphql/operationSpaceX.graphql
+              output: lib/graphql/graphql_operations_api_SpaceX.dart
           scalar_mapping:
             - graphql_type: Date
               dart_type: DateTime
