@@ -124,14 +124,16 @@ class LaunchCardGrid extends StatelessWidget {
               height: 16,
             ),
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(launch.imageLink!),
-                    fit: BoxFit.contain,
-                  ),
+              child:launch.imageLink!=null?  Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(launch.imageLink!),
+                  fit: BoxFit.contain,
                 ),
               ),
+            ) : const SizedBox(),
             ),
             const SizedBox(
               height: 16,
@@ -140,10 +142,14 @@ class LaunchCardGrid extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  launch.details!,
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
+                launch.details!=null? SizedBox(
+                        width: 300,
+                        child: Text(
+                          launch.details!,
+                          
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      ) : const SizedBox(),
                 
               ],
             ),
@@ -198,10 +204,13 @@ class LaunchCardList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     
                     children: [
-                      launch.details!=null? Text(
-                        launch.details!,
-                        
-                        style: Theme.of(context).textTheme.bodyText2,
+                      launch.details!=null? SizedBox(
+                        width: 300,
+                        child: Text(
+                          launch.details!,
+                          
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
                       ) : const SizedBox(),
                       const SizedBox(
                         width: 16,
