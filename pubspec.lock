@@ -644,17 +644,17 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  mockito:
-    dependency: transitive
-    description:
-      name: mockito
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.15"
   mocktail:
     dependency: "direct dev"
     description:
       name: mocktail
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
+  mocktail_image_network:
+    dependency: "direct dev"
+    description:
+      name: mocktail_image_network
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
@@ -672,13 +672,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  network_image_mock:
-    dependency: "direct dev"
-    description:
-      name: network_image_mock
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   node_preamble:
     dependency: transitive
     description:

@@ -6,7 +6,7 @@ import 'package:flutter_starter_project/feature/profile/view/widgets/profile_err
 import 'package:flutter_starter_project/model/model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:network_image_mock/network_image_mock.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../utils/fixture_reader.dart';
 import '../utils/widget_builder.dart';
@@ -24,7 +24,7 @@ Future<void> main() async {
     });
 
     testGoldens('ProfileData', (tester) async {
-      await mockNetworkImagesFor(() async {
+      await mockNetworkImages(() async {
         final builder = getDefaultBuilder(
           ProfileData(
             user: User.fromJson(fixture('user.json')),
@@ -35,7 +35,7 @@ Future<void> main() async {
       });
     });
     testGoldens('ProfileContent', (tester) async {
-      await mockNetworkImagesFor(() async {
+      await mockNetworkImages(() async {
         final builder = getDefaultBuilder(
           ProfileContent(
             user: User.fromJson(fixture('user.json')),
@@ -47,7 +47,7 @@ Future<void> main() async {
     });
 
     testGoldens('ProfileActions', (tester) async {
-      await mockNetworkImagesFor(() async {
+      await mockNetworkImages(() async {
         final builder = getDefaultBuilder(
           const ProfileActions(),
         );

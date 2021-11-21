@@ -46,7 +46,7 @@ dev_dependencies:
   injectable_generator: ^1.4.1
   json_serializable: ^4.1.4
   mocktail: ^0.2.0
-  network_image_mock: ^2.0.1
+  mocktail_image_network: ^0.2.0
 
 flutter:
   uses-material-design: true

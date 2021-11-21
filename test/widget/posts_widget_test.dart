@@ -3,7 +3,7 @@ import 'package:flutter_starter_project/feature/posts/view/posts_page.dart';
 import 'package:flutter_starter_project/model/model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:network_image_mock/network_image_mock.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../utils/fixture_reader.dart';
 import '../utils/widget_builder.dart';
@@ -21,7 +21,7 @@ Future<void> main() async {
     });
 
     testGoldens('PostCard', (tester) async {
-      await mockNetworkImagesFor(() async {
+      await mockNetworkImages(() async {
         final builder = getDefaultBuilder(
           PostCard(
             post: Post.fromJson(fixture('post.json')),
@@ -33,7 +33,7 @@ Future<void> main() async {
     });
 
     testGoldens('Posts list', (tester) async {
-      await mockNetworkImagesFor(() async {
+      await mockNetworkImages(() async {
         final builder = getDefaultBuilder(
           PostsList(
             posts: [
