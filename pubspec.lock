@@ -301,7 +301,7 @@ packages:
       name: ficcanaso
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.7"
+    version: "3.0.8"
   file:
     dependency: transitive
     description:
