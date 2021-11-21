@@ -70,14 +70,14 @@ packages:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.2.1"
+    version: "8.0.1"
   bloc_test:
     dependency: "direct dev"
     description:
       name: bloc_test
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.3.0"
+    version: "9.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -119,7 +119,7 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   build_runner_core:
     dependency: transitive
     description:
@@ -253,6 +253,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.0"
+  diff_match_patch:
+    dependency: transitive
+    description:
+      name: diff_match_patch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.1"
   easy_localization:
     dependency: "direct main"
     description:
@@ -294,7 +301,7 @@ packages:
       name: ficcanaso
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.6"
+    version: "3.0.7"
   file:
     dependency: transitive
     description:
@@ -308,21 +315,21 @@ packages:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.10.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "4.1.0"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   firebase_messaging:
     dependency: "direct main"
     description:
@@ -336,14 +343,14 @@ packages:
       name: firebase_messaging_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.7"
+    version: "3.0.9"
   firebase_messaging_web:
     dependency: transitive
     description:
       name: firebase_messaging_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.7"
+    version: "2.1.0"
   fixnum:
     dependency: transitive
     description:
@@ -362,7 +369,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.3.1"
+    version: "8.0.0"
   flutter_dotenv:
     dependency: "direct main"
     description:
@@ -650,7 +657,7 @@ packages:
       name: mocktail
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.4"
+    version: "0.2.0"
   modal_bottom_sheet:
     dependency: "direct main"
     description:
@@ -713,7 +720,7 @@ packages:
       name: path_provider_linux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.2"
   path_provider_platform_interface:
     dependency: transitive
     description:
@@ -727,7 +734,7 @@ packages:
       name: path_provider_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.0.4"
   pedantic:
     dependency: transitive
     description:
@@ -818,11 +825,25 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.27.2"
+    version: "0.27.3"
   shared_preferences:
     dependency: transitive
     description:
       name: shared_preferences
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.9"
+  shared_preferences_android:
+    dependency: transitive
+    description:
+      name: shared_preferences_android
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.8"
+  shared_preferences_ios:
+    dependency: transitive
+    description:
+      name: shared_preferences_ios
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.8"
@@ -832,7 +853,7 @@ packages:
       name: shared_preferences_linux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.3"
   shared_preferences_macos:
     dependency: transitive
     description:
@@ -860,7 +881,7 @@ packages:
       name: shared_preferences_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.3"
   shelf:
     dependency: transitive
     description:
@@ -984,7 +1005,7 @@ packages:
       name: time
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   timing:
     dependency: transitive
     description:
@@ -1019,7 +1040,7 @@ packages:
       name: vm_service
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.3.0"
+    version: "7.5.0"
   watcher:
     dependency: transitive
     description:
@@ -1047,7 +1068,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.10"
+    version: "2.3.0"
   xdg_directories:
     dependency: transitive
     description:
