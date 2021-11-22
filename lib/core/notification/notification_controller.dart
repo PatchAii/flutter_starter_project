@@ -4,6 +4,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:dante/dante.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/core/notification/notification_feature_controller.dart';
 import 'package:flutter_starter_project/utils/alert/snackbar_controller.dart';
@@ -199,7 +200,7 @@ class NotificationController {
     Function() function, {
     bool showError = false,
   }) async {
-    if (Platform.isAndroid || Platform.isIOS) {
+    if (!kIsWeb) {
       await function.call();
     } else {
       if (showError) {

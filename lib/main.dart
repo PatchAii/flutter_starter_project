@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:dante/dante.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -31,7 +30,6 @@ Future _initApp() async {
     ),
   ];
   RouteApp.initRoutes();
-  Bloc.observer = AppBlocObserver();
   EasyLocalization.logger.enableBuildModes = [];
 
   FlutterError.onError = (details) {

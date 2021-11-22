@@ -3,7 +3,7 @@ import 'package:flutter_starter_project/core/core.dart';
 import 'package:flutter_starter_project/feature/profile_notification/view/profile_notification_view.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:network_image_mock/network_image_mock.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../utils/widget_builder.dart';
 
@@ -12,7 +12,7 @@ Future<void> main() async {
   await loadAppFonts();
   group('ProfileNotificationView', () {
     testGoldens('ProfileNotification Content', (tester) async {
-      await mockNetworkImagesFor(() async {
+      await mockNetworkImages(() async {
         final builder = getDefaultBuilder(
           const NotificationContent(
             token: '',

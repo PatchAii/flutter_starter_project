@@ -3,7 +3,7 @@ import 'package:flutter_starter_project/feature/feature.dart';
 import 'package:flutter_starter_project/graphql/graphql_operations_api.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:network_image_mock/network_image_mock.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 
 import '../utils/fixture_reader.dart';
 import '../utils/widget_builder.dart';
@@ -23,7 +23,7 @@ Future<void> main() async {
     });
 
     testGoldens('PokedexList', (tester) async {
-      await mockNetworkImagesFor(() async {
+      await mockNetworkImages(() async {
         final builder = getDefaultBuilder(
           PokedexList(
             pokedex: [
