@@ -1,0 +1,2 @@
+ENDPOINT=https://graphql-pokemon2.now.sh/graphql
+ENVIRONMENT=dev
